@@ -1,124 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Micko Luis Garcia | QA Automation Portfolio</title>
-  <style>
-    body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 0; background-color: #f4f4f9; color: #333; }
-    header {
-      background: #1f2937;
-      color: #ffffff;
-      height: 100vh;
-      display: flex; 
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      margin: 0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Micko Garcia | QA Automation Portfolio</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            line-height: 1.6; 
+            margin: 0; 
+            padding: 0; 
+            background-color: #111827; /* Ginawa nating dark background para lumutang ang mga light blue cards */
+            color: #ffffff; 
+        }
 
-    .welcome-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-    }
+        /* Fullscreen Hero Section */
+        header { 
+            background: #1f2937; 
+            height: 100vh; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin: 0;
+        }
 
-    .hero-name {
-      font-size: 3rem;
-      margin: 0;
-      animation: fadeUp 1s ease-out forwards;
-    }
+        /* Ang Light Blue Square Speech Bubble na may Rounded Edges */
+        .speech-bubble {
+            position: relative;
+            background: #bae6fd; /* Light Blue background gaya ng nasa larawan */
+            color: #1e3a8a; /* Dark Blue text para madaling basahin */
+            padding: 40px 50px;
+            border-radius: 40px; /* Rounded edges tulad ng nasa sample mo */
+            font-size: 3.5rem;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-width: 80%;
+            animation: popBubble 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+        }
 
-    .speech-bubble {
-      position: relative;
-      background: #0284c7;
-      color: white;
-      padding: 15px 25px;
-      border-radius: 8px;
-      font-size: 1.2rem;
-      font-weight: bold;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      animation: popBubble 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.8s both;
-    }
+        /* Ang "tuka" o arrow sa itaas ng bubble */
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            top: -25px; 
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 0 20px 25px 20px;
+            border-style: solid;
+            border-color: transparent transparent #bae6fd transparent;
+        }
 
-    .speech-bubble::before {
-        content: '';
-        position: absolute;
-        top: -10px;
-        left: 50%;
-        transform: translateX(-50%);
-        border-width: 0 10px 10px 10px;
-        border-style: solid;
-        border-color: transparent transparent #0284c7 transparent;
-    }
+        /* Main Container para sa mga Sections */
+        .container { 
+            max-width: 800px; 
+            margin: 0 auto; 
+            padding: 10vh 1rem; 
+            display: flex;
+            flex-direction: column;
+            gap: 15vh; /* May malaking espasyo sa pagitan para ramdam ang scroll effect */
+        }
 
-    @keyframes fadeUp {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
+        /* --- THE SCROLL-DRIVEN ZOOM ANIMATION --- */
+        section { 
+            background: #bae6fd; /* Parehong format: light blue background */
+            color: #1e3a8a; /* Dark blue text */
+            padding: 2.5rem; 
+            border-radius: 30px; /* Rounded edges pa rin */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            
+            /* Dito ikinonfigure ang dynamic zoom base sa scroll */
+            view-timeline-name: --cardTimeline;
+            view-timeline-axis: block;
+            animation-name: zoomInOut;
+            animation-fill-mode: both;
+            animation-timeline: --cardTimeline;
+            animation-range: entry 0% exit 100%;
+        }
 
-    @keyframes popBubble {
-      0% { opacity: 0; transform: scale(0.8); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-        
-    .container { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
-    section { background: #fffffff; padding: 1.5rem; margin-bottom: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-    h2 { color: #1f2937; border-bottom: 2px solid #e5e7b; padding-bottom: 0.5rem; }
-    .skills-list { display: flex; flex-wrap: wrap; gap: 0.5 rem; list-style: none; padding: 0; }
-    .skills-list li { background: #e0f2fe; color: #0369a1; padding: 0.5rem 1 rem; border-radius: 20px; font-weight: bold; font-size: 0.9rem; }
-    .project { margin-bottom: 1.5rem }
-    .project h3 { margin: 0; color: #0284c7; }
-    .project a { color: #0284c7; text-decoration: none; font-weight: bold; }
-    .project a:hover { text-decoration: underline; }
-  </style>
+        /* Ang logic ng laki/liit: maliit sa simula, lalaki sa gitna, liliit ulit paglampas */
+        @keyframes zoomInOut {
+            0% { transform: scale(0.75); opacity: 0.3; }
+            45%, 55% { transform: scale(1); opacity: 1; } /* Lalaki nang husto kapag nasa gitna ng screen */
+            100% { transform: scale(0.75); opacity: 0.3; }
+        }
+
+        h2 { 
+            color: #1e3a8a; 
+            border-bottom: 3px solid #7dd3fc; 
+            padding-bottom: 0.5rem; 
+            margin-top: 0;
+            font-size: 2rem;
+        }
+
+        .skills-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 0.5rem; 
+            list-style: none; 
+            padding: 0; 
+        }
+
+        .skills-list li { 
+            background: #0284c7; 
+            color: #ffffff; 
+            padding: 0.6rem 1.2rem; 
+            border-radius: 20px; 
+            font-weight: bold; 
+            font-size: 0.95rem; 
+        }
+
+        .project h3 { margin: 0; color: #0369a1; font-size: 1.5rem; }
+        .project a { color: #0284c7; text-decoration: none; font-weight: bold; font-size: 1.1rem; }
+        .project a:hover { text-decoration: underline; }
+
+        @keyframes popBubble {
+            0% { opacity: 0; transform: scale(0.6); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+    </style>
 </head>
 <body>
 
-  <header>
-   <div class="welcome-container">
-     <h1 class="hero-name">Hi, I'm Micko.</h1>  
+    <!-- Unang titingkad at lilitaw sa screen gaya ng nasa photo -->
+    <header>
+        <div class="speech-bubble">
+            HI, I'M MICKO.
+        </div>
+    </header>
 
-     <div class="speech-bubble">
-       <p>Welcome to my QA Automation Portfolio</p>
-     </div>  
-   </div>  
-  </header>
+    <div class="container">
+        <section id="about">
+            <h2>About Me</h2>
+            <p>Hi! I am a passionate engineer focused on Software Quality Assurance and Automation Testing. I love building stable automation frameworks and ensuring software reliability using modern testing tools.</p>
+        </section>
 
-  <div class="container">
-    <section id="about">
-      <h2>About Me</h2>
-      <p>Hi! I am a passionate engineer focused on Softawre Quality Assurance and Automation Testing. I love building stable automation frameworks and ensuring software reliability using modern testing tools.</p>
-    </section>
+        <section id="skills">
+            <h2>Tech Stack & Tools</h2>
+            <ul class="skills-list">
+                <li>Cypress</li>
+                <li>JavaScript</li>
+                <li>Python</li>
+                <li>Java</li>
+                <li>Git & GitHub</li>
+                <li>Chrome DevTools (F12)</li>
+            </ul>
+        </section>
 
-    <section id="skills">
-      <h2>Tech Stack & Tools</h2>
-      <ul class="skills-list">
-        <li>Cypress</li>
-        <li>JavaScript</li>
-        <li>Python</li>
-        <li>Java</li>
-        <li>Git & GitHub</li>
-        <li>Chrome DevTools (F12)</li>
-      </ul>
-    </section>
+        <section id="projects">
+            <h2>Featured QA Projects</h2>
+            <div class="project">
+                <h3>Web Automation with Cypress</h3>
+                <p>Automated End-to-End (E2E) testing for dynamic platforms including login flows and search functionalities utilizing custom selector strategies and assertions.</p>
+                <a href="https://github.com/MickooooG/cypress-automation-practice" target="_blank">View GitHub Repository &rarr;</a>
+            </div>
+        </section>
+    </div>
 
-    <section id="projects">
-      <h2>Featured QA Projects</h2>
-      <div class="project">
-        <h3>Web Automation with Cypress</h3>
-        <p>Automated End-to-End (E2E) testing for dynamic platforms including login flows and search functionalities utilizing custom selector strategies and assertions.</p>
-        <a href="https://github.com/MickooooG/cypress-automation-practice" target="_blank">View GitHub Repository &rarr;</a>  
-      </div>  
-    </section>  
-  </div>
 </body>
-</html>  
-
-
-
-
-
-
-  
+</html>
