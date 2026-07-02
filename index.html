@@ -6,9 +6,63 @@
   <title>Micko Luis Garcia | QA Automation Portfolio</title>
   <style>
     body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 0; background-color: #f4f4f9; color: #333; }
-    header { background: #1f2937; color: #ffffff; padding: 2rem 1rem; text-align: center; }
-    header h1 { margin: 0; font-size: 2.5rem; }
-    header p { margin: 0.5rem 0 0; color: #9ca3af; }
+    header {
+      background: #1f2937;
+      color: #ffffff;
+      height: 100vh;
+      display: flex; 
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin: 0;
+    }
+
+    .welcome-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .hero-name {
+      font-size: 3rem;
+      margin: 0;
+      animation: fadeUp 1s ease-out forwards;
+    }
+
+    .speech-bubble {
+      position: relative;
+      background: #0284c7;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      animation: popBubble 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.8s both;
+    }
+
+    .speech-bubble::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 0 10px 10px 10px;
+        border-style: solid;
+        border-color: transparent transparent #0284c7 transparent;
+    }
+
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes popBubble {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+        
     .container { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
     section { background: #fffffff; padding: 1.5rem; margin-bottom: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
     h2 { color: #1f2937; border-bottom: 2px solid #e5e7b; padding-bottom: 0.5rem; }
