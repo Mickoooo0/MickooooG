@@ -164,4 +164,104 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.45) 0%, rgba(2, 6, 23, 0.7) 100%);
+            backdrop-filter: blur(4px); 
+            z-index: 2; 
+        }
+
+        /* Ang wrapper para sa actual text at contents ng card */
+        .card-body {
+            position: relative;
+            z-index: 3; 
+            padding: 3rem;
+        }
+
+        .content-card h2 {
+            margin-top: 0;
+            color: #ffffff;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.5rem;
+            font-size: 1.8rem;
+        }
+
+        .skills-list { display: flex; flex-wrap: wrap; gap: 0.6rem; list-style: none; padding: 0; }
+        .skills-list li { background: #0284c7; padding: 8px 16px; border-radius: 18px; font-weight: 600; font-size: 0.9rem; }
+
+        @keyframes float { 0% { transform: translateY(0); } 100% { transform: translateY(-15px); } }
+    </style>
+</head>
+<body>
+
+    <div class="window-frame">
+        
+        <nav class="navbar">
+            <div class="nav-links">
+                <a href="#about" class="nav-item">About Me</a>
+                <a href="#skills" class="nav-item">Tech Stack and tools</a>
+                <a href="#certifications" class="nav-item">Certifications</a>
+                <a href="#projects" class="nav-item">Featured Projects</a>
+            </div>
+            <div>
+                <a href="#contact" class="nav-item">Contact Me</a>
+            </div>
+        </nav>
+
+        <main class="main-viewport" id="scrollContainer">
+            <div class="creative-orb orb-1"></div>
+            <div class="creative-orb orb-2"></div>
+            
+            <div class="intro-bubble" id="greetingBubble">
+                HI, I'M MICKO.<br><span style='font-size: 1.4rem; font-weight: 400; opacity: 0.8;'>Let's transform your QA presence.</span>
+            </div>
+
+            <section id="about" class="content-card">
+                <video class="card-video" autoplay loop muted playsinline>
+                    <source src="background3.mp4" type="video/mp4">
+                </video>
+                <div class="card-overlay"></div>
+
+                <div class="card-body">
+                    <h2>About Me</h2>
+                    <p>I am a Computer test Engineering practitioner focusing on Software Quality Assurance and Test Automation frameworks.</p>
+                </div>
+            </section>
+
+            <section id="skills" class="content-card">
+                <video class="card-video" autoplay loop muted playsinline>
+                    <source src="background2.mp4" type="video/mp4">
+                </video>
+                <div class="card-overlay"></div>
+
+                <div class="card-body">
+                    <h2>Tech Stack and tools</h2>
+                    <ul class="skills-list">
+                        <li>Cypress</li>
+                        <li>JavaScript</li>
+                        <li>Git & GitHub</li>
+                        <li>Chrome DevTools</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+    </div>
+
+    <script>
+        // HOVER TO SCROLL ENGINE
+        document.querySelectorAll('.nav-item[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('mouseenter', function() {
+                const targetId = this.getAttribute('href');
+                const targetCard = document.querySelector(targetId);
+                
+                if (targetCard) {
+                    targetCard.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
