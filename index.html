@@ -228,4 +228,115 @@
             transition: all 0.4s ease;
         }
 
-        .switch { position: relative; display: inline-block; width:
+        .switch { position: relative; display: inline-block; width: 50px; height: 26px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        
+        .slider {
+            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--slider-bg);
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute; content: ""; height: 18px; width: 18px; left: 4px; bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider { background-color: #4b5563; background-image: none; }
+        input:checked + .slider:before { transform: translateX(24px); }
+
+        .slider-text { font-weight: 700; font-size: 0.9rem; color: var(--slider-text); transition: color 0.4s; }
+
+        @keyframes float { 0% { transform: translateY(0); } 100% { transform: translateY(-15px); } }
+    </style>
+</head>
+<body>
+
+    <div class="window-frame">
+        
+        <nav class="navbar">
+            <div class="nav-links">
+                <a href="#about" class="nav-item">About Me</a>
+                <a href="#skills" class="nav-item">Tech Stack and tools</a>
+                <a href="#certifications" class="nav-item">Certifications</a>
+                <a href="#projects" class="nav-item">Featured Projects</a>
+            </div>
+            <div>
+                <a href="#contact" class="nav-item">Contact Me</a>
+            </div>
+        </nav>
+
+        <main class="main-viewport" id="scrollContainer">
+            <div class="creative-orb orb-1"></div>
+            <div class="creative-orb orb-2"></div>
+            
+            <div class="intro-bubble" id="greetingBubble">
+                HI, I'M MICKO.<br><span style='font-size: 1.4rem; font-weight: 400; opacity: 0.8;'>Let's transform your QA presence.</span>
+            </div>
+
+            <section id="about" class="content-card">
+                <h2>About Me</h2>
+                <p>I am a Computer Engineering practitioner focusing on Software Quality Assurance and Test Automation frameworks.</p>
+            </section>
+
+            <section id="skills" class="content-card">
+                <h2>Tech Stack and tools</h2>
+                <ul class="skills-list">
+                    <li>Cypress</li>
+                    <li>JavaScript</li>
+                    <li>Git & GitHub</li>
+                    <li>Chrome DevTools</li>
+                </ul>
+            </section>
+        </main>
+
+        <footer class="footer-controls">
+            <label class="switch-container">
+                <div class="switch">
+                    <input type="checkbox" id="modeToggle">
+                    <span class="slider"></span>
+                </div>
+                <span class="slider-text" id="toggleText">Creative Mode Active</span>
+            </label>
+        </footer>
+
+    </div>
+
+    <script>
+        const modeToggle = document.getElementById('modeToggle');
+        const toggleText = document.getElementById('toggleText');
+        const greetingBubble = document.getElementById('greetingBubble');
+        const scrollContainer = document.getElementById('scrollContainer');
+
+        // 1. REVERSED STYLE ENGINE (Creative is First Default)
+        modeToggle.addEventListener('change', function() {
+            if (this.checked) {
+                document.body.classList.add('pro-mode');
+                toggleText.textContent = "Switch to Creative Mode";
+                greetingBubble.textContent = "Hi I'm Micko Welcome to my Website";
+            } else {
+                document.body.classList.remove('pro-mode');
+                toggleText.textContent = "Creative Mode Active";
+                greetingBubble.innerHTML = "HI, I'M MICKO.<br><span style='font-size: 1.4rem; font-weight: 400; opacity: 0.8;'>Let's transform your QA presence.</span>";
+            }
+        });
+
+        // 2. HOVER TO SCROLL ENGINE
+        document.querySelectorAll('.nav-item[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('mouseenter', function() {
+                const targetId = this.getAttribute('href');
+                const targetCard = document.querySelector(targetId);
+                
+                if (targetCard) {
+                    targetCard.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
