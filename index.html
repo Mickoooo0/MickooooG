@@ -5,16 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Micko Garcia | Portfolio</title>
     <style>
-        /* --- DESIGN CORE VARIABLES (PERMANENT CREATIVE MODE WITH VIDEO) --- */
+        /* --- DESIGN CORE VARIABLES --- */
         :root {
+            --bg-color: #020617;
+            --bg-gradient: radial-gradient(circle at 50% 50%, #1e293b 0%, #020617 100%);
             --text-main: #ffffff;
             --nav-item-border: rgba(255, 255, 255, 0.3);
             --nav-item-text: #ffffff;
             --bubble-bg: rgba(255, 255, 255, 0.03);
             --bubble-border: rgba(255, 255, 255, 0.2);
             --bubble-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-            --card-bg: rgba(15, 23, 42, 0.55); /* Bahagyang itinaas ang opacity para mas madaling basahin ang text sa ibabaw ng video */
-            --card-border: rgba(255, 255, 255, 0.1);
+            --card-border: rgba(255, 255, 255, 0.15);
             --bar-color: transparent; 
             --frame-bg: transparent; 
         }
@@ -23,41 +24,15 @@
             font-family: 'Segoe UI', Roboto, Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #020617; /* Fallback color habang naglo-load ang video */
+            background-color: var(--bg-color);
+            background-image: var(--bg-gradient);
+            background-attachment: fixed;
             color: var(--text-main);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             overflow: hidden;
-        }
-
-        /* --- BACKGROUND VIDEO ENGINE --- */
-        .bg-video-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1; /* Nilagay sa pinakalikod para hindi harangan ang kahit ano */
-            overflow: hidden;
-        }
-
-        .bg-video-container video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Sinisiguradong sakop ang buong screen nang walang distortion */
-        }
-
-        /* Opsyonal: Overlay para madagdagan ng cinematic tint at mas madaling basahin ang text */
-        .bg-video-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(30, 41, 59, 0.4) 0%, rgba(2, 6, 23, 0.8) 100%);
-            z-index: 1;
         }
 
         /* --- THE OUTER LAYOUT ENGINE --- */
@@ -69,7 +44,6 @@
             box-sizing: border-box;
             position: relative;
             background: var(--frame-bg);
-            z-index: 2; /* Inangat sa ibabaw ng video container */
         }
 
         .window-frame::before, .window-frame::after {
@@ -97,7 +71,6 @@
             color: var(--nav-item-text);
             font-weight: 600;
             font-size: 0.9rem;
-            backdrop-filter: blur(5px); /* Swabe tignan sa ibabaw ng gumagalaw na video */
             transition: all 0.3s ease;
         }
 
@@ -118,27 +91,27 @@
             z-index: 5;
         }
 
-        /* Background Glow Orbs (Pinanatili para sa Creative aesthetic) */
+        /* Background Glow Orbs (Nasa likod pa rin ng mga card) */
         .creative-orb {
             position: absolute;
             width: 450px;
             height: 450px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(56,189,248,0.12) 0%, rgba(0,0,0,0) 70%);
+            background: radial-gradient(circle, rgba(56,189,248,0.15) 0%, rgba(0,0,0,0) 70%);
             filter: blur(50px);
             z-index: 1;
             pointer-events: none;
             animation: float 8s infinite alternate ease-in-out;
         }
         .orb-1 { top: 5%; left: 15%; }
-        .orb-2 { bottom: 5%; right: 15%; background: radial-gradient(circle, rgba(139,92,246,0.1) 0%, rgba(0,0,0,0) 70%); }
+        .orb-2 { bottom: 5%; right: 15%; background: radial-gradient(circle, rgba(139,92,246,0.12) 0%, rgba(0,0,0,0) 70%); }
 
-        /* Speech Greeting Bubble */
+        /* Speech Greeting Bubble (Walang video background, glassmorphism lang) */
         .intro-bubble {
             z-index: 10;
             background: var(--bubble-bg);
             border: 3px solid var(--bubble-border);
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(25px);
             padding: 45px 65px;
             border-radius: 50px; 
             width: 100%;
@@ -150,30 +123,59 @@
             box-shadow: var(--bubble-shadow);
         }
 
-        /* Portfolio Cards */
+        /* --- PORTFOLIO CARDS WITH VIDEO BACKGROUND ENGINE --- */
         .content-card {
+            position: relative; /* Importante para gumana ang absolute video positioning */
+            overflow: hidden;   /* Para hindi lumabas ang video sa kurbada ng card borders */
             z-index: 10;
             width: 100%;
             max-width: 700px;
-            background: var(--card-bg);
             border: 1px solid var(--card-border);
-            backdrop-filter: blur(15px); /* Pinapanatili nitong readable ang text kahit dumaan sa likod ang video clips */
-            padding: 3rem;
             border-radius: 35px;
             box-sizing: border-box;
             transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
         }
 
         .content-card:hover {
-            border-color: rgba(56, 189, 248, 0.4);
+            border-color: rgba(56, 189, 248, 0.5);
             transform: scale(1.01);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        /* Ang Video Element sa loob ng Card */
+        .card-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1; /* Nasa pinakailalim ng card structure */
+            pointer-events: none;
+        }
+
+        /* Dark Tint Overlay sa ibabaw ng video para mabasa nang maayos ang text ninyo */
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(2, 6, 23, 0.9) 100%);
+            z-index: 2; /* Sa ibabaw ng video, sa ilalim ng text */
+        }
+
+        /* Ang wrapper para sa actual text at contents ng card */
+        .card-body {
+            position: relative;
+            z-index: 3; /* Nasa pinaka-ibabaw para laging malinaw */
+            padding: 3rem;
         }
 
         .content-card h2 {
             margin-top: 0;
             color: #ffffff;
-            border-bottom: 2px solid var(--card-border);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
             padding-bottom: 0.5rem;
             font-size: 1.8rem;
         }
@@ -185,14 +187,6 @@
     </style>
 </head>
 <body>
-
-    <div class="bg-video-container">
-        <div class="bg-video-overlay"></div>
-        <video autoplay loop muted playsinline>
-            <source src="background2.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </div>
 
     <div class="window-frame">
         
@@ -217,18 +211,32 @@
             </div>
 
             <section id="about" class="content-card">
-                <h2>About Me</h2>
-                <p>I am a Computer Engineering practitioner focusing on Software Quality Assurance and Test Automation frameworks.</p>
+                <video class="card-video" autoplay loop muted playsinline>
+                    <source src="background2.mp4" type="video/mp4">
+                </video>
+                <div class="card-overlay"></div>
+
+                <div class="card-body">
+                    <h2>About Me</h2>
+                    <p>I am a Computer Engineering practitioner focusing on Software Quality Assurance and Test Automation frameworks.</p>
+                </div>
             </section>
 
             <section id="skills" class="content-card">
-                <h2>Tech Stack and tools</h2>
-                <ul class="skills-list">
-                    <li>Cypress</li>
-                    <li>JavaScript</li>
-                    <li>Git & GitHub</li>
-                    <li>Chrome DevTools</li>
-                </ul>
+                <video class="card-video" autoplay loop muted playsinline>
+                    <source src="background2.mp4" type="video/mp4">
+                </video>
+                <div class="card-overlay"></div>
+
+                <div class="card-body">
+                    <h2>Tech Stack and tools</h2>
+                    <ul class="skills-list">
+                        <li>Cypress</li>
+                        <li>JavaScript</li>
+                        <li>Git & GitHub</li>
+                        <li>Chrome DevTools</li>
+                    </ul>
+                </div>
             </section>
         </main>
 
