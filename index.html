@@ -193,7 +193,7 @@
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             backdrop-filter: blur(16px); 
-            padding: 5.5rem; 
+            padding: 5rem 5.5rem; /* INADJUST: Ginawang 5rem ang vertical padding para mas compact ang gap */
             border-radius: 50px; 
             box-sizing: border-box;
             box-shadow: var(--bubble-shadow);
@@ -318,7 +318,7 @@
             setTimeout(() => { video.style.opacity = '1'; }, 400);
         }
 
-        // 2. ABSOLUTE OFFSET SCROLL CONTROLLER (FOR PERFECT UNIFORM ALIGNMENT)
+        // 2. ABSOLUTE OFFSET SCROLL CONTROLLER
         const navItems = document.querySelectorAll('.nav-item');
 
         navItems.forEach(item => {
@@ -327,13 +327,12 @@
 
             if (targetCard) {
                 item.addEventListener('mouseenter', () => {
-                    // Kinukuha ang absolute vertical position ng card sa buong pahina
                     const bodyRect = document.body.getBoundingClientRect().top;
                     const elementRect = targetCard.getBoundingClientRect().top;
                     const elementPosition = elementRect - bodyRect;
                     
-                    // Binabawasan natin ng saktong 90px para maging UNIFORM ang hinto ng bawat isa
-                    const offsetPosition = elementPosition - 90;
+                    // INADJUST: Ginawang 75 mula sa 90 para itulak pa-itaas nang kaunti ang posisyon ng lahat ng cards kapag nag-scroll
+                    const offsetPosition = elementPosition - 75;
 
                     window.scrollTo({
                         top: offsetPosition,
