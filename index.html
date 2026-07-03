@@ -5,19 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Micko Garcia | Premium Portfolio</title>
     <style>
-        /* --- BASE VARIABLES & SMOOTH TRANSITION --- */
+        /* --- BASE STYLING (PRO MODE) --- */
         :root {
             --bg-color: #0b0f19;
             --nav-bg: rgba(31, 41, 55, 0.4);
             --border-color: #374151;
             --text-main: #ffffff;
-            --bubble-bg: transparent;
             --bubble-border: #bae6fd;
-            --bubble-text: #ffffff;
+            --card-bg: #1f2937;
+            --card-text: #ffffff;
         }
 
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: var(--bg-color);
@@ -29,13 +29,13 @@
             overflow-x: hidden;
         }
 
-        /* --- THE ULTIMATE CREATIVE MODE (NEXA INSPIRED) --- */
+        /* --- CREATIVE MODE GRADIENT BACKGROUND --- */
         body.creative-mode {
-            background: radial-gradient(circle at 80% 20%, #1e293b 0%, #020617 100%);
+            background: radial-gradient(circle at 50% 50%, #1e293b 0%, #020617 100%);
             background-attachment: fixed;
         }
 
-        /* Top Navigation Container */
+        /* Top Navigation Bar */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -45,21 +45,10 @@
             border-bottom: 1px solid var(--border-color);
             backdrop-filter: blur(10px);
             z-index: 10;
-            transition: all 0.5s ease;
         }
 
-        body.creative-mode .navbar {
-            background: rgba(15, 23, 42, 0.3);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-        }
+        .nav-links { display: flex; gap: 16px; }
 
-        .nav-links {
-            display: flex;
-            gap: 16px;
-        }
-
-        /* Capsule Link Buttons */
         .nav-item {
             border: 2px solid var(--bubble-border);
             padding: 10px 22px;
@@ -68,53 +57,45 @@
             color: var(--bubble-border);
             font-weight: 600;
             font-size: 0.9rem;
-            letter-spacing: 0.5px;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transition: all 0.4s ease;
         }
 
-        /* Hover effects inside navbar */
         .nav-item:hover {
             background-color: var(--bubble-border);
             color: #0b0f19;
             box-shadow: 0 0 15px var(--bubble-border);
-            transform: translateY(-2px);
         }
 
-        /* --- THE HERO LAYOUT WITH DYNAMIC SPHERES --- */
+        /* Hero Container */
         .main-hero {
-            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 2rem;
+            padding: 6rem 2rem 3rem 2rem;
             position: relative;
         }
 
-        /* 3D Glass Orbs na lumilitaw lang sa Creative Mode katulad ng video demo mo */
+        /* Ambient Glowing Background Orbs */
         .creative-orb {
             position: absolute;
-            width: 300px;
-            height: 300px;
+            width: 400px;
+            height: 400px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(56,189,248,0.3) 0%, rgba(0,0,0,0) 70%);
-            filter: blur(40px);
+            background: radial-gradient(circle, rgba(56,189,248,0.15) 0%, rgba(0,0,0,0) 70%);
+            filter: blur(50px);
             z-index: 1;
             opacity: 0;
             transition: opacity 0.8s ease;
             pointer-events: none;
         }
+        .orb-1 { top: 10%; left: 15%; }
+        .orb-2 { bottom: 10%; right: 15%; background: radial-gradient(circle, rgba(139,92,246,0.12) 0%, rgba(0,0,0,0) 70%); }
 
-        .orb-1 { top: 15%; left: 15%; }
-        .orb-2 { bottom: 15%; right: 15%; background: radial-gradient(circle, rgba(139,92,246,0.2) 0%, rgba(0,0,0,0) 70%); }
+        body.creative-mode .creative-orb { opacity: 1; animation: floatingGlow 10s infinite ease-in-out alternate; }
 
-        body.creative-mode .creative-orb {
-            opacity: 1;
-            animation: floatingGlow 8s infinite ease-in-out alternate;
-        }
-
-        /* --- THE UPGRADED SPEECH BUBBLE / HERO BANNER --- */
+        /* The Speech Bubble Banner */
         .intro-bubble {
             position: relative;
             z-index: 2;
@@ -124,113 +105,103 @@
             max-width: 700px;
             font-size: 2.5rem;
             font-weight: 800;
-            line-height: 1.4;
-            letter-spacing: -0.5px;
             transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
-        /* Pag nag-switch sa Creative Mode - Glassmorphism Magic */
         body.creative-mode .intro-bubble {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(25px) saturate(180%);
-            -webkit-backdrop-filter: blur(25px) saturate(180%);
-            color: #ffffff;
-            font-size: 3.2rem;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            transform: scale(1.03) translateY(-10px);
+            backdrop-filter: blur(25px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            transform: scale(1.02) translateY(-5px);
         }
 
-        /* --- DYNAMIC SLIDER SWITCH (FOOTER) --- */
-        .footer-controls {
-            padding: 2rem 3rem;
+        /* --- THE CONTENT AREA (DITO SA TINUTURO NG DALIRI MO) --- */
+        .content-sections {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 2rem 6rem 2rem;
             display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            z-index: 10;
-        }
-
-        .switch-container {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            border: 2px solid var(--bubble-border);
-            padding: 10px 24px;
-            border-radius: 30px;
-            cursor: pointer;
-            user-select: none;
-            transition: all 0.4s ease;
-            background: rgba(0,0,0,0.2);
-        }
-
-        body.creative-mode .switch-container {
-            border-color: rgba(255, 255, 255, 0.3);
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(5px);
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
-        }
-
-        .switch {
+            flex-direction: column;
+            gap: 2.5rem; /* Distansya ng mga cards */
+            z-index: 2;
             position: relative;
-            display: inline-block;
-            width: 54px;
-            height: 28px;
         }
 
-        .switch input { 
-            opacity: 0; width: 0; height: 0;
+        /* Ang mga Section Cards */
+        .portfolio-card {
+            background-color: var(--card-bg);
+            color: var(--card-text);
+            padding: 3rem;
+            border-radius: 40px;
+            border: 1px solid var(--border-color);
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #374151;
-            transition: .4s;
-            border-radius: 34px;
+        /* Glassmorphism Transformation para sa Cards kapag Creative Mode */
+        body.creative-mode .portfolio-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
         }
 
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 20px;
-            width: 20px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: .4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border-radius: 50%;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        /* Hover Effect kapag itinapat ang mouse sa Card habang naka-Creative Mode */
+        body.creative-mode .portfolio-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(56, 189, 248, 0.4);
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 25px rgba(56, 189, 248, 0.1);
         }
 
-        input:checked + .slider {
-            background: linear-gradient(90deg, #38bdf8 0%, #8b5cf6 100%);
-        }
-
-        input:checked + .slider:before {
-            transform: translateX(26px);
-        }
-
-        .slider-text {
-            font-weight: 700;
-            font-size: 0.9rem;
+        .portfolio-card h2 {
+            margin-top: 0;
+            font-size: 2rem;
+            border-bottom: 2px solid var(--bubble-border);
+            padding-bottom: 0.5rem;
             color: var(--bubble-border);
-            letter-spacing: 0.5px;
             transition: color 0.4s ease;
         }
 
-        body.creative-mode .slider-text {
+        body.creative-mode .portfolio-card h2 {
             color: #ffffff;
-            text-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
         }
 
-        /* --- GLOWING BACKGROUND ORB ANIMATION --- */
+        /* Tech Stack Capsule Items */
+        .skills-list { display: flex; flex-wrap: wrap; gap: 0.75rem; list-style: none; padding: 0; }
+        .skills-list li {
+            background: #374151;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        body.creative-mode .skills-list li { background: #0284c7; color: #ffffff; }
+
+        .project a { color: #38bdf8; text-decoration: none; font-weight: bold; }
+        .project a:hover { text-decoration: underline; }
+
+        /* Mode Control Switch (Footer) */
+        .footer-controls { padding: 2rem 3rem; display: flex; justify-content: flex-start; align-items: center; z-index: 10; }
+        .switch-container {
+            display: flex; align-items: center; gap: 14px; border: 2px solid var(--bubble-border);
+            padding: 10px 24px; border-radius: 30px; cursor: pointer; user-select: none; transition: all 0.4s ease;
+        }
+        body.creative-mode .switch-container { border-color: rgba(255, 255, 255, 0.3); background: rgba(255, 255, 255, 0.05); }
+
+        .switch { position: relative; display: inline-block; width: 54px; height: 28px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #374151; transition: .4s; border-radius: 34px; }
+        .slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background: linear-gradient(90deg, #38bdf8 0%, #8b5cf6 100%); }
+        input:checked + .slider:before { transform: translateX(26px); }
+        .slider-text { font-weight: 700; font-size: 0.9rem; color: var(--bubble-border); }
+
         @keyframes floatingGlow {
             0% { transform: translate(0px, 0px) scale(1); }
-            50% { transform: translate(30px, -50px) scale(1.1); }
-            100% { transform: translate(-20px, 20px) scale(0.9); }
+            50% { transform: translate(20px, -30px) scale(1.05); }
+            100% { transform: translate(-10px, 10px) scale(0.95); }
         }
     </style>
 </head>
@@ -251,11 +222,38 @@
     <main class="main-hero">
         <div class="creative-orb orb-1"></div>
         <div class="creative-orb orb-2"></div>
-
         <div class="intro-bubble" id="greetingBubble">
             Hi I'm Micko Welcome to my Website
         </div>
     </main>
+
+    <div class="content-sections">
+        <section id="about" class="portfolio-card">
+            <h2>About Me</h2>
+            <p>Hi! I am a passionate engineer focused on Software Quality Assurance and Automation Testing. I love building stable automation frameworks and ensuring software reliability using modern testing tools.</p>
+        </section>
+
+        <section id="skills" class="portfolio-card">
+            <h2>Tech Stack and tools</h2>
+            <ul class="skills-list">
+                <li>Cypress</li>
+                <li>JavaScript</li>
+                <li>Python</li>
+                <li>Java</li>
+                <li>Git & GitHub</li>
+                <li>Chrome DevTools</li>
+            </ul>
+        </section>
+
+        <section id="projects" class="portfolio-card">
+            <h2>Featured Projects</h2>
+            <div class="project">
+                <h3>Web Automation Framework (Cypress)</h3>
+                <p>Automated End-to-End (E2E) testing suites designed for dynamic web platforms, executing rigorous framework assertions and custom selector validation rules.</p>
+                <a href="https://github.com/MickooooG" target="_blank">View GitHub Repository &rarr;</a>
+            </div>
+        </section>
+    </div>
 
     <footer class="footer-controls">
         <label class="switch-container">
@@ -274,15 +272,13 @@
 
         modeToggle.addEventListener('change', function() {
             if (this.checked) {
-                // SAKALANG NAKAPALIT SA HIGH-END CREATIVE MODE
                 document.body.classList.add('creative-mode');
                 toggleText.textContent = "Creative Mode Active";
                 greetingBubble.innerHTML = "HI, I'M MICKO.<br><span style='font-size: 1.5rem; font-weight: 400; opacity: 0.8;'>Let's transform your QA presence.</span>";
             } else {
-                // BALIK SA CLEAN SKETCH STYLE
                 document.body.classList.remove('creative-mode');
                 toggleText.textContent = "Slide to creative mode";
-                greetingBubble.textContent = "Hi I'm Micko Garcia Welcome to my Website";
+                greetingBubble.textContent = "Hi I'm Micko Welcome to my Website";
             }
         });
     </script>
