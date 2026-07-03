@@ -5,17 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Micko Garcia | Portfolio</title>
     <style>
-        /* --- DESIGN CORE VARIABLES --- */
+        /* --- DESIGN CORE VARIABLES (PERMANENT CREATIVE MODE) --- */
         :root {
-            --bg-color: #0b0f19;
+            --bg-color: #020617;
+            --bg-gradient: radial-gradient(circle at 50% 50%, #1e293b 0%, #020617 100%);
             --text-main: #ffffff;
-            --nav-item-border: #bae6fd;
-            --nav-item-text: #bae6fd;
-            --card-bg: rgba(31, 41, 55, 0.8);
-            --card-border: #374151;
-            --bar-color: #bae6fd; 
-            --frame-bg: rgba(17, 24, 39, 0.6);
-            --frame-shadow: inset 0 0 40px rgba(0, 0, 0, 0.6);
+            --nav-item-border: rgba(255, 255, 255, 0.3);
+            --nav-item-text: #ffffff;
+            --bubble-bg: rgba(255, 255, 255, 0.03);
+            --bubble-border: rgba(255, 255, 255, 0.2);
+            --bubble-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            --card-bg: rgba(30, 41, 59, 0.4); 
+            --card-border: rgba(255, 255, 255, 0.08);
+            --bar-color: transparent; 
+            --frame-bg: transparent; /* Ginawang transparent para walang haharang na structural layout */
         }
 
         body {
@@ -23,6 +26,8 @@
             margin: 0;
             padding: 0;
             background-color: var(--bg-color);
+            background-image: var(--bg-gradient);
+            background-attachment: fixed;
             color: var(--text-main);
             display: flex;
             justify-content: center;
@@ -40,8 +45,11 @@
             box-sizing: border-box;
             position: relative;
             background: var(--frame-bg);
-            box-shadow: var(--frame-shadow);
-            border: 1px solid var(--bar-color);
+        }
+
+        /* Sinisigurado na walang rendering elements ang outer container na haharang sa view */
+        .window-frame::before, .window-frame::after {
+            content: none !important;
         }
 
         /* --- NAVIGATION BAR --- */
@@ -69,9 +77,8 @@
         }
 
         .nav-item:hover {
-            background-color: #bae6fd;
-            color: #0b0f19;
-            box-shadow: 0 0 15px #bae6fd;
+            background-color: var(--nav-item-text);
+            color: #020617;
         }
 
         /* --- MAIN SCROLLABLE CONTENT VIEWPORT --- */
@@ -86,22 +93,38 @@
             z-index: 5;
         }
 
+        /* Background Glow Orbs */
+        .creative-orb {
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(56,189,248,0.15) 0%, rgba(0,0,0,0) 70%);
+            filter: blur(50px);
+            z-index: 1;
+            pointer-events: none;
+            animation: float 8s infinite alternate ease-in-out;
+        }
+        .orb-1 { top: 5%; left: 15%; }
+        .orb-2 { bottom: 5%; right: 15%; background: radial-gradient(circle, rgba(139,92,246,0.12) 0%, rgba(0,0,0,0) 70%); }
+
         /* Speech Greeting Bubble */
         .intro-bubble {
             z-index: 10;
-            background: transparent;
-            border: 3px solid var(--nav-item-border);
+            background: var(--bubble-bg);
+            border: 3px solid var(--bubble-border);
             padding: 45px 65px;
             border-radius: 50px; 
             width: 100%;
             max-width: 700px;
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: 800;
             text-align: center;
             box-sizing: border-box;
+            box-shadow: var(--bubble-shadow);
         }
 
-        /* Portfolio Cards */
+        /* Portfolio Cards (Seamless at walang blockage) */
         .content-card {
             z-index: 10;
             width: 100%;
@@ -111,18 +134,27 @@
             padding: 3rem;
             border-radius: 35px;
             box-sizing: border-box;
+            transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .content-card:hover {
+            border-color: rgba(56, 189, 248, 0.4);
+            transform: scale(1.01);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
         }
 
         .content-card h2 {
             margin-top: 0;
-            color: #bae6fd;
+            color: #ffffff;
             border-bottom: 2px solid var(--card-border);
             padding-bottom: 0.5rem;
             font-size: 1.8rem;
         }
 
         .skills-list { display: flex; flex-wrap: wrap; gap: 0.6rem; list-style: none; padding: 0; }
-        .skills-list li { background: #374151; padding: 8px 16px; border-radius: 18px; font-weight: 600; font-size: 0.9rem; }
+        .skills-list li { background: #0284c7; padding: 8px 16px; border-radius: 18px; font-weight: 600; font-size: 0.9rem; }
+
+        @keyframes float { 0% { transform: translateY(0); } 100% { transform: translateY(-15px); } }
     </style>
 </head>
 <body>
@@ -142,14 +174,16 @@
         </nav>
 
         <main class="main-viewport" id="scrollContainer">
+            <div class="creative-orb orb-1"></div>
+            <div class="creative-orb orb-2"></div>
             
             <div class="intro-bubble" id="greetingBubble">
-                Hi I'm Micko Welcome to my Website
+                HI, I'M MICKO.<br><span style='font-size: 1.4rem; font-weight: 400; opacity: 0.8;'>Let's transform your QA presence.</span>
             </div>
 
             <section id="about" class="content-card">
                 <h2>About Me</h2>
-                <p>I am a Computer test Engineering practitioner focusing on Software Quality Assurance and Test Automation frameworks.</p>
+                <p>I am a Computer Engineering practitioner focusing on Software Quality Assurance and Test Automation frameworks.</p>
             </section>
 
             <section id="skills" class="content-card">
