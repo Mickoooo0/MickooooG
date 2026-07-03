@@ -12,7 +12,7 @@
             --nav-item-text: #ffffff;
             --bubble-border: rgba(255, 255, 255, 0.2);
             --bubble-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-            --card-bg: rgba(15, 23, 42, 0.6); /* Glassmorphism transparency */
+            --card-bg: rgba(15, 23, 42, 0.65); /* Bahagyang tinaasan ang opacity para mas madaling basahin ang text */
             --card-border: rgba(255, 255, 255, 0.15);
             --bar-color: transparent; 
             --frame-bg: transparent; 
@@ -31,7 +31,7 @@
             background-color: #020617; 
         }
 
-        /* --- FIXED & ACCURATE GLOBAL BACKGROUND ENGINE --- */
+        /* --- FIXED GLOBAL BACKGROUND ENGINE --- */
         .page-background-container {
             position: fixed;
             top: 0;
@@ -48,12 +48,12 @@
             left: 50%;
             width: 100vw;
             height: 100vh;
-            object-fit: cover; /* Pinapanatili ang tamang aspect ratio nang hindi nag-e-stretch o lumalaki ng sobra */
+            object-fit: cover; 
             transform: translate(-50%, -50%);
             pointer-events: none;
         }
 
-        /* Global Overlay Tint - Binawasan ang blur para mas malinaw ang video detail */
+        /* Global Overlay Tint - IPINRESERBA NA WALANG BLUR */
         .page-overlay {
             position: fixed;
             top: 0;
@@ -61,8 +61,8 @@
             width: 100vw;
             height: 100vh;
             z-index: -1; 
-            background: radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.4) 0%, rgba(2, 6, 23, 0.8) 100%);
-            backdrop-filter: blur(1px); /* Ginawang 1px na lang mula 3px para mas kitang-kita ang background video mo */
+            background: radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.3) 0%, rgba(2, 6, 23, 0.75) 100%);
+            backdrop-filter: none !important; /* Tinanggal ang blur para malinaw ang video */
         }
 
         /* --- THE OUTER LAYOUT ENGINE --- */
@@ -195,7 +195,7 @@
             max-width: 800px; 
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            backdrop-filter: blur(12px); /* Pinanatili ang blur sa mismong card para maganda ang glass effect nito */
+            backdrop-filter: blur(12px); /* Pinanatili ang blur dito para maging malinis tingnan ang mismong mga text card niyo */
             padding: 3rem;
             border-radius: 35px;
             box-sizing: border-box;
@@ -224,6 +224,7 @@
 </head>
 <body>
 
+    <!-- VIDEO BACKGROUND CONTAINER (NO BLUR OVERLAY) -->
     <div class="page-background-container">
         <video class="page-video" autoplay loop muted playsinline>
             <source src="background3.mp4" type="video/mp4">
@@ -260,11 +261,13 @@
                 </div>
             </div>
 
+            <!-- Card 1: About Me -->
             <section id="about" class="content-card">
                 <h2>About Me</h2>
                 <p>I am a Computer Engineering practitioner focusing on Software Quality Assurance and Test Automation frameworks.</p>
             </section>
 
+            <!-- Card 2: Tech Stack -->
             <section id="skills" class="content-card">
                 <h2>Tech Stack and tools</h2>
                 <ul class="skills-list">
