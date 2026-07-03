@@ -3,76 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Micko Garcia | Portfolio</title>
+    <title>Micko Garcia | Premium Portfolio</title>
     <style>
+        /* --- BASE VARIABLES & SMOOTH TRANSITION --- */
+        :root {
+            --bg-color: #0b0f19;
+            --nav-bg: rgba(31, 41, 55, 0.4);
+            --border-color: #374151;
+            --text-main: #ffffff;
+            --bubble-bg: transparent;
+            --bubble-border: #bae6fd;
+            --bubble-text: #ffffff;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #111827; /* Default Pro Mode Background (Dark) */
-            color: #ffffff;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            transition: background-color 0.5s ease;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-x: hidden;
         }
 
-        /* --- CREATIVE MODE STYLING --- */
+        /* --- THE ULTIMATE CREATIVE MODE (NEXA INSPIRED) --- */
         body.creative-mode {
-            background-color: #7dd3fc; /* Magiging Sky Blue ang buong background */
+            background: radial-gradient(circle at 80% 20%, #1e293b 0%, #020617 100%);
+            background-attachment: fixed;
         }
 
-        /* Top Navigation Container base sa sketch mo */
+        /* Top Navigation Container */
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 2rem;
-            background-color: #1f2937;
-            border-bottom: 2px solid #374151;
-            transition: background-color 0.5s ease, border-color 0.5s ease;
+            padding: 1.5rem 3rem;
+            background-color: var(--nav-bg);
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            z-index: 10;
+            transition: all 0.5s ease;
         }
 
-        /* Pag naka-Creative mode, babaguhin natin nang kaunti ang kulay ng nav para bumagay sa Sky Blue */
         body.creative-mode .navbar {
-            background-color: #0284c7;
-            border-bottom: 2px solid #0369a1;
+            background: rgba(15, 23, 42, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
         }
 
         .nav-links {
             display: flex;
-            gap: 12px;
+            gap: 16px;
         }
 
-        /* Ang mga capsule links/buttons sa drawing mo */
+        /* Capsule Link Buttons */
         .nav-item {
-            border: 2px solid #bae6fd;
-            padding: 8px 16px;
-            border-radius: 20px;
+            border: 2px solid var(--bubble-border);
+            padding: 10px 22px;
+            border-radius: 30px;
             text-decoration: none;
-            color: #bae6fd;
-            font-weight: bold;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
+            color: var(--bubble-border);
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
+        /* Hover effects inside navbar */
         .nav-item:hover {
-            background-color: #bae6fd;
-            color: #1e3a8a;
+            background-color: var(--bubble-border);
+            color: #0b0f19;
+            box-shadow: 0 0 15px var(--bubble-border);
+            transform: translateY(-2px);
         }
 
-        /* Pag naka-Creative mode, gagawin nating puti ang borders ng buttons para kitang-kita */
-        body.creative-mode .nav-item {
-            border-color: #ffffff;
-            color: #ffffff;
-        }
-
-        body.creative-mode .nav-item:hover {
-            background-color: #ffffff;
-            color: #0284c7;
-        }
-
-        /* Ang Hero / Main Space sa gitna */
+        /* --- THE HERO LAYOUT WITH DYNAMIC SPHERES --- */
         .main-hero {
             flex: 1;
             display: flex;
@@ -81,74 +89,105 @@
             justify-content: center;
             text-align: center;
             padding: 2rem;
+            position: relative;
         }
 
-        /* Ang bilugang speech bubble sa sketch mo (Pro Mode Style) */
+        /* 3D Glass Orbs na lumilitaw lang sa Creative Mode katulad ng video demo mo */
+        .creative-orb {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(56,189,248,0.3) 0%, rgba(0,0,0,0) 70%);
+            filter: blur(40px);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            pointer-events: none;
+        }
+
+        .orb-1 { top: 15%; left: 15%; }
+        .orb-2 { bottom: 15%; right: 15%; background: radial-gradient(circle, rgba(139,92,246,0.2) 0%, rgba(0,0,0,0) 70%); }
+
+        body.creative-mode .creative-orb {
+            opacity: 1;
+            animation: floatingGlow 8s infinite ease-in-out alternate;
+        }
+
+        /* --- THE UPGRADED SPEECH BUBBLE / HERO BANNER --- */
         .intro-bubble {
-            border: 3px solid #bae6fd;
-            padding: 40px 60px;
-            border-radius: 50px; 
-            max-width: 600px;
-            font-size: 2.2rem;
-            font-weight: bold;
+            position: relative;
+            z-index: 2;
+            border: 3px solid var(--bubble-border);
+            padding: 50px 70px;
+            border-radius: 60px; 
+            max-width: 700px;
+            font-size: 2.5rem;
+            font-weight: 800;
             line-height: 1.4;
-            color: #ffffff;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            transition: all 0.5s ease;
+            letter-spacing: -0.5px;
+            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
-        /* --- SAKTONG CONFIGURATION PARA SA SKY BLUE CREATIVE MODE --- */
+        /* Pag nag-switch sa Creative Mode - Glassmorphism Magic */
         body.creative-mode .intro-bubble {
-            background-color: #ffffff; /* Puting bubble para lutang sa sky blue background */
-            color: #1e3a8a; /* Dark Blue na text para madaling basahin */
-            border-color: transparent;
-            transform: scale(1.05); /* May kaunting pag-zoom pag nag-slide */
-            box-shadow: 0 15px 35px rgba(30, 58, 138, 0.25);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            color: #ffffff;
+            font-size: 3.2rem;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transform: scale(1.03) translateY(-10px);
         }
 
-        /* Footer area kung nasaan ang slider */
+        /* --- DYNAMIC SLIDER SWITCH (FOOTER) --- */
         .footer-controls {
-            padding: 1.5rem 2rem;
+            padding: 2rem 3rem;
             display: flex;
             justify-content: flex-start;
             align-items: center;
+            z-index: 10;
         }
 
-        /* Ang modernong "Slide to creative mode" switch */
         .switch-container {
             display: flex;
             align-items: center;
-            gap: 12px;
-            border: 2px solid #bae6fd;
-            padding: 8px 18px;
-            border-radius: 25px;
+            gap: 14px;
+            border: 2px solid var(--bubble-border);
+            padding: 10px 24px;
+            border-radius: 30px;
             cursor: pointer;
             user-select: none;
-            transition: all 0.5s ease;
+            transition: all 0.4s ease;
+            background: rgba(0,0,0,0.2);
         }
 
         body.creative-mode .switch-container {
-            border-color: #1e3a8a;
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
         }
 
         .switch {
             position: relative;
             display: inline-block;
-            width: 50px;
-            height: 26px;
+            width: 54px;
+            height: 28px;
         }
 
         .switch input { 
-            opacity: 0;
-            width: 0;
-            height: 0;
+            opacity: 0; width: 0; height: 0;
         }
 
         .slider {
             position: absolute;
             cursor: pointer;
             top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #4b5563;
+            background-color: #374151;
             transition: .4s;
             border-radius: 34px;
         }
@@ -156,33 +195,42 @@
         .slider:before {
             position: absolute;
             content: "";
-            height: 18px;
-            width: 18px;
+            height: 20px;
+            width: 20px;
             left: 4px;
             bottom: 4px;
             background-color: white;
-            transition: .4s;
+            transition: .4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
         input:checked + .slider {
-            background-color: #1e3a8a; /* Madilim na asul na slider kapag naka-on */
+            background: linear-gradient(90deg, #38bdf8 0%, #8b5cf6 100%);
         }
 
         input:checked + .slider:before {
-            transform: translateX(24px);
+            transform: translateX(26px);
         }
 
         .slider-text {
-            font-weight: bold;
-            font-size: 0.95rem;
-            color: #bae6fd;
-            transition: color 0.5s ease;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--bubble-border);
+            letter-spacing: 0.5px;
+            transition: color 0.4s ease;
         }
 
-        /* Gagawin nating dark blue ang font ng slider text para mabasa sa sky blue background */
         body.creative-mode .slider-text {
-            color: #1e3a8a;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+        }
+
+        /* --- GLOWING BACKGROUND ORB ANIMATION --- */
+        @keyframes floatingGlow {
+            0% { transform: translate(0px, 0px) scale(1); }
+            50% { transform: translate(30px, -50px) scale(1.1); }
+            100% { transform: translate(-20px, 20px) scale(0.9); }
         }
     </style>
 </head>
@@ -201,6 +249,9 @@
     </nav>
 
     <main class="main-hero">
+        <div class="creative-orb orb-1"></div>
+        <div class="creative-orb orb-2"></div>
+
         <div class="intro-bubble" id="greetingBubble">
             Hi I'm Micko Welcome to my Website
         </div>
@@ -223,12 +274,12 @@
 
         modeToggle.addEventListener('change', function() {
             if (this.checked) {
-                // KAPAG NAKA-ON (CREATIVE MODE)
+                // SAKALANG NAKAPALIT SA HIGH-END CREATIVE MODE
                 document.body.classList.add('creative-mode');
-                toggleText.textContent = "Creative Mode Active!";
-                greetingBubble.textContent = "HI, I'M MICKO."; /* Ang gusto mong malaking text format kanina */
+                toggleText.textContent = "Creative Mode Active";
+                greetingBubble.innerHTML = "HI, I'M MICKO.<br><span style='font-size: 1.5rem; font-weight: 400; opacity: 0.8;'>Let's transform your QA presence.</span>";
             } else {
-                // KAPAG NAKA-OFF (BACK TO PRO VERSION)
+                // BALIK SA CLEAN SKETCH STYLE
                 document.body.classList.remove('creative-mode');
                 toggleText.textContent = "Slide to creative mode";
                 greetingBubble.textContent = "Hi I'm Micko Welcome to my Website";
