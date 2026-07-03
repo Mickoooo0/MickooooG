@@ -106,17 +106,24 @@
         .orb-1 { top: 5%; left: 15%; }
         .orb-2 { bottom: 5%; right: 15%; background: radial-gradient(circle, rgba(139,92,246,0.12) 0%, rgba(0,0,0,0) 70%); }
 
-        /* --- INTRO BUBBLE WITH VIDEO ENGINE --- */
+        /* --- NILAKIHANG INTRO BUBBLE WITH VIDEO ENGINE --- */
         .intro-bubble {
-            position: relative; /* Para sa absolute scaling ng video at overlay sa loob */
-            overflow: hidden;   /* Para hindi lumabas ang video sa kurbada ng border radius */
+            position: relative; 
+            overflow: hidden;   
             z-index: 10;
-            background: rgba(30, 41, 59, 0.45); /* Fallback color kung sakaling naglo-load pa ang video */
+            background: rgba(30, 41, 59, 0.45); 
             border: 3px solid var(--bubble-border);
-            padding: 45px 65px;
-            border-radius: 50px; 
+            
+            /* Dito natin pinalaki ang card para hindi na siya maipit */
+            padding: 60px 80px;         /* Dinagdagan ang espasyo sa loob */
             width: 100%;
-            max-width: 700px;
+            max-width: 800px;           /* Ginawang 800px mula sa 700px para mas malapad */
+            min-height: 240px;          /* Nilagyan ng minimum height para siguradong kasya ang text niyo */
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50px; 
             box-sizing: border-box;
             box-shadow: var(--bubble-shadow);
         }
@@ -134,7 +141,7 @@
             display: block;
         }
 
-        /* Dark Glassmorphism Overlay para mabasa ang text sa ibabaw ng video */
+        /* Dark Glassmorphism Overlay */
         .intro-overlay {
             position: absolute;
             top: 0;
@@ -146,20 +153,22 @@
             z-index: 2;
         }
 
-        /* Ang wrapper ng Text para lumutang sa ibabaw ng video at overlay */
+        /* Ang wrapper ng Text upang lumutang sa ibabaw ng video at overlay nang maayos */
         .intro-content {
             position: relative;
             z-index: 3;
-            font-size: 3rem;
+            font-size: 3.2rem; /* Konting laki sa font para bagay sa mas malaking card */
             font-weight: 800;
             text-align: center;
+            width: 100%;
+            line-height: 1.3;
         }
 
         /* --- PORTFOLIO CARDS --- */
         .content-card {
             z-index: 10;
             width: 100%;
-            max-width: 700px;
+            max-width: 800px; /* Ginawa rin nating 800px para pantay ang lapad sa intro card */
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             backdrop-filter: blur(12px); 
@@ -209,6 +218,7 @@
             <div class="creative-orb orb-1"></div>
             <div class="creative-orb orb-2"></div>
             
+            <!-- Mas Malaki at Maluwag na Intro Bubble -->
             <div class="intro-bubble" id="greetingBubble">
                 <video class="intro-video" autoplay loop muted playsinline>
                     <source src="background3.mp4" type="video/mp4">
@@ -216,15 +226,17 @@
                 <div class="intro-overlay"></div>
 
                 <div class="intro-content">
-                    HI, I'M MICKO.<br><span style='font-size: 1.4rem; font-weight: 400; opacity: 0.8;'>Let's transform your QA presence.</span>
+                    HI, I'M MICKO.<br><span style='font-size: 1.5rem; font-weight: 400; opacity: 0.85; display: block; margin-top: 10px;'>Let's transform your QA presence.</span>
                 </div>
             </div>
 
+            <!-- Card 1: About Me -->
             <section id="about" class="content-card">
                 <h2>About Me</h2>
                 <p>I am a Computer Engineering practitioner focusing on Software Quality Assurance and Test Automation frameworks.</p>
             </section>
 
+            <!-- Card 2: Tech Stack -->
             <section id="skills" class="content-card">
                 <h2>Tech Stack and tools</h2>
                 <ul class="skills-list">
