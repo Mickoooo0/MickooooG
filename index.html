@@ -9,14 +9,20 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #111827; /* Dark background para lumutang ang lines */
+            background-color: #111827; /* Default Pro Mode Background */
             color: #ffffff;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            transition: background-color 0.5s ease;
         }
 
-        /* Top Navigation Container base sa sketch */
+        /* --- CREATIVE MODE STYLING --- */
+        body.creative-mode {
+            background-color: #0f172a; /* Mas madilim para sa cinematic feel */
+        }
+
+        /* Top Navigation Container base sa sketch mo */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -31,7 +37,7 @@
             gap: 12px;
         }
 
-        /* Ang mga pills/capsule na buttons sa drawing mo */
+        /* Ang mga capsule links sa drawing mo */
         .nav-item {
             border: 2px solid #bae6fd;
             padding: 8px 16px;
@@ -59,17 +65,27 @@
             padding: 2rem;
         }
 
-        /* Ang bilugang speech bubble sa sketch */
+        /* Ang bilugang speech bubble sa sketch mo */
         .intro-bubble {
             border: 3px solid #bae6fd;
             padding: 40px 60px;
-            border-radius: 50px; /* Mas bilugan base sa drawing */
+            border-radius: 50px; 
             max-width: 600px;
             font-size: 2.2rem;
             font-weight: bold;
             line-height: 1.4;
             color: #ffffff;
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            transition: all 0.5s ease;
+        }
+
+        /* Kapag naka-Creative Mode, magbabago ang kulay ng bubble katulad ng gusto mo kanina! */
+        body.creative-mode .intro-bubble {
+            background-color: #bae6fd;
+            color: #1e3a8a;
+            border-color: transparent;
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(186, 230, 253, 0.4);
         }
 
         /* Footer area kung nasaan ang slider */
@@ -89,6 +105,7 @@
             padding: 8px 18px;
             border-radius: 25px;
             cursor: pointer;
+            user-select: none;
         }
 
         .switch {
@@ -142,7 +159,6 @@
 </head>
 <body>
 
-    <!-- Ang Navbar mula sa itaas ng sketch -->
     <nav class="navbar">
         <div class="nav-links">
             <a href="#about" class="nav-item">About Me</a>
@@ -155,23 +171,41 @@
         </div>
     </nav>
 
-    <!-- Ang Gitnang Bahagi kung nasaan ang Bubble Text -->
     <main class="main-hero">
-        <div class="intro-bubble">
+        <div class="intro-bubble" id="greetingBubble">
             Hi I'm Micko Welcome to my Website
         </div>
     </main>
 
-    <!-- Ang Slider Switch sa ibaba ng iyong drawing -->
     <footer class="footer-controls">
         <label class="switch-container">
             <div class="switch">
                 <input type="checkbox" id="modeToggle">
                 <span class="slider"></span>
             </div>
-            <span class="slider-text">Slide to creative mode</span>
+            <span class="slider-text" id="toggleText">Slide to creative mode</span>
         </label>
     </footer>
+
+    <script>
+        const modeToggle = document.getElementById('modeToggle');
+        const toggleText = document.getElementById('toggleText');
+        const greetingBubble = document.getElementById('greetingBubble');
+
+        modeToggle.addEventListener('change', function() {
+            if (this.checked) {
+                // Pag naka-ON ang slider (Creative Mode)
+                document.body.classList.add('creative-mode');
+                toggleText.textContent = "Creative Mode Active!";
+                greetingBubble.textContent = "HI, I'M MICKO.";
+            } else {
+                // Pag binuksan ulit (Babalik sa Pro Version)
+                document.body.classList.remove('creative-mode');
+                toggleText.textContent = "Slide to creative mode";
+                greetingBubble.textContent = "Hi I'm Micko Welcome to my Website";
+            }
+        });
+    </script>
 
 </body>
 </html>
