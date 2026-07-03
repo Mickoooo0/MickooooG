@@ -12,7 +12,7 @@
             --nav-item-text: #ffffff;
             --bubble-border: rgba(255, 255, 255, 0.2);
             --bubble-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-            --card-bg: rgba(15, 23, 42, 0.65); /* Bahagyang tinaasan ang opacity para mas madaling basahin ang text */
+            --card-bg: rgba(15, 23, 42, 0.65); 
             --card-border: rgba(255, 255, 255, 0.15);
             --bar-color: transparent; 
             --frame-bg: transparent; 
@@ -27,7 +27,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden;
+            overflow: hidden; /* Tinanggal ang scrollbar dahil hindi na kailangan mag-scroll */
             background-color: #020617; 
         }
 
@@ -53,7 +53,6 @@
             pointer-events: none;
         }
 
-        /* Global Overlay Tint - IPINRESERBA NA WALANG BLUR */
         .page-overlay {
             position: fixed;
             top: 0;
@@ -62,7 +61,7 @@
             height: 100vh;
             z-index: -1; 
             background: radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.3) 0%, rgba(2, 6, 23, 0.75) 100%);
-            backdrop-filter: none !important; /* Tinanggal ang blur para malinaw ang video */
+            backdrop-filter: none !important; 
         }
 
         /* --- THE OUTER LAYOUT ENGINE --- */
@@ -74,10 +73,6 @@
             box-sizing: border-box;
             position: relative;
             background: var(--frame-bg);
-        }
-
-        .window-frame::before, .window-frame::after {
-            content: none !important;
         }
 
         /* --- NAVIGATION BAR --- */
@@ -102,6 +97,7 @@
             font-weight: 600;
             font-size: 0.9rem;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .nav-item:hover {
@@ -109,15 +105,14 @@
             color: #020617;
         }
 
-        /* --- MAIN SCROLLABLE CONTENT VIEWPORT --- */
+        /* --- CONTENT DISPLAY VIEWPORT --- */
         .main-viewport {
-            padding: 4rem 2rem;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4rem;
             position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
             z-index: 5;
         }
 
@@ -131,28 +126,42 @@
             filter: blur(60px);
             z-index: 1;
             pointer-events: none;
-            animation: float 8s infinite alternate ease-in-out;
         }
         .orb-1 { top: 5%; left: 15%; }
         .orb-2 { bottom: 5%; right: 15%; background: radial-gradient(circle, rgba(139,92,246,0.08) 0%, rgba(0,0,0,0) 70%); }
 
+        /* --- DYNAMIC STACK ENGINE (Dito magpapatong-patong ang cards sa iisang pwesto) --- */
+        .card-stack-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            height: 280px; /* Sapat na taas para sa pagpapalit-palit ng mga cards */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
         /* --- INTRO BUBBLE --- */
         .intro-bubble {
-            position: relative; 
+            position: absolute; 
             overflow: hidden;   
-            z-index: 10;
-            background: rgba(30, 41, 59, 0.45); 
-            border: 3px solid var(--bubble-border);
-            padding: 60px 80px;         
             width: 100%;
-            max-width: 800px;           
-            min-height: 240px;          
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50px; 
+            border: 3px solid var(--bubble-border);
             box-sizing: border-box;
             box-shadow: var(--bubble-shadow);
+            background: rgba(30, 41, 59, 0.45); 
+            
+            /* Smooth transitions para sa pagpapakita at pagtatago */
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+            transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
         }
 
         .intro-video {
@@ -164,7 +173,6 @@
             object-fit: cover;
             z-index: 1;
             pointer-events: none;
-            display: block;
         }
 
         .intro-overlay {
@@ -188,24 +196,38 @@
             line-height: 1.3;
         }
 
-        /* --- PORTFOLIO CARDS --- */
+        /* --- CONTENT CARDS (Naka-hide by default gamit ang opacity) --- */
         .content-card {
-            z-index: 10;
+            position: absolute;
             width: 100%;
-            max-width: 800px; 
+            height: 100%;
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            backdrop-filter: blur(12px); /* Pinanatili ang blur dito para maging malinis tingnan ang mismong mga text card niyo */
+            backdrop-filter: blur(12px); 
             padding: 3rem;
             border-radius: 35px;
             box-sizing: border-box;
-            transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: var(--bubble-shadow);
+            
+            /* Hidden State Animation */
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.95);
+            transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
         }
 
-        .content-card:hover {
-            border-color: rgba(56, 189, 248, 0.5);
-            transform: scale(1.01);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        /* Active State (Kapag hinober ang kaukulang button) */
+        .content-card.active {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+        }
+
+        /* Kapag may lumabas na card, hihina ang opacity ng intro bubble */
+        .intro-bubble.hidden {
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(1.05);
         }
 
         .content-card h2 {
@@ -218,13 +240,10 @@
 
         .skills-list { display: flex; flex-wrap: wrap; gap: 0.6rem; list-style: none; padding: 0; }
         .skills-list li { background: #0284c7; padding: 8px 16px; border-radius: 18px; font-weight: 600; font-size: 0.9rem; }
-
-        @keyframes float { 0% { transform: translateY(0); } 100% { transform: translateY(-15px); } }
     </style>
 </head>
 <body>
 
-    <!-- VIDEO BACKGROUND CONTAINER (NO BLUR OVERLAY) -->
     <div class="page-background-container">
         <video class="page-video" autoplay loop muted playsinline>
             <source src="background5.mp4" type="video/mp4">
@@ -236,65 +255,96 @@
         
         <nav class="navbar">
             <div class="nav-links">
-                <a href="#about" class="nav-item">About Me</a>
-                <a href="#skills" class="nav-item">Tech Stack and tools</a>
-                <a href="#certifications" class="nav-item">Certifications</a>
-                <a href="#projects" class="nav-item">Featured Projects</a>
+                <a class="nav-item" data-target="about">About Me</a>
+                <a class="nav-item" data-target="skills">Tech Stack and tools</a>
+                <a class="nav-item" data-target="certifications">Certifications</a>
+                <a class="nav-item" data-target="projects">Featured Projects</a>
             </div>
             <div>
-                <a href="#contact" class="nav-item">Contact Me</a>
+                <a class="nav-item" data-target="contact">Contact Me</a>
             </div>
         </nav>
 
-        <main class="main-viewport" id="scrollContainer">
+        <main class="main-viewport">
             <div class="creative-orb orb-1"></div>
             <div class="creative-orb orb-2"></div>
             
-            <div class="intro-bubble" id="greetingBubble">
-                <video class="intro-video" autoplay loop muted playsinline>
-                    <source src="background2.mp4" type="video/mp4">
-                </video>
-                <div class="intro-overlay"></div>
-
-                <div class="intro-content">
-                    HI, I'M MICKO.<br><span style='font-size: 1.5rem; font-weight: 400; opacity: 0.85; display: block; margin-top: 10px;'>Let's transform your QA presence.</span>
+            <div class="card-stack-container">
+                
+                <div class="intro-bubble" id="greetingBubble">
+                    <video class="intro-video" autoplay loop muted playsinline>
+                        <source src="background2.mp4" type="video/mp4">
+                    </video>
+                    <div class="intro-overlay"></div>
+                    <div class="intro-content">
+                        HI, I'M MICKO.<br><span style='font-size: 1.5rem; font-weight: 400; opacity: 0.85; display: block; margin-top: 10px;'>Let's transform your QA presence.</span>
+                    </div>
                 </div>
+
+                <section id="about" class="content-card">
+                    <h2>About Me</h2>
+                    <p>I am a Computer Engineering practitioner focusing on Software Quality Assurance and Test Automation frameworks.</p>
+                </section>
+
+                <section id="skills" class="content-card">
+                    <h2>Tech Stack and tools</h2>
+                    <ul class="skills-list">
+                        <li>Cypress</li>
+                        <li>JavaScript</li>
+                        <li>Git & GitHub</li>
+                        <li>Chrome DevTools</li>
+                    </ul>
+                </section>
+
+                <section id="certifications" class="content-card">
+                    <h2>Certifications</h2>
+                    <p>ISTQB Certified Tester / Coursera Professional Certifications ongoing.</p>
+                </section>
+
+                <section id="projects" class="content-card">
+                    <h2>Featured Projects</h2>
+                    <p>Automation test suites and technical engineering documentations repository.</p>
+                </section>
+
+                <section id="contact" class="content-card">
+                    <h2>Contact Me</h2>
+                    <p>Email: mickogarcia@example.com | Metro Manila, Philippines</p>
+                </section>
+
             </div>
-
-            <!-- Card 1: About Me -->
-            <section id="about" class="content-card">
-                <h2>About Me</h2>
-                <p>I am a Computer test2 Engineering practitioner focusing on Software Quality Assurance and Test Automation frameworks.</p>
-            </section>
-
-            <!-- Card 2: Tech Stack -->
-            <section id="skills" class="content-card">
-                <h2>Tech Stack and tools</h2>
-                <ul class="skills-list">
-                    <li>Cypress</li>
-                    <li>JavaScript</li>
-                    <li>Git & GitHub</li>
-                    <li>Chrome DevTools</li>
-                </ul>
-            </section>
         </main>
 
     </div>
 
     <script>
-        // HOVER TO SCROLL ENGINE
-        document.querySelectorAll('.nav-item[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('mouseenter', function() {
-                const targetId = this.getAttribute('href');
-                const targetCard = document.querySelector(targetId);
-                
-                if (targetCard) {
-                    targetCard.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'center'
-                    });
-                }
-            });
+        const greetingBubble = document.getElementById('greetingBubble');
+        const navItems = document.querySelectorAll('.nav-item');
+        const contentCards = document.querySelectorAll('.content-card');
+
+        navItems.forEach(item => {
+            const targetId = item.getAttribute('data-target');
+            const targetCard = document.getElementById(targetId);
+
+            if (targetCard) {
+                // KAPAG HINOBER ANG NAVBAR ITEM:
+                item.addEventListener('mouseenter', () => {
+                    // 1. Itago ang Main Intro Card
+                    greetingBubble.classList.add('hidden');
+                    
+                    // 2. Siguraduhing walang ibang active na card na maiiwan
+                    contentCards.forEach(card => card.classList.remove('active'));
+                    
+                    // 3. Ipakita ang katapat nitong card
+                    targetCard.classList.add('active');
+                });
+
+                // KAPAG INALIS ANG MOUSE SA NAVBAR ITEM:
+                item.addEventListener('mouseleave', () => {
+                    // Ibalik sa normal: itago ang card at ilabas ulit si "Hi, I'm Micko"
+                    targetCard.classList.remove('active');
+                    greetingBubble.classList.remove('hidden');
+                });
+            }
         });
     </script>
 
