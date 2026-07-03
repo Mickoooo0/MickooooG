@@ -7,14 +7,12 @@
     <style>
         /* --- DESIGN CORE VARIABLES --- */
         :root {
-            --bg-color: #020617;
-            --bg-gradient: radial-gradient(circle at 50% 50%, #1e293b 0%, #020617 100%);
             --text-main: #ffffff;
             --nav-item-border: rgba(255, 255, 255, 0.3);
             --nav-item-text: #ffffff;
             --bubble-border: rgba(255, 255, 255, 0.2);
             --bubble-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-            --card-bg: rgba(30, 41, 59, 0.45);
+            --card-bg: rgba(15, 23, 42, 0.55); /* Ginawang mas madilim ng konti para mas lutang sa page background */
             --card-border: rgba(255, 255, 255, 0.15);
             --bar-color: transparent; 
             --frame-bg: transparent; 
@@ -24,15 +22,43 @@
             font-family: 'Segoe UI', Roboto, Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--bg-color);
-            background-image: var(--bg-gradient);
-            background-attachment: fixed;
             color: var(--text-main);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             overflow: hidden;
+            background-color: #020617; /* Fallback color habang naglo-load ang video */
+        }
+
+        /* --- GLOBAL PAGE BACKGROUND VIDEO ENGINE --- */
+        .page-background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -2; /* Pinakailalim sa lahat */
+            overflow: hidden;
+        }
+
+        .page-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+
+        /* Global Overlay para maging cinematic at madilim ang video background */
+        .page-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1; /* Sa ibabaw ng video pero sa ilalim ng mga card */
+            background: radial-gradient(circle at 50% 50%, rgba(30, 41, 59, 0.5) 0%, rgba(2, 6, 23, 0.85) 100%);
+            backdrop-filter: blur(3px); /* Swabeng blur sa buong background para lumutang ang mga cards */
         }
 
         /* --- THE OUTER LAYOUT ENGINE --- */
@@ -97,29 +123,26 @@
             width: 450px;
             height: 450px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(56,189,248,0.15) 0%, rgba(0,0,0,0) 70%);
-            filter: blur(50px);
+            background: radial-gradient(circle, rgba(56,189,248,0.12) 0%, rgba(0,0,0,0) 70%);
+            filter: blur(60px);
             z-index: 1;
             pointer-events: none;
             animation: float 8s infinite alternate ease-in-out;
         }
         .orb-1 { top: 5%; left: 15%; }
-        .orb-2 { bottom: 5%; right: 15%; background: radial-gradient(circle, rgba(139,92,246,0.12) 0%, rgba(0,0,0,0) 70%); }
+        .orb-2 { bottom: 5%; right: 15%; background: radial-gradient(circle, rgba(139,92,246,0.1) 0%, rgba(0,0,0,0) 70%); }
 
-        /* --- NILAKIHANG INTRO BUBBLE WITH VIDEO ENGINE --- */
+        /* --- INTRO BUBBLE WITH VIDEO ENGINE --- */
         .intro-bubble {
             position: relative; 
             overflow: hidden;   
             z-index: 10;
             background: rgba(30, 41, 59, 0.45); 
             border: 3px solid var(--bubble-border);
-            
-            /* Dito natin pinalaki ang card para hindi na siya maipit */
-            padding: 60px 80px;         /* Dinagdagan ang espasyo sa loob */
+            padding: 60px 80px;         
             width: 100%;
-            max-width: 800px;           /* Ginawang 800px mula sa 700px para mas malapad */
-            min-height: 240px;          /* Nilagyan ng minimum height para siguradong kasya ang text niyo */
-            
+            max-width: 800px;           
+            min-height: 240px;          
             display: flex;
             align-items: center;
             justify-content: center;
@@ -141,7 +164,7 @@
             display: block;
         }
 
-        /* Dark Glassmorphism Overlay */
+        /* Dark Glassmorphism Overlay para sa Intro Card */
         .intro-overlay {
             position: absolute;
             top: 0;
@@ -153,11 +176,11 @@
             z-index: 2;
         }
 
-        /* Ang wrapper ng Text upang lumutang sa ibabaw ng video at overlay nang maayos */
+        /* Ang wrapper ng Text sa Intro Card */
         .intro-content {
             position: relative;
             z-index: 3;
-            font-size: 3.2rem; /* Konting laki sa font para bagay sa mas malaking card */
+            font-size: 3.2rem; 
             font-weight: 800;
             text-align: center;
             width: 100%;
@@ -168,10 +191,10 @@
         .content-card {
             z-index: 10;
             width: 100%;
-            max-width: 800px; /* Ginawa rin nating 800px para pantay ang lapad sa intro card */
+            max-width: 800px; 
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            backdrop-filter: blur(12px); 
+            backdrop-filter: blur(16px); /* Mas tinaasan ang blur para mas lutang sa page background video */
             padding: 3rem;
             border-radius: 35px;
             box-sizing: border-box;
@@ -200,6 +223,14 @@
 </head>
 <body>
 
+    <!-- ETOR ANG VIDEO BACKGROUND PARA SA BUONG PAGE -->
+    <div class="page-background-container">
+        <video class="page-video" autoplay loop muted playsinline>
+            <source src="background3.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="page-overlay"></div>
+
     <div class="window-frame">
         
         <nav class="navbar">
@@ -218,15 +249,15 @@
             <div class="creative-orb orb-1"></div>
             <div class="creative-orb orb-2"></div>
             
-            <!-- Mas Malaki at Maluwag na Intro Bubble -->
+            <!-- Intro Bubble na may sariling Background Video -->
             <div class="intro-bubble" id="greetingBubble">
                 <video class="intro-video" autoplay loop muted playsinline>
-                    <source src="background3.mp4" type="video/mp4">
+                    <source src="background2.mp4" type="video/mp4">
                 </video>
                 <div class="intro-overlay"></div>
 
                 <div class="intro-content">
-                    HI, I'M MICKO test.<br><span style='font-size: 1.5rem; font-weight: 400; opacity: 0.85; display: block; margin-top: 10px;'>Let's transform your QA presence.</span>
+                    HI, I'M MICKO.<br><span style='font-size: 1.5rem; font-weight: 400; opacity: 0.85; display: block; margin-top: 10px;'>Let's transform your QA presence.</span>
                 </div>
             </div>
 
