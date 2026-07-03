@@ -22,15 +22,13 @@
             margin: 0;
             padding: 0;
             color: var(--text-main);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow: hidden; 
             background-color: #020617; 
+            /* Binuksan ulit ang scrolling dahil nakalatag na ang cards */
+            overflow-y: auto; 
+            overflow-x: hidden;
         }
 
-        /* --- FIXED GLOBAL BACKGROUND ENGINE (CRYSTAL CLEAR) --- */
+        /* --- FIXED GLOBAL BACKGROUND ENGINE (100% CRYSTAL CLEAR) --- */
         .page-background-container {
             position: fixed;
             top: 0;
@@ -59,7 +57,6 @@
             width: 100vw;
             height: 100vh;
             z-index: -1; 
-            /* Ginawang transparent para 100% hilaw at malinaw ang background video */
             background: transparent; 
             backdrop-filter: none !important; 
         }
@@ -67,22 +64,26 @@
         /* --- THE OUTER LAYOUT ENGINE --- */
         .window-frame {
             width: 100vw;
-            height: 100vh;
-            display: grid;
-            grid-template-rows: auto 1fr;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
             box-sizing: border-box;
             position: relative;
             background: var(--frame-bg);
         }
 
-        /* --- NAVIGATION BAR --- */
+        /* --- STICKY NAVIGATION BAR --- */
         .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1.5rem 3rem;
-            border-bottom: 1px solid var(--bar-color);
-            z-index: 20; 
+            box-sizing: border-box;
+            z-index: 30; 
             background: transparent;
         }
 
@@ -100,7 +101,6 @@
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
             cursor: pointer;
             
-            /* Initial state bago mag-animate down */
             opacity: 0;
             transform: translateY(-20px);
             animation: fadeDownAnimation 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -111,52 +111,38 @@
             color: #020617;
         }
 
-        /* Iba't ibang delay para sa bawat button (Staggered Cascade) */
         .nav-links .nav-item:nth-child(1) { animation-delay: 0.4s; }
         .nav-links .nav-item:nth-child(2) { animation-delay: 0.55s; }
         .nav-links .nav-item:nth-child(3) { animation-delay: 0.7s; }
         .nav-links .nav-item:nth-child(4) { animation-delay: 0.85s; }
         .navbar-right .nav-item { animation-delay: 1s; } 
 
-        /* --- SPLIT VIEWPORT CONTENT --- */
+        /* --- TWO-COLUMN LAYOUT ENGINE --- */
         .main-viewport {
             position: relative;
             display: grid;
             grid-template-columns: 1fr 1fr; 
-            align-items: center;
             width: 100%;
-            height: 100%;
-            padding: 0 4rem;
+            padding: 10rem 4rem 4rem 4rem; /* Dinagdagan ang padding sa taas para hindi matakpan ng navbar */
             box-sizing: border-box;
             z-index: 5;
+            gap: 2rem;
         }
 
-        .creative-orb {
-            position: absolute;
-            width: 450px;
-            height: 450px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(56,189,248,0.1) 0%, rgba(0,0,0,0) 70%);
-            filter: blur(60px);
-            z-index: 1;
-            pointer-events: none;
-        }
-        .orb-1 { top: 5%; left: 15%; }
-        .orb-2 { bottom: 5%; right: 15%; background: radial-gradient(circle, rgba(139,92,246,0.08) 0%, rgba(0,0,0,0) 70%); }
-
-        /* --- LEFT SIDE: INTRO TEXT (HIGHER POSITION AND FADE IN) --- */
-        .intro-text-left {
-            z-index: 10;
+        /* --- LEFT SIDE: FIXED/STICKY CINEMATIC INTRO TEXT --- */
+        .left-sticky-panel {
+            position: sticky;
+            top: 12rem; /* Nananatili sa pwesto habang nag-e-scroll ang kanan */
+            height: fit-content;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
             text-align: left;
-            
-            /* Tinaasan ang vertical orientation */
-            margin-top: -80px; 
-            
-            /* Cinematic Fade-In galing kaliwa */
+            z-index: 10;
+        }
+
+        .intro-text-left {
             opacity: 0;
             transform: translateX(-30px);
             animation: fadeLeftAnimation 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -169,7 +155,6 @@
             margin: 0;
             line-height: 1.1;
             letter-spacing: -1px;
-            /* Mas pinalakas na text shadow para madaling basahin kahit maliwanag ang video */
             text-shadow: 0 4px 30px rgba(0, 0, 0, 0.9), 0 2px 10px rgba(0, 0, 0, 0.9); 
         }
 
@@ -182,45 +167,33 @@
             text-shadow: 0 2px 15px rgba(0, 0, 0, 0.9);
         }
 
-        /* --- RIGHT SIDE: CARD STACK DECK --- */
-        .card-stack-container {
-            position: relative;
+        /* --- RIGHT SIDE: SCROLLABLE CARDS STACK CONTAINER --- */
+        .right-scroll-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem; /* Agwat sa pagitan ng mga cards */
             width: 100%;
             max-width: 650px;
-            height: 350px; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            justify-self: end;
             z-index: 10;
-            justify-self: end; 
-            margin-top: -40px; 
         }
 
-        /* --- CONTENT CARDS --- */
+        /* --- CONTENT CARDS (PERMANENTLY VISIBLE & SCROLLABLE) --- */
         .content-card {
-            position: absolute;
             width: 100%;
-            height: 100%;
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            backdrop-filter: blur(16px); /* Glass effect para sa cards para malinis basahin */
+            backdrop-filter: blur(16px); 
             padding: 3rem;
             border-radius: 35px;
             box-sizing: border-box;
             box-shadow: var(--bubble-shadow);
             
-            display: none; 
-            flex-direction: column;
-            justify-content: center;
-            transition: opacity 0.4s ease, transform 0.4s ease;
+            /* Swabeng entry animation kapag nag-load ang buong page */
             opacity: 0;
-            transform: translateY(20px); 
-        }
-
-        .content-card.show {
-            display: flex;
-            opacity: 1;
-            transform: translateY(0);
+            transform: translateY(30px);
+            animation: fadeUpCards 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.5s;
         }
 
         .content-card h2 {
@@ -234,7 +207,7 @@
         .skills-list { display: flex; flex-wrap: wrap; gap: 0.6rem; list-style: none; padding: 0; }
         .skills-list li { background: #0284c7; padding: 8px 16px; border-radius: 18px; font-weight: 600; font-size: 0.9rem; }
 
-        /* --- KEYFRAME ENGINES --- */
+        /* --- KEYFRAME ANIMATIONS --- */
         @keyframes fadeLeftAnimation {
             to {
                 opacity: 1;
@@ -248,13 +221,20 @@
                 transform: translateY(0);
             }
         }
+
+        @keyframes fadeUpCards {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
 
     <div class="page-background-container">
         <video class="page-video" autoplay loop muted playsinline>
-            <source src="background2.mp4" type="video/mp4">
+            <source src="page-bg.mp4" type="video/mp4">
         </video>
     </div>
     <div class="page-overlay"></div>
@@ -263,26 +243,26 @@
         
         <nav class="navbar">
             <div class="nav-links">
-                <a class="nav-item" data-target="about">About Me</a>
-                <a class="nav-item" data-target="skills">Tech Stack and tools</a>
-                <a class="nav-item" data-target="certifications">Certifications</a>
-                <a class="nav-item" data-target="projects">Featured Projects</a>
+                <a class="nav-item" href="#about">About Me</a>
+                <a class="nav-item" href="#skills">Tech Stack and tools</a>
+                <a class="nav-item" href="#certifications">Certifications</a>
+                <a class="nav-item" href="#projects">Featured Projects</a>
             </div>
             <div class="navbar-right">
-                <a class="nav-item" data-target="contact">Contact Me</a>
+                <a class="nav-item" href="#contact">Contact Me</a>
             </div>
         </nav>
 
         <main class="main-viewport">
-            <div class="creative-orb orb-1"></div>
-            <div class="creative-orb orb-2"></div>
             
-            <div class="intro-text-left" id="introductionMarkup">
-                <h1>HI, I'M MICKO.</h1>
-                <span>Let's transform your QA presence.</span>
+            <div class="left-sticky-panel">
+                <div class="intro-text-left">
+                    <h1>HI, I'M MICKO.</h1>
+                    <span>Let's transform your QA presence.</span>
+                </div>
             </div>
 
-            <div class="card-stack-container">
+            <div class="right-scroll-container">
                 
                 <section id="about" class="content-card">
                     <h2>About Me</h2>
@@ -318,37 +298,6 @@
         </main>
 
     </div>
-
-    <script>
-        const navItems = document.querySelectorAll('.nav-item');
-        const contentCards = document.querySelectorAll('.content-card');
-
-        navItems.forEach(item => {
-            const targetId = item.getAttribute('data-target');
-            const targetCard = document.getElementById(targetId);
-
-            if (targetCard) {
-                // When hover triggers
-                item.addEventListener('mouseenter', () => {
-                    contentCards.forEach(card => {
-                        card.classList.remove('show');
-                        card.style.display = 'none';
-                    });
-                    
-                    targetCard.style.display = 'flex';
-                    setTimeout(() => {
-                        targetCard.classList.add('show');
-                    }, 10);
-                });
-
-                // When hover leaves
-                item.addEventListener('mouseleave', () => {
-                    targetCard.classList.remove('show');
-                    targetCard.style.display = 'none';
-                });
-            }
-        });
-    </script>
 
 </body>
 </html>
