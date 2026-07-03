@@ -182,7 +182,7 @@
             box-sizing: border-box;
         }
 
-        /* --- CONTENT CARDS LAYOUT WITH DYNAMIC FADE TRANSITION --- */
+        /* --- CONTENT CARDS LAYOUT WITH INITIAL ENTRANCE ANIMATION --- */
         .content-card {
             width: 100%;
             min-height: 80vh; 
@@ -198,24 +198,23 @@
             box-sizing: border-box;
             box-shadow: var(--bubble-shadow);
             
-            /* DYNAMIC FADE EFFECT TUNING */
-            opacity: 0.15; /* Naka-dim nang kaunti ang card kapag hindi naka-focus */
-            transform: scale(0.97); /* Bahagyang mas maliit para sa pop-out animation */
-            transition: opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease;
-            filter: blur(4px); /* Bahagyang malabo kapag hindi tinitingnan para malinis ang visual focus */
+            /* INITIAL STATE BAGO MAG-LOAD ANG ANIMATION */
+            opacity: 0;
+            transform: translateY(40px);
+            
+            /* CALLING THE ENTRANCE ANIMATION */
+            animation: fadeUpCards 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            
+            /* DYNAMIC HOVER TRANSITION PREPARATION */
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
-        /* WHEN THE CARD IS DYNAMICALLY HOVERED OR DIRECTLY SCROLLED TO */
-        .content-card.active-card {
-            opacity: 1 !important;
-            transform: scale(1) !important;
-            filter: blur(0px) !important;
-        }
-
-        /* Ang mga teksto sa loob ng active card ay magkakaroon din ng smooth transition */
-        .content-card h2, .content-card p, .content-card ul {
-            transition: opacity 0.6s ease;
-        }
+        /* STAGGERED TIMING DELAYS FOR EACH CARD ON SITE WEBPAGE OPENING */
+        .vertical-cards-container .content-card:nth-child(1) { animation-delay: 0.6s; }  /* About Me */
+        .vertical-cards-container .content-card:nth-child(2) { animation-delay: 0.8s; }  /* Tech Stack */
+        .vertical-cards-container .content-card:nth-child(3) { animation-delay: 1.0s; }  /* Certifications */
+        .vertical-cards-container .content-card:nth-child(4) { animation-delay: 1.2s; }  /* Featured Projects */
+        .vertical-cards-container .content-card:nth-child(5) { animation-delay: 1.4s; }  /* Contact Me */
 
         .content-card h2 {
             margin-top: 0;
@@ -242,13 +241,21 @@
         @keyframes fadeDownAnimation {
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* ANG ENTRANCE ANIMATION NG MGA CARDS */
+        @keyframes fadeUpCards {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
 
     <div class="page-background-container">
         <video id="bgVideo" class="page-video" autoplay loop muted playsinline>
-            <source src="background7.mp4" type="video/mp4">
+            <source src="background2.mp4" type="video/mp4">
         </video>
     </div>
     <div class="page-overlay"></div>
@@ -327,9 +334,8 @@
             setTimeout(() => { video.style.opacity = '1'; }, 400);
         }
 
-        // 2. ABSOLUTE OFFSET SCROLL & FADE CONTROLLER
+        // 2. ABSOLUTE OFFSET SCROLL CONTROLLER
         const navItems = document.querySelectorAll('.nav-item');
-        const allCards = document.querySelectorAll('.content-card');
 
         navItems.forEach(item => {
             const targetId = item.getAttribute('data-scroll');
@@ -337,13 +343,6 @@
 
             if (targetCard) {
                 item.addEventListener('mouseenter', () => {
-                    // Alisin ang active fade state sa lahat ng ibang cards
-                    allCards.forEach(card => card.classList.remove('active-card'));
-                    
-                    // Isa-aktibo ang tinatarget na card para mag-fade in
-                    targetCard.classList.add('active-card');
-
-                    // Kalkulahin ang eksaktong posisyon
                     const bodyRect = document.body.getBoundingClientRect().top;
                     const elementRect = targetCard.getBoundingClientRect().top;
                     const elementPosition = elementRect - bodyRect;
@@ -353,29 +352,6 @@
                         top: offsetPosition,
                         behavior: 'smooth'
                     });
-                });
-            }
-        });
-
-        // 3. SCROLL SPY ENGINE (Para kapag nag-scroll ka gamit ang mouse wheel, mag-fe-fade in pa rin ang card na natatapat sa screen)
-        window.addEventListener('scroll', () => {
-            let currentActive = "";
-            
-            allCards.forEach(card => {
-                const cardTop = card.offsetTop;
-                // Kung ang card ay pumasok na sa gitna/itaas ng viewport window
-                if (window.scrollY >= (cardTop - 300)) {
-                    currentActive = card.getAttribute('id');
-                }
-            });
-
-            if (currentActive) {
-                allCards.forEach(card => {
-                    if (card.getAttribute('id') === currentActive) {
-                        card.classList.add('active-card');
-                    } else {
-                        card.classList.remove('active-card');
-                    }
                 });
             }
         });
