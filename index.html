@@ -7,7 +7,7 @@
     <style>
         /* --- DESIGN CORE VARIABLES --- */
         :root {
-            /* Default: Premium Creative Mode (Nexa Inspired) */
+            /* Default: Premium Creative Mode */
             --bg-color: #020617;
             --bg-gradient: radial-gradient(circle at 50% 50%, #1e293b 0%, #020617 100%);
             --text-main: #ffffff;
@@ -23,7 +23,7 @@
             --slider-text: #ffffff;
         }
 
-        /* --- ALTERNATIVE: PRO MODE STYLE (REVERSED VIA CLASS) --- */
+        /* --- PRO MODE OVERRIDE --- */
         body.pro-mode {
             --bg-color: #0b0f19;
             --bg-gradient: none;
@@ -56,7 +56,7 @@
             transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* --- THE OUTER LAYOUT ENGINE (NO MORE CONTAINER BORDER) --- */
+        /* --- THE OUTER LAYOUT ENGINE (NO BOX BORDER) --- */
         .window-frame {
             width: 100vw;
             height: 100vh;
@@ -90,7 +90,6 @@
             transition: all 0.3s ease;
         }
 
-        /* Hover response bases on current active theme style */
         .nav-item:hover, .nav-item.active {
             background-color: var(--nav-item-text);
             color: #020617;
@@ -112,7 +111,7 @@
             position: relative;
         }
 
-        /* Background Kinetic Glow Orbs (Visible only on Creative Mode) */
+        /* Background Glow Orbs */
         .creative-orb {
             position: absolute;
             width: 450px;
@@ -132,7 +131,7 @@
             animation: float 8s infinite alternate ease-in-out;
         }
 
-        /* Speech Greeting Bubble */
+        /* Hero/Speech Greeting Bubble */
         .intro-bubble {
             z-index: 2;
             background: var(--bubble-bg);
@@ -155,7 +154,7 @@
             font-size: 2.5rem;
         }
 
-        /* Portfolio Cards Integration (Pointing Area) */
+        /* Portfolio Cards */
         .content-card {
             z-index: 2;
             width: 100%;
@@ -173,7 +172,6 @@
             backdrop-filter: none;
         }
 
-        /* Glow react hover style when creative layout is up */
         .content-card:hover {
             border-color: rgba(56, 189, 248, 0.4);
             transform: scale(1.01);
@@ -201,7 +199,7 @@
         .skills-list li { background: #0284c7; padding: 8px 16px; border-radius: 18px; font-weight: 600; font-size: 0.9rem; transition: background-color 0.4s; }
         body.pro-mode .skills-list li { background: #374151; }
 
-        /* --- DYNAMIC TRANSFORMATION SWITCH FOOTER --- */
+        /* --- CONTROL SWITCH FOOTER --- */
         .footer-controls {
             padding: 1.5rem 3rem;
             border-top: 1px solid var(--card-border);
@@ -238,7 +236,6 @@
             transition: .4s;
             border-radius: 50%;
         }
-        /* Handle switch checked movement naturally */
         input:checked + .slider { background-color: #4b5563; background-image: none; }
         input:checked + .slider:before { transform: translateX(24px); }
 
@@ -251,9 +248,10 @@
 
     <div class="window-frame">
         
+        <!-- TOP ROW MENU -->
         <nav class="navbar">
             <div class="nav-links">
-                <a href="#about" class="nav-item active">About Me</a>
+                <a href="#about" class="nav-item">About Me</a>
                 <a href="#skills" class="nav-item">Tech Stack and tools</a>
                 <a href="#certifications" class="nav-item">Certifications</a>
                 <a href="#projects" class="nav-item">Featured Projects</a>
@@ -263,7 +261,8 @@
             </div>
         </nav>
 
-        <main class="main-viewport">
+        <!-- MAIN INTERNAL VIEWPORT -->
+        <main class="main-viewport" id="scrollContainer">
             <div class="creative-orb orb-1"></div>
             <div class="creative-orb orb-2"></div>
             
@@ -271,6 +270,7 @@
                 HI, I'M MICKO.<br><span style='font-size: 1.4rem; font-weight: 400; opacity: 0.8;'>Let's transform your QA presence.</span>
             </div>
 
+            <!-- Content Cards -->
             <section id="about" class="content-card">
                 <h2>About Me</h2>
                 <p>I am a Computer Engineering practitioner focusing on Software Quality Assurance and Test Automation frameworks.</p>
@@ -287,6 +287,7 @@
             </section>
         </main>
 
+        <!-- BOTTOM ROW TOGGLE SWITCH -->
         <footer class="footer-controls">
             <label class="switch-container">
                 <div class="switch">
@@ -299,23 +300,39 @@
 
     </div>
 
+    <!-- SCRIPT CONTROL CONSOLE -->
     <script>
         const modeToggle = document.getElementById('modeToggle');
         const toggleText = document.getElementById('toggleText');
         const greetingBubble = document.getElementById('greetingBubble');
+        const scrollContainer = document.getElementById('scrollContainer');
 
+        // 1. REVERSED STYLE ENGINE (Creative is First Default)
         modeToggle.addEventListener('change', function() {
             if (this.checked) {
-                // Pag naka-CHECK (ini-slide), lilipat sa Pro Mode
                 document.body.classList.add('pro-mode');
                 toggleText.textContent = "Switch to Creative Mode";
                 greetingBubble.textContent = "Hi I'm Micko Welcome to my Website";
             } else {
-                // Default State (Naka-UNCHECK): Creative Mode agad!
                 document.body.classList.remove('pro-mode');
                 toggleText.textContent = "Creative Mode Active";
                 greetingBubble.innerHTML = "HI, I'M MICKO.<br><span style='font-size: 1.4rem; font-weight: 400; opacity: 0.8;'>Let's transform your QA presence.</span>";
             }
+        });
+
+        // 2. HOVER TO SCROLL ENGINE
+        document.querySelectorAll('.nav-item[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('mouseenter', function() {
+                const targetId = this.getAttribute('href');
+                const targetCard = document.querySelector(targetId);
+                
+                if (targetCard) {
+                    targetCard.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center' // Awtomatikong ipoposisyon ang content block sa gitna
+                    });
+                }
+            });
         });
     </script>
 
