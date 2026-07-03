@@ -3,159 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Micko Garcia | QA Automation Portfolio</title>
+    <title>Micko Garcia | Portfolio</title>
     <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            line-height: 1.6; 
-            margin: 0; 
-            padding: 0; 
-            background-color: #111827; /* Ginawa nating dark background para lumutang ang mga light blue cards */
-            color: #ffffff; 
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #111827; /* Dark background para lumutang ang lines */
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
-        /* Fullscreen Hero Section */
-        header { 
-            background: #1f2937; 
-            height: 100vh; 
+        /* Top Navigation Container base sa sketch */
+        .navbar {
             display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background-color: #1f2937;
+            border-bottom: 2px solid #374151;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        /* Ang mga pills/capsule na buttons sa drawing mo */
+        .nav-item {
+            border: 2px solid #bae6fd;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: #bae6fd;
+            font-weight: bold;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover {
+            background-color: #bae6fd;
+            color: #1e3a8a;
+        }
+
+        /* Ang Hero / Main Space sa gitna */
+        .main-hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            margin: 0;
+            padding: 2rem;
         }
 
-        /* Ang Light Blue Square Speech Bubble na may Rounded Edges */
-        .speech-bubble {
-            position: relative;
-            background: #bae6fd; /* Light Blue background gaya ng nasa larawan */
-            color: #1e3a8a; /* Dark Blue text para madaling basahin */
-            padding: 40px 50px;
-            border-radius: 40px; /* Rounded edges tulad ng nasa sample mo */
-            font-size: 3.5rem;
+        /* Ang bilugang speech bubble sa sketch */
+        .intro-bubble {
+            border: 3px solid #bae6fd;
+            padding: 40px 60px;
+            border-radius: 50px; /* Mas bilugan base sa drawing */
+            max-width: 600px;
+            font-size: 2.2rem;
             font-weight: bold;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            max-width: 80%;
-            animation: popBubble 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
-        }
-
-        /* Ang "tuka" o arrow sa itaas ng bubble */
-        .speech-bubble::before {
-            content: '';
-            position: absolute;
-            top: -25px; 
-            left: 50%;
-            transform: translateX(-50%);
-            border-width: 0 20px 25px 20px;
-            border-style: solid;
-            border-color: transparent transparent #bae6fd transparent;
-        }
-
-        /* Main Container para sa mga Sections */
-        .container { 
-            max-width: 800px; 
-            margin: 0 auto; 
-            padding: 10vh 1rem; 
-            display: flex;
-            flex-direction: column;
-            gap: 15vh; /* May malaking espasyo sa pagitan para ramdam ang scroll effect */
-        }
-
-        /* --- THE SCROLL-DRIVEN ZOOM ANIMATION --- */
-        section { 
-            background: #bae6fd; /* Parehong format: light blue background */
-            color: #1e3a8a; /* Dark blue text */
-            padding: 2.5rem; 
-            border-radius: 30px; /* Rounded edges pa rin */
+            line-height: 1.4;
+            color: #ffffff;
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            
-            /* Dito ikinonfigure ang dynamic zoom base sa scroll */
-            view-timeline-name: --cardTimeline;
-            view-timeline-axis: block;
-            animation-name: zoomInOut;
-            animation-fill-mode: both;
-            animation-timeline: --cardTimeline;
-            animation-range: entry 0% exit 100%;
         }
 
-        /* Ang logic ng laki/liit: maliit sa simula, lalaki sa gitna, liliit ulit paglampas */
-        @keyframes zoomInOut {
-            0% { transform: scale(0.75); opacity: 0.3; }
-            45%, 55% { transform: scale(1); opacity: 1; } /* Lalaki nang husto kapag nasa gitna ng screen */
-            100% { transform: scale(0.75); opacity: 0.3; }
+        /* Footer area kung nasaan ang slider */
+        .footer-controls {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
         }
 
-        h2 { 
-            color: #1e3a8a; 
-            border-bottom: 3px solid #7dd3fc; 
-            padding-bottom: 0.5rem; 
-            margin-top: 0;
-            font-size: 2rem;
+        /* Ang modernong "Slide to creative mode" switch */
+        .switch-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 2px solid #bae6fd;
+            padding: 8px 18px;
+            border-radius: 25px;
+            cursor: pointer;
         }
 
-        .skills-list { 
-            display: flex; 
-            flex-wrap: wrap; 
-            gap: 0.5rem; 
-            list-style: none; 
-            padding: 0; 
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
         }
 
-        .skills-list li { 
-            background: #0284c7; 
-            color: #ffffff; 
-            padding: 0.6rem 1.2rem; 
-            border-radius: 20px; 
-            font-weight: bold; 
-            font-size: 0.95rem; 
+        .switch input { 
+            opacity: 0;
+            width: 0;
+            height: 0;
         }
 
-        .project h3 { margin: 0; color: #0369a1; font-size: 1.5rem; }
-        .project a { color: #0284c7; text-decoration: none; font-weight: bold; font-size: 1.1rem; }
-        .project a:hover { text-decoration: underline; }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #4b5563;
+            transition: .4s;
+            border-radius: 34px;
+        }
 
-        @keyframes popBubble {
-            0% { opacity: 0; transform: scale(0.6); }
-            100% { opacity: 1; transform: scale(1); }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #0284c7;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(24px);
+        }
+
+        .slider-text {
+            font-weight: bold;
+            font-size: 0.95rem;
+            color: #bae6fd;
         }
     </style>
 </head>
 <body>
 
-    <!-- Unang titingkad at lilitaw sa screen gaya ng nasa photo -->
-    <header>
-        <div class="speech-bubble">
-            HI, I'M MICKO.
+    <!-- Ang Navbar mula sa itaas ng sketch -->
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="#about" class="nav-item">About Me</a>
+            <a href="#skills" class="nav-item">Tech Stack and tools</a>
+            <a href="#certifications" class="nav-item">Certifications</a>
+            <a href="#projects" class="nav-item">Featured Projects</a>
         </div>
-    </header>
+        <div>
+            <a href="#contact" class="nav-item">Contact Me</a>
+        </div>
+    </nav>
 
-    <div class="container">
-        <section id="about">
-            <h2>About Me</h2>
-            <p>Hi! I am a passionate engineer focused on Software Quality Assurance and Automation Testing. I love building stable automation frameworks and ensuring software reliability using modern testing tools.</p>
-        </section>
+    <!-- Ang Gitnang Bahagi kung nasaan ang Bubble Text -->
+    <main class="main-hero">
+        <div class="intro-bubble">
+            Hi I'm Micko Welcome to my Website
+        </div>
+    </main>
 
-        <section id="skills">
-            <h2>Tech Stack & Tools</h2>
-            <ul class="skills-list">
-                <li>Cypress</li>
-                <li>JavaScript</li>
-                <li>Python</li>
-                <li>Java</li>
-                <li>Git & GitHub</li>
-                <li>Chrome DevTools (F12)</li>
-            </ul>
-        </section>
-
-        <section id="projects">
-            <h2>Featured QA Projects</h2>
-            <div class="project">
-                <h3>Web Automation with Cypress</h3>
-                <p>Automated End-to-End (E2E) testing for dynamic platforms including login flows and search functionalities utilizing custom selector strategies and assertions.</p>
-                <a href="https://github.com/MickooooG/cypress-automation-practice" target="_blank">View GitHub Repository &rarr;</a>
+    <!-- Ang Slider Switch sa ibaba ng iyong drawing -->
+    <footer class="footer-controls">
+        <label class="switch-container">
+            <div class="switch">
+                <input type="checkbox" id="modeToggle">
+                <span class="slider"></span>
             </div>
-        </section>
-    </div>
+            <span class="slider-text">Slide to creative mode</span>
+        </label>
+    </footer>
 
 </body>
 </html>
