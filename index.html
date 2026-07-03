@@ -12,7 +12,7 @@
             --nav-item-text: #ffffff;
             --bubble-border: rgba(255, 255, 255, 0.2);
             --bubble-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-            --card-bg: rgba(15, 23, 42, 0.65); 
+            --card-bg: rgba(15, 23, 42, 0.75); /* Tinaasan para mas solid ang text readability */
             --card-border: rgba(255, 255, 255, 0.15);
             --bar-color: transparent; 
             --frame-bg: transparent; 
@@ -27,7 +27,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden; /* Tinanggal ang scrollbar dahil hindi na kailangan mag-scroll */
+            overflow: hidden; 
             background-color: #020617; 
         }
 
@@ -61,7 +61,6 @@
             height: 100vh;
             z-index: -1; 
             background: radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.3) 0%, rgba(2, 6, 23, 0.75) 100%);
-            backdrop-filter: none !important; 
         }
 
         /* --- THE OUTER LAYOUT ENGINE --- */
@@ -116,7 +115,6 @@
             z-index: 5;
         }
 
-        /* Background Glow Orbs */
         .creative-orb {
             position: absolute;
             width: 450px;
@@ -130,12 +128,12 @@
         .orb-1 { top: 5%; left: 15%; }
         .orb-2 { bottom: 5%; right: 15%; background: radial-gradient(circle, rgba(139,92,246,0.08) 0%, rgba(0,0,0,0) 70%); }
 
-        /* --- DYNAMIC STACK ENGINE (Dito magpapatong-patong ang cards sa iisang pwesto) --- */
+        /* --- CENTRAL CARD STACK DECK --- */
         .card-stack-container {
             position: relative;
             width: 100%;
             max-width: 800px;
-            height: 280px; /* Sapat na taas para sa pagpapalit-palit ng mga cards */
+            height: 260px; 
             display: flex;
             justify-content: center;
             align-items: center;
@@ -148,7 +146,7 @@
             overflow: hidden;   
             width: 100%;
             height: 100%;
-            display: flex;
+            display: flex; /* Nakalabas sa simula */
             align-items: center;
             justify-content: center;
             border-radius: 50px; 
@@ -156,12 +154,7 @@
             box-sizing: border-box;
             box-shadow: var(--bubble-shadow);
             background: rgba(30, 41, 59, 0.45); 
-            
-            /* Smooth transitions para sa pagpapakita at pagtatago */
-            opacity: 1;
-            visibility: visible;
-            transform: scale(1);
-            transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+            transition: opacity 0.3s ease;
         }
 
         .intro-video {
@@ -196,7 +189,7 @@
             line-height: 1.3;
         }
 
-        /* --- CONTENT CARDS (Naka-hide by default gamit ang opacity) --- */
+        /* --- CONTENT CARDS (STRICTLY HIDDEN VIA DISPLAY NONE) --- */
         .content-card {
             position: absolute;
             width: 100%;
@@ -209,25 +202,11 @@
             box-sizing: border-box;
             box-shadow: var(--bubble-shadow);
             
-            /* Hidden State Animation */
+            display: none; /* PWERSADONG NAKATAGO SA SIMULA */
+            flex-direction: column;
+            justify-content: center;
+            transition: opacity 0.3s ease;
             opacity: 0;
-            visibility: hidden;
-            transform: scale(0.95);
-            transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
-        }
-
-        /* Active State (Kapag hinober ang kaukulang button) */
-        .content-card.active {
-            opacity: 1;
-            visibility: visible;
-            transform: scale(1);
-        }
-
-        /* Kapag may lumabas na card, hihina ang opacity ng intro bubble */
-        .intro-bubble.hidden {
-            opacity: 0;
-            visibility: hidden;
-            transform: scale(1.05);
         }
 
         .content-card h2 {
@@ -326,23 +305,32 @@
             const targetCard = document.getElementById(targetId);
 
             if (targetCard) {
-                // KAPAG HINOBER ANG NAVBAR ITEM:
+                // HOVER INPUT
                 item.addEventListener('mouseenter', () => {
-                    // 1. Itago ang Main Intro Card
-                    greetingBubble.classList.add('hidden');
+                    // Itago ang intro card gamit ang display
+                    greetingBubble.style.display = 'none';
                     
-                    // 2. Siguraduhing walang ibang active na card na maiiwan
-                    contentCards.forEach(card => card.classList.remove('active'));
+                    // Siguraduhing lahat ng ibang content cards ay naitago muna
+                    contentCards.forEach(card => {
+                        card.style.display = 'none';
+                        card.style.opacity = '0';
+                    });
                     
-                    // 3. Ipakita ang katapat nitong card
-                    targetCard.classList.add('active');
+                    // Labasan at i-fade in ang tamang hinober na card
+                    targetCard.style.display = 'flex';
+                    setTimeout(() => {
+                        targetCard.style.opacity = '1';
+                    }, 10);
                 });
 
-                // KAPAG INALIS ANG MOUSE SA NAVBAR ITEM:
+                // MOUSE LEAVE INPUT
                 item.addEventListener('mouseleave', () => {
-                    // Ibalik sa normal: itago ang card at ilabas ulit si "Hi, I'm Micko"
-                    targetCard.classList.remove('active');
-                    greetingBubble.classList.remove('hidden');
+                    // Itago ang active content card
+                    targetCard.style.display = 'none';
+                    targetCard.style.opacity = '0';
+                    
+                    // Ibalik sa center view ang Intro Bubble mo
+                    greetingBubble.style.display = 'flex';
                 });
             }
         });
