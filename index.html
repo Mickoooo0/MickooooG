@@ -10,7 +10,7 @@
             --text-main: #ffffff;
             --nav-item-border: rgba(255, 255, 255, 0.3);
             --nav-item-text: #ffffff;
-            --bubble-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.5); /* Bahagyang inadjust para sa mas malaking card */
+            --bubble-shadow: 0 25px 50px -20px rgba(0, 0, 0, 0.6); 
             --card-bg: rgba(15, 23, 42, 0.75); 
             --card-border: rgba(255, 255, 255, 0.15);
             --bar-color: transparent; 
@@ -174,22 +174,27 @@
         .vertical-cards-container {
             display: flex;
             flex-direction: column;
-            gap: 5rem; /* Dinagdagan ang agwat para sumakto sa laki ng cards */
+            gap: 12rem; /* PINALAKI ANG DISTANSYA: Ginawang 12rem mula sa 5rem para mas malayo ang agwat */
             width: 100%;
-            max-width: 1100px; /* PINALAKI: Mula 900px, ginawang 1100px para mas malapad */
+            max-width: 1100px; 
             margin-top: 15vh; 
-            padding-bottom: 12rem; 
+            padding-bottom: 20rem; /* Dinagdagan ang huling allowance sa ilalim ng page */
             box-sizing: border-box;
         }
 
-        /* --- CONTENT CARDS LAYOUT (EXPANDED SIZE) --- */
+        /* --- CONTENT CARDS LAYOUT (MORE HEIGHT & SPACE) --- */
         .content-card {
             width: 100%;
+            min-height: 400px; /* PINALAKI ANG TAAS: May base height na 400px para mas mahaba silang tignan */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             backdrop-filter: blur(16px); 
-            padding: 4.5rem; /* PINALAKI: Mas malaking padding sa loob para lumaki ang physical height at space */
-            border-radius: 45px; /* Bahagyang pinalaki ang kurbada para sumakto sa bagong sukat */
+            padding: 4.5rem; 
+            border-radius: 45px; 
             box-sizing: border-box;
             box-shadow: var(--bubble-shadow);
             
@@ -204,11 +209,11 @@
             color: #ffffff;
             border-bottom: 2px solid rgba(255, 255, 255, 0.1);
             padding-bottom: 1rem;
-            font-size: 2.4rem; /* PINALAKI: Mas malaking font size para sa heading */
+            font-size: 2.4rem; 
         }
 
         .content-card p {
-            font-size: 1.25rem; /* PINALAKI: Mas madaling basahing katawan ng text */
+            font-size: 1.25rem; 
             line-height: 1.7;
             color: rgba(255, 255, 255, 0.9);
         }
