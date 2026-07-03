@@ -30,7 +30,7 @@
             background-color: #020617; 
         }
 
-        /* --- FIXED GLOBAL BACKGROUND ENGINE --- */
+        /* --- FIXED GLOBAL BACKGROUND ENGINE (STRICTLY NO BLUR) --- */
         .page-background-container {
             position: fixed;
             top: 0;
@@ -59,7 +59,8 @@
             width: 100vw;
             height: 100vh;
             z-index: -1; 
-            background: radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.3) 0%, rgba(2, 6, 23, 0.75) 100%);
+            background: radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.2) 0%, rgba(2, 6, 23, 0.65) 100%);
+            backdrop-filter: none !important; /* Siguradong walang blur sa likod */
         }
 
         /* --- THE OUTER LAYOUT ENGINE --- */
@@ -86,6 +87,7 @@
 
         .nav-links { display: flex; gap: 16px; }
 
+        /* NAVBAR BUTTONS: STAGGERED FADE-DOWN ENGINE */
         .nav-item {
             border: 2px solid var(--nav-item-border);
             padding: 8px 20px;
@@ -94,8 +96,13 @@
             color: var(--nav-item-text);
             font-weight: 600;
             font-size: 0.9rem;
-            transition: all 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
             cursor: pointer;
+            
+            /* Initial state bago mag-animate */
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeDownAnimation 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         .nav-item:hover {
@@ -103,11 +110,18 @@
             color: #020617;
         }
 
+        /* Iba't ibang delay para sa bawat button (Staggered Entry) */
+        .nav-links .nav-item:nth-child(1) { animation-delay: 0.4s; }
+        .nav-links .nav-item:nth-child(2) { animation-delay: 0.55s; }
+        .nav-links .nav-item:nth-child(3) { animation-delay: 0.7s; }
+        .nav-links .nav-item:nth-child(4) { animation-delay: 0.85s; }
+        .navbar-right .nav-item { animation-delay: 1s; } /* Ang pinakahuling lilitaw ay Contact Me button */
+
         /* --- SPLIT VIEWPORT CONTENT --- */
         .main-viewport {
             position: relative;
             display: grid;
-            grid-template-columns: 1fr 1fr; /* Hinati sa dalawa: Left para sa Intro, Right para sa Hover Cards */
+            grid-template-columns: 1fr 1fr; 
             align-items: center;
             width: 100%;
             height: 100%;
@@ -129,7 +143,7 @@
         .orb-1 { top: 5%; left: 15%; }
         .orb-2 { bottom: 5%; right: 15%; background: radial-gradient(circle, rgba(139,92,246,0.08) 0%, rgba(0,0,0,0) 70%); }
 
-        /* --- LEFT SIDE: FLOATING INTRO TEXT (NO CARD BACKGROUND) --- */
+        /* --- LEFT SIDE: INTRO TEXT (HIGHER POSITION AND FADE IN FROM LEFT) --- */
         .intro-text-left {
             z-index: 10;
             display: flex;
@@ -138,10 +152,13 @@
             align-items: flex-start;
             text-align: left;
             
-            /* Cinematic Fade-In at Slidemup Animation on Page Load */
+            /* Tinaasan ang pwesto gamit ang negative margin / transform adjust */
+            margin-top: -80px; 
+            
+            /* Cinematic Fade-In at Slide-right Entry Animation */
             opacity: 0;
             transform: translateX(-30px);
-            animation: cinematicFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: fadeLeftAnimation 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             animation-delay: 0.2s;
         }
 
@@ -173,17 +190,18 @@
             justify-content: center;
             align-items: center;
             z-index: 10;
-            justify-self: end; /* Dikit sa kanang bahagi */
+            justify-self: end; 
+            margin-top: -40px; /* Pantay sa pagkakataas ng text sa kaliwa */
         }
 
-        /* --- CONTENT CARDS (STRICTLY HIDDEN VIA DISPLAY NONE) --- */
+        /* --- CONTENT CARDS --- */
         .content-card {
             position: absolute;
             width: 100%;
             height: 100%;
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            backdrop-filter: blur(16px); 
+            backdrop-filter: blur(16px); /* Pinanatili ang soft glassmorphic filter sa mismong info cards para malinis basahin */
             padding: 3rem;
             border-radius: 35px;
             box-sizing: border-box;
@@ -194,10 +212,9 @@
             justify-content: center;
             transition: opacity 0.4s ease, transform 0.4s ease;
             opacity: 0;
-            transform: translateY(20px); /* Swabeng slide up kapag nag-appear */
+            transform: translateY(20px); 
         }
 
-        /* Kapag active ang card */
         .content-card.show {
             display: flex;
             opacity: 1;
@@ -215,11 +232,18 @@
         .skills-list { display: flex; flex-wrap: wrap; gap: 0.6rem; list-style: none; padding: 0; }
         .skills-list li { background: #0284c7; padding: 8px 16px; border-radius: 18px; font-weight: 600; font-size: 0.9rem; }
 
-        /* --- ANIMATION KEYFRAMES --- */
-        @keyframes cinematicFadeIn {
+        /* --- ANIMATION ENGINE KEYFRAMES --- */
+        @keyframes fadeLeftAnimation {
             to {
                 opacity: 1;
                 transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeDownAnimation {
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
     </style>
@@ -242,7 +266,7 @@
                 <a class="nav-item" data-target="certifications">Certifications</a>
                 <a class="nav-item" data-target="projects">Featured Projects</a>
             </div>
-            <div>
+            <div class="navbar-right">
                 <a class="nav-item" data-target="contact">Contact Me</a>
             </div>
         </nav>
@@ -302,22 +326,20 @@
             const targetCard = document.getElementById(targetId);
 
             if (targetCard) {
-                // KAPAG HINOBER ANG NAVBAR ITEM
+                // Hover display event
                 item.addEventListener('mouseenter', () => {
-                    // Itago muna ang lahat ng cards bago ipakita ang bago
                     contentCards.forEach(card => {
                         card.classList.remove('show');
                         card.style.display = 'none';
                     });
                     
-                    // Ipakita ang katapat na card na may slide transition
                     targetCard.style.display = 'flex';
                     setTimeout(() => {
                         targetCard.classList.add('show');
                     }, 10);
                 });
 
-                // KAPAG INALIS ANG MOUSE SA NAVBAR ITEM
+                // Mouse out hide event
                 item.addEventListener('mouseleave', () => {
                     targetCard.classList.remove('show');
                     targetCard.style.display = 'none';
