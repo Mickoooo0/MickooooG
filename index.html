@@ -10,7 +10,7 @@
             --text-main: #ffffff;
             --nav-item-border: rgba(255, 255, 255, 0.3);
             --nav-item-text: #ffffff;
-            --bubble-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.4); /* Malambot at natural na shadow */
+            --bubble-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.4); 
             --card-bg: rgba(15, 23, 42, 0.75); 
             --card-border: rgba(255, 255, 255, 0.15);
             --bar-color: transparent; 
@@ -23,9 +23,9 @@
             padding: 0;
             color: var(--text-main);
             background-color: #020617; 
-            overflow-y: auto; /* Pinagana ang normal vertical scroll */
+            overflow-y: auto; 
             overflow-x: hidden;
-            scroll-behavior: smooth; /* Para sa swabend pag-scroll */
+            scroll-behavior: smooth; 
         }
 
         /* --- FIXED GLOBAL BACKGROUND ENGINE (100% CRYSTAL CLEAR) --- */
@@ -72,7 +72,7 @@
             background: var(--frame-bg);
         }
 
-        /* --- FIXED NAVIGATION BAR --- */
+        /* --- FIXED NAVIGATION BAR (FULLY TRANSPARENT NOW) --- */
         .navbar {
             position: fixed;
             top: 0;
@@ -84,8 +84,10 @@
             padding: 1.5rem 3rem;
             box-sizing: border-box;
             z-index: 30; 
-            background: rgba(2, 6, 23, 0.2); /* Manipis na tint para hindi mawala kapag nag-scroll */
-            backdrop-filter: blur(8px);
+            /* Tinanggal ang kulay at blur para walang gray bar na makita kahit mag-scroll */
+            background: transparent !important; 
+            backdrop-filter: none !important; 
+            -webkit-backdrop-filter: none !important;
         }
 
         .nav-links { display: flex; gap: 16px; }
@@ -123,7 +125,7 @@
             position: relative;
             display: flex;
             flex-direction: column;
-            align-items: center; /* I-center lahat ng block sa gitna */
+            align-items: center; 
             width: 100%;
             padding: 0 2rem;
             box-sizing: border-box;
@@ -133,15 +135,13 @@
         /* --- INTRO SECTION (OCCUPIES FIRST VIEWPORT) --- */
         .intro-section-hero {
             width: 100%;
-            min-height: 90vh; /* Sakop halos buong unang screen */
+            min-height: 90vh; 
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: flex-start; /* Naka-align sa kaliwa tulad ng orihinal */
+            align-items: flex-start; 
             padding-left: 4rem;
             box-sizing: border-box;
-            
-            /* Tinaasan ang kabuuang pwesto */
             margin-top: -40px; 
         }
 
@@ -158,7 +158,7 @@
             margin: 0;
             line-height: 1.1;
             letter-spacing: -1px;
-            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); /* Mas banayad na shadow */
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); 
         }
 
         .intro-text-left span {
@@ -167,17 +167,17 @@
             opacity: 0.85;
             margin-top: 15px;
             display: block;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); /* Mas banayad na shadow */
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); 
         }
 
-        /* --- LOWER CARDS ROW STACK (NASA BABA NA SILA) --- */
+        /* --- LOWER CARDS ROW STACK --- */
         .vertical-cards-container {
             display: flex;
             flex-direction: column;
-            gap: 4rem; /* Swabeng layo ng bawat malaking card */
+            gap: 4rem; 
             width: 100%;
-            max-width: 900px; /* Mas malapad at mas malaking sukat ng cards */
-            padding-bottom: 8rem; /* May margin sa pinakababa ng page */
+            max-width: 900px; 
+            padding-bottom: 8rem; 
             box-sizing: border-box;
         }
 
@@ -192,7 +192,6 @@
             box-sizing: border-box;
             box-shadow: var(--bubble-shadow);
             
-            /* Fade up entry kapag nag-load */
             opacity: 0;
             transform: translateY(30px);
             animation: fadeUpCards 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -241,7 +240,6 @@
 </head>
 <body>
 
-    <!-- VIDEO BACKGROUND CONTAINER (CRYSTAL CLEAR) -->
     <div class="page-background-container">
         <video class="page-video" autoplay loop muted playsinline>
             <source src="background2.mp4" type="video/mp4">
@@ -251,7 +249,6 @@
 
     <div class="window-frame">
         
-        <!-- FIXED NAVIGATION BAR -->
         <nav class="navbar">
             <div class="nav-links">
                 <a class="nav-item" data-scroll="about">About Me</a>
@@ -266,7 +263,6 @@
 
         <main class="main-viewport">
             
-            <!-- UPPER PORTION: HERO INTRU BLOCK -->
             <section class="intro-section-hero">
                 <div class="intro-text-left">
                     <h1>HI, I'M MICKO.</h1>
@@ -274,16 +270,13 @@
                 </div>
             </section>
 
-            <!-- LOWER PORTION: EXPANDED SCROLLABLE CARDS (UNDER THE HERO) -->
             <div class="vertical-cards-container">
                 
-                <!-- Card 1: About Me -->
                 <section id="about" class="content-card">
                     <h2>About Me</h2>
                     <p>I am a Computer Engineering practitioner focusing on Software Quality Assurance and Test Automation frameworks. Passionate about ensuring high-fidelity systems execution and building stable test cycles.</p>
                 </section>
 
-                <!-- Card 2: Tech Stack -->
                 <section id="skills" class="content-card">
                     <h2>Tech Stack and tools</h2>
                     <p>The core technical frameworks and engineering instruments utilized for software validation environments:</p>
@@ -295,19 +288,16 @@
                     </ul>
                 </section>
 
-                <!-- Card 3: Certifications -->
                 <section id="certifications" class="content-card">
                     <h2>Certifications</h2>
                     <p>ISTQB Certified Tester credentials ongoing. Actively pursuing advanced technical specializations and professional portfolio courses for automated system deployments.</p>
                 </section>
 
-                <!-- Card 4: Featured Projects -->
                 <section id="projects" class="content-card">
                     <h2>Featured Projects</h2>
                     <p>An organized showcase of continuous integration test scripts, dynamic object models repositories, and comprehensive automation test suites designed for reliable deployment operations.</p>
                 </section>
 
-                <!-- Card 5: Contact -->
                 <section id="contact" class="content-card">
                     <h2>Contact Me</h2>
                     <p>Let's collaborate on optimization projects or QA structures. Reach out through my open communication lines:</p>
@@ -319,7 +309,6 @@
 
     </div>
 
-    <!-- HOVER TO SCROLL-DOWN CONTROLLER -->
     <script>
         const navItems = document.querySelectorAll('.nav-item');
 
@@ -328,7 +317,6 @@
             const targetCard = document.getElementById(targetId);
 
             if (targetCard) {
-                // HOVER CONTROLLER: Kapag hinober, bababa ang scroll papunta sa card
                 item.addEventListener('mouseenter', () => {
                     targetCard.scrollIntoView({
                         behavior: 'smooth',
