@@ -10,7 +10,7 @@
             --text-main: #ffffff;
             --nav-item-border: rgba(255, 255, 255, 0.3);
             --nav-item-text: #ffffff;
-            --bubble-shadow: 0 25px 50px -20px rgba(0, 0, 0, 0.6); 
+            --bubble-shadow: 0 35px 60px -25px rgba(0, 0, 0, 0.6); 
             --card-bg: rgba(15, 23, 42, 0.75); 
             --card-border: rgba(255, 255, 255, 0.15);
             --bar-color: transparent; 
@@ -174,27 +174,27 @@
         .vertical-cards-container {
             display: flex;
             flex-direction: column;
-            gap: 12rem; /* PINALAKI ANG DISTANSYA: Ginawang 12rem mula sa 5rem para mas malayo ang agwat */
+            gap: 15rem; /* MAS PINALAYO: Ginawang 15rem para talagang may breathable transition space sa pagitan */
             width: 100%;
             max-width: 1100px; 
             margin-top: 15vh; 
-            padding-bottom: 20rem; /* Dinagdagan ang huling allowance sa ilalim ng page */
+            padding-bottom: 25rem; 
             box-sizing: border-box;
         }
 
-        /* --- CONTENT CARDS LAYOUT (MORE HEIGHT & SPACE) --- */
+        /* --- CONTENT CARDS LAYOUT (ULTRA HEIGHT ENGINE) --- */
         .content-card {
             width: 100%;
-            min-height: 400px; /* PINALAKI ANG TAAS: May base height na 400px para mas mahaba silang tignan */
+            min-height: 80vh; /* SAGAD SA HEIGHT: Gagamit ng 80% ng kabuuang taas ng iyong screen layout */
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: center; /* Naka-center nang patayo ang laman para magandang tignan kahit dambuhala ang taas */
             
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             backdrop-filter: blur(16px); 
-            padding: 4.5rem; 
-            border-radius: 45px; 
+            padding: 5.5rem; /* Dinagdagan ang padding para sa mas malaking workspace */
+            border-radius: 50px; 
             box-sizing: border-box;
             box-shadow: var(--bubble-shadow);
             
@@ -208,13 +208,13 @@
             margin-top: 0;
             color: #ffffff;
             border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 1rem;
-            font-size: 2.4rem; 
+            padding-bottom: 1.2rem;
+            font-size: 2.6rem; 
         }
 
         .content-card p {
-            font-size: 1.25rem; 
-            line-height: 1.7;
+            font-size: 1.35rem; 
+            line-height: 1.8;
             color: rgba(255, 255, 255, 0.9);
         }
 
@@ -246,6 +246,7 @@
 </head>
 <body>
 
+    <!-- VIDEO BACKGROUND CONTAINER -->
     <div class="page-background-container">
         <video id="bgVideo" class="page-video" autoplay loop muted playsinline>
             <source src="background2.mp4" type="video/mp4">
@@ -255,6 +256,7 @@
 
     <div class="window-frame">
         
+        <!-- FIXED NAVIGATION BAR -->
         <nav class="navbar">
             <div class="nav-links">
                 <a class="nav-item" data-scroll="about">About Me</a>
@@ -269,6 +271,7 @@
 
         <main class="main-viewport">
             
+            <!-- UPPER PORTION: HERO INTRO BLOCK -->
             <section class="intro-section-hero">
                 <div class="intro-text-left">
                     <h1>HI, I'M MICKO.</h1>
@@ -276,13 +279,16 @@
                 </div>
             </section>
 
+            <!-- LOWER PORTION: EXPANDED SCROLLABLE CARDS -->
             <div class="vertical-cards-container">
                 
+                <!-- Card 1: About Me -->
                 <section id="about" class="content-card">
                     <h2>About Me</h2>
                     <p>I am a Computer Engineering practitioner focusing on Software Quality Assurance and Test Automation frameworks. Passionate about ensuring high-fidelity systems execution and building stable test cycles.</p>
                 </section>
 
+                <!-- Card 2: Tech Stack -->
                 <section id="skills" class="content-card">
                     <h2>Tech Stack and tools</h2>
                     <p>The core technical frameworks and engineering instruments utilized for software validation environments:</p>
@@ -294,20 +300,23 @@
                     </ul>
                 </section>
 
+                <!-- Card 3: Certifications -->
                 <section id="certifications" class="content-card">
                     <h2>Certifications</h2>
                     <p>ISTQB Certified Tester credentials ongoing. Actively pursuing advanced technical specializations and professional portfolio courses for automated system deployments.</p>
                 </section>
 
+                <!-- Card 4: Featured Projects -->
                 <section id="projects" class="content-card">
                     <h2>Featured Projects</h2>
                     <p>An organized showcase of continuous integration test scripts, dynamic object models repositories, and comprehensive automation test suites designed for reliable deployment operations.</p>
                 </section>
 
+                <!-- Card 5: Contact -->
                 <section id="contact" class="content-card">
                     <h2>Contact Me</h2>
                     <p>Let's collaborate on optimization projects or QA structures. Reach out through my open communication lines:</p>
-                    <p style="font-weight: 600; font-size: 1.3rem; margin-top: 0.5rem; color: #38bdf8;">Email: mickogarcia@example.com | Metro Manila, Philippines</p>
+                    <p style="font-weight: 600; font-size: 1.4rem; margin-top: 0.5rem; color: #38bdf8;">Email: mickogarcia@example.com | Metro Manila, Philippines</p>
                 </section>
 
             </div>
@@ -315,6 +324,7 @@
 
     </div>
 
+    <!-- DYNAMIC BACKGROUND FADE & HOVER TO SCROLL SYSTEM -->
     <script>
         // 1. VIDEO BACKGROUND FADE ENGINE WITH DELAY
         const video = document.getElementById('bgVideo');
