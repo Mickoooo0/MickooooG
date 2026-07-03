@@ -11,7 +11,7 @@
             --nav-item-border: rgba(255, 255, 255, 0.3);
             --nav-item-text: #ffffff;
             --bubble-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-            --card-bg: rgba(15, 23, 42, 0.75); 
+            --card-bg: rgba(15, 23, 42, 0.8); /* Bahagyang mas solid para sa malalaking cards */
             --card-border: rgba(255, 255, 255, 0.15);
             --bar-color: transparent; 
             --frame-bg: transparent; 
@@ -22,10 +22,12 @@
             margin: 0;
             padding: 0;
             color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden; /* No scrolling ulit dahil hover mechanics na ito */
             background-color: #020617; 
-            /* Binuksan ulit ang scrolling dahil nakalatag na ang cards */
-            overflow-y: auto; 
-            overflow-x: hidden;
         }
 
         /* --- FIXED GLOBAL BACKGROUND ENGINE (100% CRYSTAL CLEAR) --- */
@@ -64,32 +66,28 @@
         /* --- THE OUTER LAYOUT ENGINE --- */
         .window-frame {
             width: 100vw;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            height: 100vh;
+            display: grid;
+            grid-template-rows: auto 1fr;
             box-sizing: border-box;
             position: relative;
             background: var(--frame-bg);
         }
 
-        /* --- STICKY NAVIGATION BAR --- */
+        /* --- NAVIGATION BAR --- */
         .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1.5rem 3rem;
-            box-sizing: border-box;
-            z-index: 30; 
+            border-bottom: 1px solid var(--bar-color);
+            z-index: 20; 
             background: transparent;
         }
 
         .nav-links { display: flex; gap: 16px; }
 
-        /* NAVBAR BUTTONS: STAGGERED FADE-DOWN ENGINE */
+        /* NAVBAR BUTTONS: STAGGERED FADE-DOWN */
         .nav-item {
             border: 2px solid var(--nav-item-border);
             padding: 8px 20px;
@@ -117,40 +115,38 @@
         .nav-links .nav-item:nth-child(4) { animation-delay: 0.85s; }
         .navbar-right .nav-item { animation-delay: 1s; } 
 
-        /* --- TWO-COLUMN LAYOUT ENGINE --- */
+        /* --- VERTICAL CENTER VIEWPORT LAYOUT --- */
         .main-viewport {
             position: relative;
-            display: grid;
-            grid-template-columns: 1fr 1fr; 
+            display: flex;
+            flex-direction: column; /* Ginawang column para nasa ibaba ang mga cards */
+            justify-content: center;
+            align-items: center;
             width: 100%;
-            padding: 10rem 4rem 4rem 4rem; /* Dinagdagan ang padding sa taas para hindi matakpan ng navbar */
+            height: 100%;
+            padding: 0 2rem;
             box-sizing: border-box;
             z-index: 5;
-            gap: 2rem;
         }
 
-        /* --- LEFT SIDE: FIXED/STICKY CINEMATIC INTRO TEXT --- */
-        .left-sticky-panel {
-            position: sticky;
-            top: 12rem; /* Nananatili sa pwesto habang nag-e-scroll ang kanan */
-            height: fit-content;
+        /* --- INTRO TEXT (CENTERED AT UPPER HALF) --- */
+        .intro-text-top {
+            z-index: 10;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: flex-start;
-            text-align: left;
-            z-index: 10;
-        }
-
-        .intro-text-left {
+            align-items: center; /* Gitna ang alignment */
+            text-align: center;
+            margin-bottom: 2rem; /* May awang sa pagitan ng text at ng card sa ibaba */
+            
             opacity: 0;
-            transform: translateX(-30px);
-            animation: fadeLeftAnimation 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            transform: translateY(20px);
+            animation: fadeUpAnimation 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             animation-delay: 0.2s;
         }
 
-        .intro-text-left h1 {
-            font-size: 4rem;
+        .intro-text-top h1 {
+            font-size: 4.5rem; /* Bahagyang pinalaki para sa full screen impact */
             font-weight: 800;
             margin: 0;
             line-height: 1.1;
@@ -158,8 +154,8 @@
             text-shadow: 0 4px 30px rgba(0, 0, 0, 0.9), 0 2px 10px rgba(0, 0, 0, 0.9); 
         }
 
-        .intro-text-left span {
-            font-size: 1.6rem;
+        .intro-text-top span {
+            font-size: 1.8rem;
             font-weight: 400;
             opacity: 0.85;
             margin-top: 15px;
@@ -167,62 +163,74 @@
             text-shadow: 0 2px 15px rgba(0, 0, 0, 0.9);
         }
 
-        /* --- RIGHT SIDE: SCROLLABLE CARDS STACK CONTAINER --- */
-        .right-scroll-container {
-            display: flex;
-            flex-direction: column;
-            gap: 2.5rem; /* Agwat sa pagitan ng mga cards */
+        /* --- LOWER DECK: LARGER HOVER CARDS CONTAINER --- */
+        .card-stack-container {
+            position: relative;
             width: 100%;
-            max-width: 650px;
-            justify-self: end;
+            max-width: 950px; /* LALONG PINALAKI ang sakop na space sa screen */
+            height: 380px; /* Mas mataas na canvas para sa malalaking content block */
+            display: flex;
+            justify-content: center;
+            align-items: center;
             z-index: 10;
         }
 
-        /* --- CONTENT CARDS (PERMANENTLY VISIBLE & SCROLLABLE) --- */
+        /* --- EXPANDED CONTENT CARDS (HIDDEN BY DEFAULT) --- */
         .content-card {
+            position: absolute;
             width: 100%;
+            height: 100%;
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            backdrop-filter: blur(16px); 
-            padding: 3rem;
-            border-radius: 35px;
+            backdrop-filter: blur(20px); /* Mas makapal na frosted glass layout */
+            padding: 3.5rem; /* Dinagdagan ang panloob na espasyo */
+            border-radius: 40px; /* Mas swabe at modernong kurbada */
             box-sizing: border-box;
             box-shadow: var(--bubble-shadow);
             
-            /* Swabeng entry animation kapag nag-load ang buong page */
+            display: none; 
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            transition: opacity 0.4s ease, transform 0.4s ease;
             opacity: 0;
-            transform: translateY(30px);
-            animation: fadeUpCards 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            animation-delay: 0.5s;
+            transform: scale(0.96) translateY(20px); /* Scale at slide-up effect kapag lumabas */
+        }
+
+        /* Show configuration gamit ang classes */
+        .content-card.show {
+            display: flex;
+            opacity: 1;
+            transform: scale(1) translateY(0);
         }
 
         .content-card h2 {
             margin-top: 0;
             color: #ffffff;
             border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 0.5rem;
-            font-size: 1.8rem;
+            padding-bottom: 0.8rem;
+            font-size: 2.2rem; /* Mas malaking heading style */
+            width: 100%;
         }
 
-        .skills-list { display: flex; flex-wrap: wrap; gap: 0.6rem; list-style: none; padding: 0; }
-        .skills-list li { background: #0284c7; padding: 8px 16px; border-radius: 18px; font-weight: 600; font-size: 0.9rem; }
-
-        /* --- KEYFRAME ANIMATIONS --- */
-        @keyframes fadeLeftAnimation {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        .content-card p {
+            font-size: 1.2rem; /* Mas madaling basahin ang detalye */
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
         }
 
-        @keyframes fadeDownAnimation {
+        .skills-list { display: flex; flex-wrap: wrap; gap: 0.8rem; list-style: none; padding: 0; margin-top: 1rem; }
+        .skills-list li { background: #0284c7; padding: 10px 22px; border-radius: 20px; font-weight: 600; font-size: 1rem; }
+
+        /* --- CORE ANIMATION KEYFRAMES --- */
+        @keyframes fadeUpAnimation {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        @keyframes fadeUpCards {
+        @keyframes fadeDownAnimation {
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -234,7 +242,7 @@
 
     <div class="page-background-container">
         <video class="page-video" autoplay loop muted playsinline>
-            <source src="background7.mp4" type="video/mp4">
+            <source src="background2.mp4" type="video/mp4">
         </video>
     </div>
     <div class="page-overlay"></div>
@@ -243,34 +251,33 @@
         
         <nav class="navbar">
             <div class="nav-links">
-                <a class="nav-item" href="#about">About Me</a>
-                <a class="nav-item" href="#skills">Tech Stack and tools</a>
-                <a class="nav-item" href="#certifications">Certifications</a>
-                <a class="nav-item" href="#projects">Featured Projects</a>
+                <a class="nav-item" data-target="about">About Me</a>
+                <a class="nav-item" data-target="skills">Tech Stack and tools</a>
+                <a class="nav-item" data-target="certifications">Certifications</a>
+                <a class="nav-item" data-target="projects">Featured Projects</a>
             </div>
             <div class="navbar-right">
-                <a class="nav-item" href="#contact">Contact Me</a>
+                <a class="nav-item" data-target="contact">Contact Me</a>
             </div>
         </nav>
 
         <main class="main-viewport">
             
-            <div class="left-sticky-panel">
-                <div class="intro-text-left">
-                    <h1>HI, I'M MICKO.</h1>
-                    <span>Let's transform your QA presence.</span>
-                </div>
+            <div class="intro-text-top" id="introductionMarkup">
+                <h1>HI, I'M MICKO.</h1>
+                <span>Let's transform your QA presence.</span>
             </div>
 
-            <div class="right-scroll-container">
+            <div class="card-stack-container">
                 
                 <section id="about" class="content-card">
                     <h2>About Me</h2>
-                    <p>I am a Computer Engineering practitioner focusing on Software Quality Assurance and Test Automation frameworks.</p>
+                    <p>I am a Computer Engineering practitioner focusing on Software Quality Assurance and Test Automation frameworks. Passionate about ensuring high-fidelity systems execution and building stable test cycles.</p>
                 </section>
 
                 <section id="skills" class="content-card">
                     <h2>Tech Stack and tools</h2>
+                    <p>The core technical frameworks and engineering instruments utilized for software validation environments:</p>
                     <ul class="skills-list">
                         <li>Cypress</li>
                         <li>JavaScript</li>
@@ -281,23 +288,55 @@
 
                 <section id="certifications" class="content-card">
                     <h2>Certifications</h2>
-                    <p>ISTQB Certified Tester / Coursera Professional Certifications ongoing.</p>
+                    <p>ISTQB Certified Tester credentials ongoing. Actively pursuing advanced technical specializations and professional portfolio courses for automated system deployments.</p>
                 </section>
 
                 <section id="projects" class="content-card">
                     <h2>Featured Projects</h2>
-                    <p>Automation test suites and technical engineering documentations repository.</p>
+                    <p>An organized showcase of continuous integration test scripts, dynamic object models repositories, and comprehensive automation test suites designed for reliable deployment operations.</p>
                 </section>
 
                 <section id="contact" class="content-card">
                     <h2>Contact Me</h2>
-                    <p>Email: mickogarcia@example.com | Metro Manila, Philippines</p>
+                    <p>Let's collaborate on optimization projects or QA structures. Reach out through my open communication lines:</p>
+                    <p style="font-weight: 600; font-size: 1.3rem; margin-top: 0.5rem; color: #38bdf8;">Email: mickogarcia@example.com | Metro Manila, Philippines</p>
                 </section>
 
             </div>
         </main>
 
     </div>
+
+    <script>
+        const navItems = document.querySelectorAll('.nav-item');
+        const contentCards = document.querySelectorAll('.content-card');
+
+        navItems.forEach(item => {
+            const targetId = item.getAttribute('data-target');
+            const targetCard = document.getElementById(targetId);
+
+            if (targetCard) {
+                // Trigger view on hover entry
+                item.addEventListener('mouseenter', () => {
+                    contentCards.forEach(card => {
+                        card.classList.remove('show');
+                        card.style.display = 'none';
+                    });
+                    
+                    targetCard.style.display = 'flex';
+                    setTimeout(() => {
+                        targetCard.classList.add('show');
+                    }, 10);
+                });
+
+                // Clear view on hover leave
+                item.addEventListener('mouseleave', () => {
+                    targetCard.classList.remove('show');
+                    targetCard.style.display = 'none';
+                });
+            }
+        });
+    </script>
 
 </body>
 </html>
