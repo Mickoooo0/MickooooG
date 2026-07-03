@@ -15,6 +15,7 @@
             --bubble-bg: rgba(255, 255, 255, 0.03);
             --bubble-border: rgba(255, 255, 255, 0.2);
             --bubble-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            --card-bg: rgba(30, 41, 59, 0.45);
             --card-border: rgba(255, 255, 255, 0.15);
             --bar-color: transparent; 
             --frame-bg: transparent; 
@@ -123,16 +124,15 @@
             box-shadow: var(--bubble-shadow);
         }
 
-        /* --- PORTFOLIO CARDS WITH VIDEO BACKGROUND ENGINE --- */
+        /* --- PORTFOLIO CARDS --- */
         .content-card {
-            position: relative; 
-            overflow: hidden;   
             z-index: 10;
             width: 100%;
             max-width: 700px;
-            /* FALLBACK BACKGROUND: Kulay ng card kung sakaling hindi mag-load o magka-error ang video ninyo */
-            background: rgba(30, 41, 59, 0.45) !important; 
+            background: var(--card-bg);
             border: 1px solid var(--card-border);
+            backdrop-filter: blur(12px); /* Swabeng frosted glass effect */
+            padding: 3rem;
             border-radius: 35px;
             box-sizing: border-box;
             transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
@@ -142,38 +142,6 @@
             border-color: rgba(56, 189, 248, 0.5);
             transform: scale(1.01);
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-        }
-
-        /* Ang Video Element sa loob ng Card */
-        .card-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1; 
-            pointer-events: none;
-            display: block;
-        }
-
-        /* Overlay Tint para maging semi-transparent at may konting glass blur sa ibabaw ng video */
-        .card-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.45) 0%, rgba(2, 6, 23, 0.7) 100%);
-            backdrop-filter: blur(4px); 
-            z-index: 2; 
-        }
-
-        /* Ang wrapper para sa actual text at contents ng card */
-        .card-body {
-            position: relative;
-            z-index: 3; 
-            padding: 3rem;
         }
 
         .content-card h2 {
@@ -196,72 +164,3 @@
         
         <nav class="navbar">
             <div class="nav-links">
-                <a href="#about" class="nav-item">About Me</a>
-                <a href="#skills" class="nav-item">Tech Stack and tools</a>
-                <a href="#certifications" class="nav-item">Certifications</a>
-                <a href="#projects" class="nav-item">Featured Projects</a>
-            </div>
-            <div>
-                <a href="#contact" class="nav-item">Contact Me</a>
-            </div>
-        </nav>
-
-        <main class="main-viewport" id="scrollContainer">
-            <div class="creative-orb orb-1"></div>
-            <div class="creative-orb orb-2"></div>
-            
-            <div class="intro-bubble" id="greetingBubble">
-                HI, I'M MICKO.<br><span style='font-size: 1.4rem; font-weight: 400; opacity: 0.8;'>Let's transform your QA presence.</span>
-            </div>
-
-            <section id="about" class="content-card">
-                <video class="card-video" autoplay loop muted playsinline>
-                    <source src="background3.mp4" type="video/mp4">
-                </video>
-                <div class="card-overlay"></div>
-
-                <div class="card-body">
-                    <h2>About Me</h2>
-                    <p>I am a Computer test Engineering practitioner focusing on Software Quality Assurance and Test Automation frameworks.</p>
-                </div>
-            </section>
-
-            <section id="skills" class="content-card">
-                <video class="card-video" autoplay loop muted playsinline>
-                    <source src="background2.mp4" type="video/mp4">
-                </video>
-                <div class="card-overlay"></div>
-
-                <div class="card-body">
-                    <h2>Tech Stack and tools</h2>
-                    <ul class="skills-list">
-                        <li>Cypress</li>
-                        <li>JavaScript</li>
-                        <li>Git & GitHub</li>
-                        <li>Chrome DevTools</li>
-                    </ul>
-                </div>
-            </section>
-        </main>
-
-    </div>
-
-    <script>
-        // HOVER TO SCROLL ENGINE
-        document.querySelectorAll('.nav-item[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('mouseenter', function() {
-                const targetId = this.getAttribute('href');
-                const targetCard = document.querySelector(targetId);
-                
-                if (targetCard) {
-                    targetCard.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'center'
-                    });
-                }
-            });
-        });
-    </script>
-
-</body>
-</html>
