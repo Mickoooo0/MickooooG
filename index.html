@@ -131,7 +131,7 @@
             max-width: 700px;
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            backdrop-filter: blur(12px); /* Swabeng frosted glass effect */
+            backdrop-filter: blur(12px); 
             padding: 3rem;
             border-radius: 35px;
             box-sizing: border-box;
@@ -164,3 +164,58 @@
         
         <nav class="navbar">
             <div class="nav-links">
+                <a href="#about" class="nav-item">About Me</a>
+                <a href="#skills" class="nav-item">Tech Stack and tools</a>
+                <a href="#certifications" class="nav-item">Certifications</a>
+                <a href="#projects" class="nav-item">Featured Projects</a>
+            </div>
+            <div>
+                <a href="#contact" class="nav-item">Contact Me</a>
+            </div>
+        </nav>
+
+        <main class="main-viewport" id="scrollContainer">
+            <div class="creative-orb orb-1"></div>
+            <div class="creative-orb orb-2"></div>
+            
+            <div class="intro-bubble" id="greetingBubble">
+                HI, I'M MICKO.<br><span style='font-size: 1.4rem; font-weight: 400; opacity: 0.8;'>Let's transform your QA presence.</span>
+            </div>
+
+            <section id="about" class="content-card">
+                <h2>About Me</h2>
+                <p>I am a Computer Engineering practitioner focusing on Software Quality Assurance and Test Automation frameworks.</p>
+            </section>
+
+            <section id="skills" class="content-card">
+                <h2>Tech Stack and tools</h2>
+                <ul class="skills-list">
+                    <li>Cypress</li>
+                    <li>JavaScript</li>
+                    <li>Git & GitHub</li>
+                    <li>Chrome DevTools</li>
+                </ul>
+            </section>
+        </main>
+
+    </div>
+
+    <script>
+        // HOVER TO SCROLL ENGINE
+        document.querySelectorAll('.nav-item[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('mouseenter', function() {
+                const targetId = this.getAttribute('href');
+                const targetCard = document.querySelector(targetId);
+                
+                if (targetCard) {
+                    targetCard.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
