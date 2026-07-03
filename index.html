@@ -72,7 +72,7 @@
             background: var(--frame-bg);
         }
 
-        /* --- FIXED NAVIGATION BAR (FULLY TRANSPARENT NOW) --- */
+        /* --- FIXED NAVIGATION BAR (FULLY TRANSPARENT) --- */
         .navbar {
             position: fixed;
             top: 0;
@@ -84,7 +84,6 @@
             padding: 1.5rem 3rem;
             box-sizing: border-box;
             z-index: 30; 
-            /* Tinanggal ang kulay at blur para walang gray bar na makita kahit mag-scroll */
             background: transparent !important; 
             backdrop-filter: none !important; 
             -webkit-backdrop-filter: none !important;
@@ -135,14 +134,13 @@
         /* --- INTRO SECTION (OCCUPIES FIRST VIEWPORT) --- */
         .intro-section-hero {
             width: 100%;
-            min-height: 90vh; 
+            min-height: 85vh; /* Binawasan nang kaunti para mas sumakto sa viewport */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: flex-start; 
             padding-left: 4rem;
             box-sizing: border-box;
-            margin-top: -40px; 
         }
 
         .intro-text-left {
@@ -170,14 +168,15 @@
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); 
         }
 
-        /* --- LOWER CARDS ROW STACK --- */
+        /* --- LOWER CARDS ROW STACK (PINABABA LAHAT NG CARDS) --- */
         .vertical-cards-container {
             display: flex;
             flex-direction: column;
             gap: 4rem; 
             width: 100%;
             max-width: 900px; 
-            padding-bottom: 8rem; 
+            margin-top: 15vh; /* IPINUSH PABABA: Nagdagdag ng malaking clearance sa ilalim ng intro text */
+            padding-bottom: 10rem; 
             box-sizing: border-box;
         }
 
