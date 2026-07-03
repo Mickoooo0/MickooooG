@@ -7,49 +7,15 @@
     <style>
         /* --- DESIGN CORE VARIABLES --- */
         :root {
-            /* Default: Premium Creative Mode */
-            --bg-color: #020617;
-            --bg-gradient: radial-gradient(circle at 50% 50%, #1e293b 0%, #020617 100%);
-            --text-main: #ffffff;
-            --nav-item-border: rgba(255, 255, 255, 0.3);
-            --nav-item-text: #ffffff;
-            --bubble-bg: rgba(255, 255, 255, 0.03);
-            --bubble-border: rgba(255, 255, 255, 0.2);
-            --bubble-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-            --card-bg: rgba(30, 41, 59, 0.4); 
-            --card-border: rgba(255, 255, 255, 0.08);
-            --orb-opacity: 1;
-            --slider-bg: linear-gradient(90deg, #38bdf8 0%, #8b5cf6 100%);
-            --slider-text: #ffffff;
-            --bar-color: transparent; 
-            
-            /* CREATIVE MODE: Ganap na transparent ang labas na lalagyan para walang harang */
-            --frame-bg: transparent;
-            --frame-border: none;
-            --frame-clip: none;
-            --frame-shadow: none;
-        }
-
-        /* --- PRO MODE OVERRIDE --- */
-        body.pro-mode {
             --bg-color: #0b0f19;
-            --bg-gradient: none;
             --text-main: #ffffff;
             --nav-item-border: #bae6fd;
             --nav-item-text: #bae6fd;
-            --bubble-bg: transparent;
-            --bubble-border: #bae6fd;
-            --bubble-shadow: none;
             --card-bg: rgba(31, 41, 55, 0.8);
             --card-border: #374151;
-            --orb-opacity: 0;
-            --slider-bg: #4b5563;
-            --slider-text: #bae6fd;
             --bar-color: #bae6fd; 
-            
-            /* PRO MODE: Dito lang babalik ang solid blueprint sketch boundaries mo */
             --frame-bg: rgba(17, 24, 39, 0.6);
-            --frame-shadow: inset 0 0 40px rgba(0,0,0,0.6);
+            --frame-shadow: inset 0 0 40px rgba(0, 0, 0, 0.6);
         }
 
         body {
@@ -57,38 +23,24 @@
             margin: 0;
             padding: 0;
             background-color: var(--bg-color);
-            background-image: var(--bg-gradient);
-            background-attachment: fixed;
             color: var(--text-main);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             overflow: hidden;
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* --- THE OUTER LAYOUT ENGINE (FIXED FRAME BLOCKING) --- */
+        /* --- THE OUTER LAYOUT ENGINE --- */
         .window-frame {
             width: 100vw;
             height: 100vh;
             display: grid;
-            grid-template-rows: auto 1fr auto;
+            grid-template-rows: auto 1fr;
             box-sizing: border-box;
             position: relative;
             background: var(--frame-bg);
             box-shadow: var(--frame-shadow);
-            clip-path: var(--frame-clip);
-            transition: background 0.5s ease, box-shadow 0.5s ease;
-        }
-
-        /* Tinitiyak na walang anino o pseudo-elements na humaharang kapag naka Creative Mode */
-        .window-frame::before, .window-frame::after {
-            content: none !important;
-        }
-
-        body.pro-mode .window-frame {
-            /* Binabalik ang folder shape aesthetics para sa Pro Mode kung kinakailangan */
             border: 1px solid var(--bar-color);
         }
 
@@ -101,7 +53,6 @@
             border-bottom: 1px solid var(--bar-color);
             z-index: 20; 
             background: transparent;
-            transition: border-color 0.5s ease;
         }
 
         .nav-links { display: flex; gap: 16px; }
@@ -117,11 +68,7 @@
             transition: all 0.3s ease;
         }
 
-        .nav-item:hover, .nav-item.active {
-            background-color: var(--nav-item-text);
-            color: #020617;
-        }
-        body.pro-mode .nav-item:hover {
+        .nav-item:hover {
             background-color: #bae6fd;
             color: #0b0f19;
             box-shadow: 0 0 15px #bae6fd;
@@ -139,45 +86,19 @@
             z-index: 5;
         }
 
-        /* Background Glow Orbs */
-        .creative-orb {
-            position: absolute;
-            width: 450px;
-            height: 450px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(56,189,248,0.15) 0%, rgba(0,0,0,0) 70%);
-            filter: blur(50px);
-            z-index: 1;
-            opacity: var(--orb-opacity);
-            transition: opacity 0.8s ease;
-            pointer-events: none;
-        }
-        .orb-1 { top: 5%; left: 15%; }
-        .orb-2 { bottom: 5%; right: 15%; background: radial-gradient(circle, rgba(139,92,246,0.12) 0%, rgba(0,0,0,0) 70%); }
-        
-        body:not(.pro-mode) .creative-orb {
-            animation: float 8s infinite alternate ease-in-out;
-        }
-
-        /* Hero/Speech Greeting Bubble */
+        /* Speech Greeting Bubble */
         .intro-bubble {
             z-index: 10;
-            background: var(--bubble-bg);
-            border: 3px solid var(--bubble-border);
+            background: transparent;
+            border: 3px solid var(--nav-item-border);
             padding: 45px 65px;
             border-radius: 50px; 
             width: 100%;
             max-width: 700px;
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 800;
             text-align: center;
             box-sizing: border-box;
-            box-shadow: var(--bubble-shadow);
-            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-
-        body.pro-mode .intro-bubble {
-            font-size: 2.5rem;
         }
 
         /* Portfolio Cards */
@@ -190,80 +111,18 @@
             padding: 3rem;
             border-radius: 35px;
             box-sizing: border-box;
-            transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
-        }
-
-        .content-card:hover {
-            border-color: rgba(56, 189, 248, 0.4);
-            transform: scale(1.01);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-        }
-        body.pro-mode .content-card:hover {
-            border-color: #bae6fd;
-            box-shadow: none;
-            transform: none;
         }
 
         .content-card h2 {
             margin-top: 0;
-            color: #ffffff;
+            color: #bae6fd;
             border-bottom: 2px solid var(--card-border);
             padding-bottom: 0.5rem;
             font-size: 1.8rem;
-            transition: color 0.4s ease;
-        }
-        body.pro-mode .content-card h2 {
-            color: #bae6fd;
         }
 
         .skills-list { display: flex; flex-wrap: wrap; gap: 0.6rem; list-style: none; padding: 0; }
-        .skills-list li { background: #0284c7; padding: 8px 16px; border-radius: 18px; font-weight: 600; font-size: 0.9rem; transition: background-color 0.4s; }
-        body.pro-mode .skills-list li { background: #374151; }
-
-        /* --- CONTROL SWITCH FOOTER --- */
-        .footer-controls {
-            padding: 1.5rem 3rem;
-            border-top: 1px solid var(--bar-color);
-            display: flex;
-            justify-content: flex-start;
-            z-index: 20;
-            background: transparent;
-            transition: border-color 0.5s ease;
-        }
-
-        .switch-container {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            border: 2px solid var(--bubble-border);
-            padding: 8px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            user-select: none;
-            transition: all 0.4s ease;
-        }
-
-        .switch { position: relative; display: inline-block; width: 50px; height: 26px; }
-        .switch input { opacity: 0; width: 0; height: 0; }
-        
-        .slider {
-            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
-            background: var(--slider-bg);
-            transition: .4s;
-            border-radius: 34px;
-        }
-        .slider:before {
-            position: absolute; content: ""; height: 18px; width: 18px; left: 4px; bottom: 4px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
-        input:checked + .slider { background-color: #4b5563; background-image: none; }
-        input:checked + .slider:before { transform: translateX(24px); }
-
-        .slider-text { font-weight: 700; font-size: 0.9rem; color: var(--slider-text); transition: color 0.4s; }
-
-        @keyframes float { 0% { transform: translateY(0); } 100% { transform: translateY(-15px); } }
+        .skills-list li { background: #374151; padding: 8px 16px; border-radius: 18px; font-weight: 600; font-size: 0.9rem; }
     </style>
 </head>
 <body>
@@ -283,8 +142,45 @@
         </nav>
 
         <main class="main-viewport" id="scrollContainer">
-            <div class="creative-orb orb-1"></div>
-            <div class="creative-orb orb-2"></div>
             
             <div class="intro-bubble" id="greetingBubble">
-                HI, I'M MICKO.<br><span style='font-size: 1.4rem; font-weight: 400; opacity: 0.8;'>Let's transform your QA presence
+                Hi I'm Micko Welcome to my Website
+            </div>
+
+            <section id="about" class="content-card">
+                <h2>About Me</h2>
+                <p>I am a Computer Engineering practitioner focusing on Software Quality Assurance and Test Automation frameworks.</p>
+            </section>
+
+            <section id="skills" class="content-card">
+                <h2>Tech Stack and tools</h2>
+                <ul class="skills-list">
+                    <li>Cypress</li>
+                    <li>JavaScript</li>
+                    <li>Git & GitHub</li>
+                    <li>Chrome DevTools</li>
+                </ul>
+            </section>
+        </main>
+
+    </div>
+
+    <script>
+        // HOVER TO SCROLL ENGINE
+        document.querySelectorAll('.nav-item[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('mouseenter', function() {
+                const targetId = this.getAttribute('href');
+                const targetCard = document.querySelector(targetId);
+                
+                if (targetCard) {
+                    targetCard.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
