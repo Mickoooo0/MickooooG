@@ -177,7 +177,7 @@
             gap: 15rem; 
             width: 100%;
             max-width: 1100px; 
-            margin-top: 18vh; /* INADJUST: Itinaas nang kaunti mula 25vh para sumakto ang unang card sa view */
+            margin-top: 18vh; 
             padding-bottom: 25rem; 
             box-sizing: border-box;
         }
@@ -203,8 +203,12 @@
             animation: fadeUpCards 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             animation-delay: 0.5s; 
             
-            /* INADJUST: Ginawang 90px mula sa 120px para mas umakyat nang kaunti ang card kapag nag-scroll gamit ang buttons */
             scroll-margin-top: 90px; 
+        }
+
+        /* SPECIFIC ADJUSTMENT FOR TECH STACK CARD */
+        #skills {
+            scroll-margin-top: 130px; /* PINALAKI ITONG SPECIALLY: Mas itataas nito ang hinto ng Tech tools card para pantay sa iba */
         }
 
         .content-card h2 {
@@ -249,7 +253,6 @@
 </head>
 <body>
 
-    <!-- VIDEO BACKGROUND CONTAINER -->
     <div class="page-background-container">
         <video id="bgVideo" class="page-video" autoplay loop muted playsinline>
             <source src="background2.mp4" type="video/mp4">
@@ -259,7 +262,6 @@
 
     <div class="window-frame">
         
-        <!-- FIXED NAVIGATION BAR -->
         <nav class="navbar">
             <div class="nav-links">
                 <a class="nav-item" data-scroll="about">About Me</a>
@@ -274,7 +276,6 @@
 
         <main class="main-viewport">
             
-            <!-- UPPER PORTION: HERO INTRO BLOCK -->
             <section class="intro-section-hero">
                 <div class="intro-text-left">
                     <h1>HI, I'M MICKO.</h1>
@@ -282,16 +283,13 @@
                 </div>
             </section>
 
-            <!-- LOWER PORTION: EXPANDED SCROLLABLE CARDS -->
             <div class="vertical-cards-container">
                 
-                <!-- Card 1: About Me -->
                 <section id="about" class="content-card">
                     <h2>About Me</h2>
                     <p>I am a Computer Engineering practitioner focusing on Software Quality Assurance and Test Automation frameworks. Passionate about ensuring high-fidelity systems execution and building stable test cycles.</p>
                 </section>
 
-                <!-- Card 2: Tech Stack -->
                 <section id="skills" class="content-card">
                     <h2>Tech Stack and tools</h2>
                     <p>The core technical frameworks and engineering instruments utilized for software validation environments:</p>
@@ -303,19 +301,16 @@
                     </ul>
                 </section>
 
-                <!-- Card 3: Certifications -->
                 <section id="certifications" class="content-card">
                     <h2>Certifications</h2>
                     <p>ISTQB Certified Tester credentials ongoing. Actively pursuing advanced technical specializations and professional portfolio courses for automated system deployments.</p>
                 </section>
 
-                <!-- Card 4: Featured Projects -->
                 <section id="projects" class="content-card">
                     <h2>Featured Projects</h2>
                     <p>An organized showcase of continuous integration test scripts, dynamic object models repositories, and comprehensive automation test suites designed for reliable deployment operations.</p>
                 </section>
 
-                <!-- Card 5: Contact -->
                 <section id="contact" class="content-card">
                     <h2>Contact Me</h2>
                     <p>Let's collaborate on optimization projects or QA structures. Reach out through my open communication lines:</p>
@@ -327,7 +322,6 @@
 
     </div>
 
-    <!-- DYNAMIC BACKGROUND FADE & HOVER TO SCROLL SYSTEM -->
     <script>
         // 1. VIDEO BACKGROUND FADE ENGINE WITH DELAY
         const video = document.getElementById('bgVideo');
@@ -344,7 +338,7 @@
             }, 400);
         }
 
-        // 2. HOVER TO SCROLL-DOWN CONTROLLER (TUNED FOR BALANCED SPACING)
+        // 2. HOVER TO SCROLL-DOWN CONTROLLER
         const navItems = document.querySelectorAll('.nav-item');
 
         navItems.forEach(item => {
