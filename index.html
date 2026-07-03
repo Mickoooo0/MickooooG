@@ -8,12 +8,10 @@
         /* --- BASE STYLING (PRO MODE) --- */
         :root {
             --bg-color: #0b0f19;
-            --nav-bg: rgba(31, 41, 55, 0.4);
-            --border-color: #374151;
+            --frame-border: #bae6fd;
             --text-main: #ffffff;
-            --bubble-border: #bae6fd;
-            --card-bg: #1f2937;
-            --card-text: #ffffff;
+            --card-bg: rgba(31, 41, 55, 0.4);
+            --border-color: #374151;
         }
 
         body {
@@ -23,247 +21,253 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             display: flex;
-            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             min-height: 100vh;
             transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow-x: hidden;
         }
 
-        /* --- CREATIVE MODE GRADIENT BACKGROUND --- */
+        /* --- CREATIVE MODE --- */
         body.creative-mode {
             background: radial-gradient(circle at 50% 50%, #1e293b 0%, #020617 100%);
-            background-attachment: fixed;
         }
 
-        /* Top Navigation Bar */
+        /* --- THE MASTER FRAME CONTAINER (ANG DRAWING MO) --- */
+        .window-frame {
+            width: 90vw;
+            max-width: 1200px;
+            height: 85vh;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            border: 3px solid var(--frame-border);
+            border-radius: 40px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            transition: all 0.5s ease;
+            background: rgba(17, 24, 39, 0.6);
+            backdrop-filter: blur(8px);
+        }
+
+        /* Kapag naka-Creative Mode, mag-g-glow ang buong frame tulad ng Nexa video */
+        body.creative-mode .window-frame {
+            border-color: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(56, 189, 248, 0.1);
+        }
+
+        /* --- NAVIGATION BAR (TOP ROW) --- */
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 3rem;
-            background-color: var(--nav-bg);
-            border-bottom: 1px solid var(--border-color);
-            backdrop-filter: blur(10px);
-            z-index: 10;
+            padding: 1.2rem 2rem;
+            border-bottom: 2px solid var(--frame-border);
         }
 
-        .nav-links { display: flex; gap: 16px; }
+        body.creative-mode .navbar {
+            border-bottom-color: rgba(255, 255, 255, 0.1);
+        }
 
+        .nav-links { display: flex; gap: 12px; }
+
+        /* Ang mga pills/capsule menu buttons mo */
         .nav-item {
-            border: 2px solid var(--bubble-border);
-            padding: 10px 22px;
-            border-radius: 30px;
+            border: 2px solid var(--frame-border);
+            padding: 6px 16px;
+            border-radius: 20px;
             text-decoration: none;
-            color: var(--bubble-border);
+            color: var(--frame-border);
             font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.4s ease;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
         }
 
-        .nav-item:hover {
-            background-color: var(--bubble-border);
+        .nav-item:hover, .nav-item.active {
+            background-color: var(--frame-border);
             color: #0b0f19;
-            box-shadow: 0 0 15px var(--bubble-border);
         }
 
-        /* Hero Container */
-        .main-hero {
+        body.creative-mode .nav-item {
+            border-color: rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+        }
+        body.creative-mode .nav-item:hover {
+            background-color: #ffffff;
+            color: #020617;
+            box-shadow: 0 0 15px rgba(255,255,255,0.5);
+        }
+
+        /* --- MAIN VIEWPORT INTERIOR (MIDDLE ROW) --- */
+        .main-viewport {
+            padding: 2rem;
+            overflow-y: auto;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 6rem 2rem 3rem 2rem;
+            gap: 3rem;
             position: relative;
         }
 
-        /* Ambient Glowing Background Orbs */
+        /* Glowing Orbs for Creative Mode Background */
         .creative-orb {
             position: absolute;
-            width: 400px;
-            height: 400px;
+            width: 300px;
+            height: 300px;
             border-radius: 50%;
             background: radial-gradient(circle, rgba(56,189,248,0.15) 0%, rgba(0,0,0,0) 70%);
-            filter: blur(50px);
+            filter: blur(40px);
             z-index: 1;
             opacity: 0;
             transition: opacity 0.8s ease;
             pointer-events: none;
         }
-        .orb-1 { top: 10%; left: 15%; }
-        .orb-2 { bottom: 10%; right: 15%; background: radial-gradient(circle, rgba(139,92,246,0.12) 0%, rgba(0,0,0,0) 70%); }
+        .orb-1 { top: 10%; left: 10%; }
+        body.creative-mode .creative-orb { opacity: 1; animation: float { 6s infinite alternate; } }
 
-        body.creative-mode .creative-orb { opacity: 1; animation: floatingGlow 10s infinite ease-in-out alternate; }
-
-        /* The Speech Bubble Banner */
+        /* Speech Bubble Card */
         .intro-bubble {
-            position: relative;
             z-index: 2;
-            border: 3px solid var(--bubble-border);
-            padding: 50px 70px;
-            border-radius: 60px; 
-            max-width: 700px;
-            font-size: 2.5rem;
+            border: 3px solid var(--frame-border);
+            padding: 35px 50px;
+            border-radius: 40px; 
+            max-width: 650px;
+            font-size: 2.2rem;
             font-weight: 800;
-            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            text-align: center;
+            transition: all 0.5s ease;
         }
 
         body.creative-mode .intro-bubble {
             background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(25px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-            transform: scale(1.02) translateY(-5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 2.8rem;
+            text-shadow: 0 0 15px rgba(255,255,255,0.3);
+            transform: translateY(-5px);
         }
 
-        /* --- THE CONTENT AREA (DITO SA TINUTURO NG DALIRI MO) --- */
-        .content-sections {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem 2rem 6rem 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 2.5rem; /* Distansya ng mga cards */
+        /* Content Sections (Dito sa itinuturo ng daliri mo) */
+        .content-card {
             z-index: 2;
-            position: relative;
-        }
-
-        /* Ang mga Section Cards */
-        .portfolio-card {
-            background-color: var(--card-bg);
-            color: var(--card-text);
-            padding: 3rem;
-            border-radius: 40px;
+            width: 100%;
+            max-width: 700px;
+            background: var(--card-bg);
             border: 1px solid var(--border-color);
-            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            padding: 2.5rem;
+            border-radius: 30px;
+            transition: all 0.4s ease;
         }
 
-        /* Glassmorphism Transformation para sa Cards kapag Creative Mode */
-        body.creative-mode .portfolio-card {
+        body.creative-mode .content-card {
             background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(20px);
+            border-color: rgba(255, 255, 255, 0.08);
         }
 
-        /* Hover Effect kapag itinapat ang mouse sa Card habang naka-Creative Mode */
-        body.creative-mode .portfolio-card:hover {
-            background: rgba(255, 255, 255, 0.05);
+        body.creative-mode .content-card:hover {
             border-color: rgba(56, 189, 248, 0.4);
-            transform: translateY(-5px) scale(1.01);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 25px rgba(56, 189, 248, 0.1);
+            transform: scale(1.01);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
         }
 
-        .portfolio-card h2 {
+        .content-card h2 {
             margin-top: 0;
-            font-size: 2rem;
-            border-bottom: 2px solid var(--bubble-border);
+            color: var(--frame-border);
+            border-bottom: 2px solid var(--border-color);
             padding-bottom: 0.5rem;
-            color: var(--bubble-border);
-            transition: color 0.4s ease;
         }
 
-        body.creative-mode .portfolio-card h2 {
-            color: #ffffff;
-            text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        body.creative-mode .content-card h2 { color: #ffffff; }
+
+        .skills-list { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; padding: 0; }
+        .skills-list li { background: #374151; padding: 6px 14px; border-radius: 15px; font-weight: 600; font-size: 0.85rem; }
+        body.creative-mode .skills-list li { background: #0284c7; }
+
+        /* --- CONTROLS FOOTER (BOTTOM ROW) --- */
+        .footer-controls {
+            padding: 1.2rem 2rem;
+            border-top: 2px solid var(--frame-border);
+            display: flex;
+            justify-content: flex-start;
         }
 
-        /* Tech Stack Capsule Items */
-        .skills-list { display: flex; flex-wrap: wrap; gap: 0.75rem; list-style: none; padding: 0; }
-        .skills-list li {
-            background: #374151;
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-        body.creative-mode .skills-list li { background: #0284c7; color: #ffffff; }
+        body.creative-mode .footer-controls { border-top-color: rgba(255, 255, 255, 0.1); }
 
-        .project a { color: #38bdf8; text-decoration: none; font-weight: bold; }
-        .project a:hover { text-decoration: underline; }
-
-        /* Mode Control Switch (Footer) */
-        .footer-controls { padding: 2rem 3rem; display: flex; justify-content: flex-start; align-items: center; z-index: 10; }
+        /* Custom Slider Mode Switch */
         .switch-container {
-            display: flex; align-items: center; gap: 14px; border: 2px solid var(--bubble-border);
-            padding: 10px 24px; border-radius: 30px; cursor: pointer; user-select: none; transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 2px solid var(--frame-border);
+            padding: 6px 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            user-select: none;
         }
-        body.creative-mode .switch-container { border-color: rgba(255, 255, 255, 0.3); background: rgba(255, 255, 255, 0.05); }
 
-        .switch { position: relative; display: inline-block; width: 54px; height: 28px; }
+        body.creative-mode .switch-container { border-color: rgba(255, 255, 255, 0.3); }
+
+        .switch { position: relative; display: inline-block; width: 46px; height: 24px; }
         .switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #374151; transition: .4s; border-radius: 34px; }
-        .slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #4b5563; transition: .4s; border-radius: 34px; }
+        .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
         input:checked + .slider { background: linear-gradient(90deg, #38bdf8 0%, #8b5cf6 100%); }
-        input:checked + .slider:before { transform: translateX(26px); }
-        .slider-text { font-weight: 700; font-size: 0.9rem; color: var(--bubble-border); }
+        input:checked + .slider:before { transform: translateX(22px); }
+        .slider-text { font-weight: 700; font-size: 0.85rem; color: var(--frame-border); }
+        body.creative-mode .slider-text { color: #ffffff; }
 
-        @keyframes floatingGlow {
-            0% { transform: translate(0px, 0px) scale(1); }
-            50% { transform: translate(20px, -30px) scale(1.05); }
-            100% { transform: translate(-10px, 10px) scale(0.95); }
-        }
+        @keyframes float { 0% { transform: translateY(0); } 100% { transform: translateY(-20px); } }
     </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="nav-links">
-            <a href="#about" class="nav-item">About Me</a>
-            <a href="#skills" class="nav-item">Tech Stack and tools</a>
-            <a href="#certifications" class="nav-item">Certifications</a>
-            <a href="#projects" class="nav-item">Featured Projects</a>
-        </div>
-        <div>
-            <a href="#contact" class="nav-item">Contact Me</a>
-        </div>
-    </nav>
-
-    <main class="main-hero">
-        <div class="creative-orb orb-1"></div>
-        <div class="creative-orb orb-2"></div>
-        <div class="intro-bubble" id="greetingBubble">
-            Hi I'm Micko Welcome to my Website
-        </div>
-    </main>
-
-    <div class="content-sections">
-        <section id="about" class="portfolio-card">
-            <h2>About Me</h2>
-            <p>Hi! I am a passionate engineer focused on Software Quality Assurance and Automation Testing. I love building stable automation frameworks and ensuring software reliability using modern testing tools.</p>
-        </section>
-
-        <section id="skills" class="portfolio-card">
-            <h2>Tech Stack and tools</h2>
-            <ul class="skills-list">
-                <li>Cypress</li>
-                <li>JavaScript</li>
-                <li>Python</li>
-                <li>Java</li>
-                <li>Git & GitHub</li>
-                <li>Chrome DevTools</li>
-            </ul>
-        </section>
-
-        <section id="projects" class="portfolio-card">
-            <h2>Featured Projects</h2>
-            <div class="project">
-                <h3>Web Automation Framework (Cypress)</h3>
-                <p>Automated End-to-End (E2E) testing suites designed for dynamic web platforms, executing rigorous framework assertions and custom selector validation rules.</p>
-                <a href="https://github.com/MickooooG" target="_blank">View GitHub Repository &rarr;</a>
+    <div class="window-frame">
+        
+        <nav class="navbar">
+            <div class="nav-links">
+                <a href="#about" class="nav-item active">About Me</a>
+                <a href="#skills" class="nav-item">Tech Stack and tools</a>
+                <a href="#certifications" class="nav-item">Certifications</a>
+                <a href="#projects" class="nav-item">Featured Projects</a>
             </div>
-        </section>
+            <div>
+                <a href="#contact" class="nav-item">Contact Me</a>
+            </div>
+        </nav>
+
+        <main class="main-viewport">
+            <div class="creative-orb orb-1"></div>
+            
+            <div class="intro-bubble" id="greetingBubble">
+                Hi I'm Micko Welcome to my Website
+            </div>
+
+            <section id="about" class="content-card">
+                <h2>About Me</h2>
+                <p>I am a Computer Engineering practitioner focusing on Software Quality Assurance and Test Automation frameworks.</p>
+            </section>
+
+            <section id="skills" class="content-card">
+                <h2>Tech Stack and tools</h2>
+                <ul class="skills-list">
+                    <li>Cypress</li>
+                    <li>JavaScript</li>
+                    <li>Git & GitHub</li>
+                    <li>Chrome DevTools</li>
+                </ul>
+            </section>
+        </main>
+
+        <footer class="footer-controls">
+            <label class="switch-container">
+                <div class="switch">
+                    <input type="checkbox" id="modeToggle">
+                    <span class="slider"></span>
+                </div>
+                <span class="slider-text" id="toggleText">Slide to creative mode</span>
+            </label>
+        </footer>
+
     </div>
-
-    <footer class="footer-controls">
-        <label class="switch-container">
-            <div class="switch">
-                <input type="checkbox" id="modeToggle">
-                <span class="slider"></span>
-            </div>
-            <span class="slider-text" id="toggleText">Slide to creative mode</span>
-        </label>
-    </footer>
 
     <script>
         const modeToggle = document.getElementById('modeToggle');
@@ -274,7 +278,7 @@
             if (this.checked) {
                 document.body.classList.add('creative-mode');
                 toggleText.textContent = "Creative Mode Active";
-                greetingBubble.innerHTML = "HI, I'M MICKO.<br><span style='font-size: 1.5rem; font-weight: 400; opacity: 0.8;'>Let's transform your QA presence.</span>";
+                greetingBubble.innerHTML = "HI, I'M MICKO.<br><span style='font-size: 1.3rem; font-weight: 400; opacity: 0.8;'>Let's transform your QA presence.</span>";
             } else {
                 document.body.classList.remove('creative-mode');
                 toggleText.textContent = "Slide to creative mode";
