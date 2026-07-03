@@ -28,7 +28,7 @@
             scroll-behavior: smooth; 
         }
 
-        /* --- FIXED GLOBAL BACKGROUND ENGINE (100% CRYSTAL CLEAR) --- */
+        /* --- FIXED GLOBAL BACKGROUND ENGINE --- */
         .page-background-container {
             position: fixed;
             top: 0;
@@ -74,7 +74,7 @@
             background: var(--frame-bg);
         }
 
-        /* --- FIXED NAVIGATION BAR (FULLY TRANSPARENT) --- */
+        /* --- FIXED NAVIGATION BAR --- */
         .navbar {
             position: fixed;
             top: 0;
@@ -133,7 +133,7 @@
             z-index: 5;
         }
 
-        /* --- INTRO SECTION (OCCUPIES FIRST VIEWPORT) --- */
+        /* --- INTRO SECTION --- */
         .intro-section-hero {
             width: 100%;
             min-height: 85vh; 
@@ -182,7 +182,7 @@
             box-sizing: border-box;
         }
 
-        /* --- CONTENT CARDS LAYOUT (ULTRA HEIGHT ENGINE) --- */
+        /* --- CONTENT CARDS LAYOUT --- */
         .content-card {
             width: 100%;
             min-height: 80vh; 
@@ -202,13 +202,6 @@
             transform: translateY(30px);
             animation: fadeUpCards 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             animation-delay: 0.5s; 
-            
-            scroll-margin-top: 90px; 
-        }
-
-        /* SPECIFIC ADJUSTMENT FOR TECH STACK CARD */
-        #skills {
-            scroll-margin-top: 130px; /* PINALAKI ITONG SPECIALLY: Mas itataas nito ang hinto ng Tech tools card para pantay sa iba */
         }
 
         .content-card h2 {
@@ -230,24 +223,15 @@
 
         /* --- KEYFRAME ANIMATIONS --- */
         @keyframes fadeLeftAnimation {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         @keyframes fadeDownAnimation {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes fadeUpCards {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -323,22 +307,18 @@
     </div>
 
     <script>
-        // 1. VIDEO BACKGROUND FADE ENGINE WITH DELAY
+        // 1. VIDEO BACKGROUND FADE ENGINE
         const video = document.getElementById('bgVideo');
 
         video.addEventListener('canplaythrough', () => {
-            setTimeout(() => {
-                video.style.opacity = '1';
-            }, 400); 
+            setTimeout(() => { video.style.opacity = '1'; }, 400); 
         });
 
         if (video.readyState >= 3) {
-            setTimeout(() => {
-                video.style.opacity = '1';
-            }, 400);
+            setTimeout(() => { video.style.opacity = '1'; }, 400);
         }
 
-        // 2. HOVER TO SCROLL-DOWN CONTROLLER
+        // 2. ABSOLUTE OFFSET SCROLL CONTROLLER (FOR PERFECT UNIFORM ALIGNMENT)
         const navItems = document.querySelectorAll('.nav-item');
 
         navItems.forEach(item => {
@@ -347,9 +327,17 @@
 
             if (targetCard) {
                 item.addEventListener('mouseenter', () => {
-                    targetCard.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start' 
+                    // Kinukuha ang absolute vertical position ng card sa buong pahina
+                    const bodyRect = document.body.getBoundingClientRect().top;
+                    const elementRect = targetCard.getBoundingClientRect().top;
+                    const elementPosition = elementRect - bodyRect;
+                    
+                    // Binabawasan natin ng saktong 90px para maging UNIFORM ang hinto ng bawat isa
+                    const offsetPosition = elementPosition - 90;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
                     });
                 });
             }
