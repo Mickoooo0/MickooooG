@@ -22,7 +22,7 @@
             margin: 0;
             padding: 0;
             color: var(--text-main);
-            background-color: #020617; 
+            background-color: #020617; /* Solid dark background habang naghihintay sa video */
             overflow-y: auto; 
             overflow-x: hidden;
             scroll-behavior: smooth; 
@@ -39,6 +39,7 @@
             overflow: hidden;
         }
 
+        /* DYNAMIC VIDEO TRANSITION ENGINE */
         .page-video {
             position: absolute;
             top: 50%;
@@ -48,6 +49,11 @@
             object-fit: cover; 
             transform: translate(-50%, -50%);
             pointer-events: none;
+            
+            /* Naka-tago muna sa simula */
+            opacity: 0; 
+            /* Swabeng 1.5s fade effect kapag binago ng JS ang opacity */
+            transition: opacity 1.5s ease-in-out; 
         }
 
         .page-overlay {
@@ -134,7 +140,7 @@
         /* --- INTRO SECTION (OCCUPIES FIRST VIEWPORT) --- */
         .intro-section-hero {
             width: 100%;
-            min-height: 85vh; /* Binawasan nang kaunti para mas sumakto sa viewport */
+            min-height: 85vh; 
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -168,14 +174,14 @@
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); 
         }
 
-        /* --- LOWER CARDS ROW STACK (PINABABA LAHAT NG CARDS) --- */
+        /* --- LOWER CARDS ROW STACK --- */
         .vertical-cards-container {
             display: flex;
             flex-direction: column;
             gap: 4rem; 
             width: 100%;
             max-width: 900px; 
-            margin-top: 15vh; /* IPINUSH PABABA: Nagdagdag ng malaking clearance sa ilalim ng intro text */
+            margin-top: 15vh; 
             padding-bottom: 10rem; 
             box-sizing: border-box;
         }
@@ -194,7 +200,7 @@
             opacity: 0;
             transform: translateY(30px);
             animation: fadeUpCards 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            animation-delay: 0.5s;
+            animation-delay: 0.5s; 
         }
 
         .content-card h2 {
@@ -240,7 +246,7 @@
 <body>
 
     <div class="page-background-container">
-        <video class="page-video" autoplay loop muted playsinline>
+        <video id="bgVideo" class="page-video" autoplay loop muted playsinline>
             <source src="background2.mp4" type="video/mp4">
         </video>
     </div>
@@ -309,6 +315,25 @@
     </div>
 
     <script>
+        // 1. VIDEO BACKGROUND FADE ENGINE WITH DELAY
+        const video = document.getElementById('bgVideo');
+
+        // Tumutugon kapag sapat na ang nakargang buffer para i-play nang walang lag
+        video.addEventListener('canplaythrough', () => {
+            // Kaunting intentional delay (400ms) para maunang mag-load ang text interface
+            setTimeout(() => {
+                video.style.opacity = '1';
+            }, 400); 
+        });
+
+        // Backup fallback kung sakaling cached na o lumagpas na sa initial event
+        if (video.readyState >= 3) {
+            setTimeout(() => {
+                video.style.opacity = '1';
+            }, 400);
+        }
+
+        // 2. HOVER TO SCROLL-DOWN CONTROLLER
         const navItems = document.querySelectorAll('.nav-item');
 
         navItems.forEach(item => {
