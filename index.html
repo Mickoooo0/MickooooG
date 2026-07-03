@@ -9,7 +9,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #111827; /* Default Pro Mode Background */
+            background-color: #111827; /* Default Pro Mode Background (Dark) */
             color: #ffffff;
             display: flex;
             flex-direction: column;
@@ -19,7 +19,7 @@
 
         /* --- CREATIVE MODE STYLING --- */
         body.creative-mode {
-            background-color: #0f172a; /* Mas madilim para sa cinematic feel */
+            background-color: #7dd3fc; /* Magiging Sky Blue ang buong background */
         }
 
         /* Top Navigation Container base sa sketch mo */
@@ -30,6 +30,13 @@
             padding: 1.5rem 2rem;
             background-color: #1f2937;
             border-bottom: 2px solid #374151;
+            transition: background-color 0.5s ease, border-color 0.5s ease;
+        }
+
+        /* Pag naka-Creative mode, babaguhin natin nang kaunti ang kulay ng nav para bumagay sa Sky Blue */
+        body.creative-mode .navbar {
+            background-color: #0284c7;
+            border-bottom: 2px solid #0369a1;
         }
 
         .nav-links {
@@ -37,7 +44,7 @@
             gap: 12px;
         }
 
-        /* Ang mga capsule links sa drawing mo */
+        /* Ang mga capsule links/buttons sa drawing mo */
         .nav-item {
             border: 2px solid #bae6fd;
             padding: 8px 16px;
@@ -54,6 +61,17 @@
             color: #1e3a8a;
         }
 
+        /* Pag naka-Creative mode, gagawin nating puti ang borders ng buttons para kitang-kita */
+        body.creative-mode .nav-item {
+            border-color: #ffffff;
+            color: #ffffff;
+        }
+
+        body.creative-mode .nav-item:hover {
+            background-color: #ffffff;
+            color: #0284c7;
+        }
+
         /* Ang Hero / Main Space sa gitna */
         .main-hero {
             flex: 1;
@@ -65,7 +83,7 @@
             padding: 2rem;
         }
 
-        /* Ang bilugang speech bubble sa sketch mo */
+        /* Ang bilugang speech bubble sa sketch mo (Pro Mode Style) */
         .intro-bubble {
             border: 3px solid #bae6fd;
             padding: 40px 60px;
@@ -79,13 +97,13 @@
             transition: all 0.5s ease;
         }
 
-        /* Kapag naka-Creative Mode, magbabago ang kulay ng bubble katulad ng gusto mo kanina! */
+        /* --- SAKTONG CONFIGURATION PARA SA SKY BLUE CREATIVE MODE --- */
         body.creative-mode .intro-bubble {
-            background-color: #bae6fd;
-            color: #1e3a8a;
+            background-color: #ffffff; /* Puting bubble para lutang sa sky blue background */
+            color: #1e3a8a; /* Dark Blue na text para madaling basahin */
             border-color: transparent;
-            transform: scale(1.05);
-            box-shadow: 0 15px 35px rgba(186, 230, 253, 0.4);
+            transform: scale(1.05); /* May kaunting pag-zoom pag nag-slide */
+            box-shadow: 0 15px 35px rgba(30, 58, 138, 0.25);
         }
 
         /* Footer area kung nasaan ang slider */
@@ -106,6 +124,11 @@
             border-radius: 25px;
             cursor: pointer;
             user-select: none;
+            transition: all 0.5s ease;
+        }
+
+        body.creative-mode .switch-container {
+            border-color: #1e3a8a;
         }
 
         .switch {
@@ -143,7 +166,7 @@
         }
 
         input:checked + .slider {
-            background-color: #0284c7;
+            background-color: #1e3a8a; /* Madilim na asul na slider kapag naka-on */
         }
 
         input:checked + .slider:before {
@@ -154,6 +177,12 @@
             font-weight: bold;
             font-size: 0.95rem;
             color: #bae6fd;
+            transition: color 0.5s ease;
+        }
+
+        /* Gagawin nating dark blue ang font ng slider text para mabasa sa sky blue background */
+        body.creative-mode .slider-text {
+            color: #1e3a8a;
         }
     </style>
 </head>
@@ -194,12 +223,12 @@
 
         modeToggle.addEventListener('change', function() {
             if (this.checked) {
-                // Pag naka-ON ang slider (Creative Mode)
+                // KAPAG NAKA-ON (CREATIVE MODE)
                 document.body.classList.add('creative-mode');
                 toggleText.textContent = "Creative Mode Active!";
-                greetingBubble.textContent = "HI, I'M MICKO.";
+                greetingBubble.textContent = "HI, I'M MICKO."; /* Ang gusto mong malaking text format kanina */
             } else {
-                // Pag binuksan ulit (Babalik sa Pro Version)
+                // KAPAG NAKA-OFF (BACK TO PRO VERSION)
                 document.body.classList.remove('creative-mode');
                 toggleText.textContent = "Slide to creative mode";
                 greetingBubble.textContent = "Hi I'm Micko Welcome to my Website";
