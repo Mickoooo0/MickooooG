@@ -15,8 +15,8 @@
             --card-border: rgba(255, 255, 255, 0.15);
             --bar-color: transparent; 
             --frame-bg: transparent; 
-            --navy-blue: #1e3a8a; /* Bagong kulay para sa solid visual anchor ng Contact button */
-            --navy-blue-hover: #1d4ed8; /* Mas maliwanag na navy/blue kapag hino-hover */
+            --royal-blue: #4169E1; /* Royal Blue base code */
+            --royal-blue-hover: #2752d8; /* Bahagyang mas malalim na asul para sa hover effect */
         }
 
         body {
@@ -117,19 +117,19 @@
             color: #020617;
         }
 
-        /* --- CUSTOM UNIQUE STYLING FOR NAVY BLUE CONTACT BUTTON --- */
+        /* --- ROYAL BLUE UPGRADE FOR CONTACT ME BUTTON --- */
         .navbar-right .nav-item {
-            background-color: var(--navy-blue);
-            border-color: var(--navy-blue); /* Solid outline alignment */
-            color: #ffffff !important; /* Siguradong naka-retain ang puting text color */
-            box-shadow: 0 4px 14px rgba(30, 58, 138, 0.4); /* Malambot na blue glow para umangat siya */
+            background-color: var(--royal-blue);
+            border-color: var(--royal-blue);
+            color: #ffffff !important; 
+            box-shadow: 0 4px 14px rgba(65, 105, 225, 0.4); /* Malambot na Royal Blue glow effect */
         }
 
         .navbar-right .nav-item:hover {
-            background-color: var(--navy-blue-hover) !important;
-            border-color: var(--navy-blue-hover) !important;
-            color: #ffffff !important; /* Pinanatiling puti pa rin ang font kahit i-hover */
-            transform: translateY(-2px); /* Swabeng micro-interaction lift */
+            background-color: var(--royal-blue-hover) !important;
+            border-color: var(--royal-blue-hover) !important;
+            color: #ffffff !important; 
+            transform: translateY(-2px); 
         }
 
         /* STAGGERED ENTRANCE TIMING */
@@ -273,7 +273,7 @@
 
     <div class="page-background-container">
         <video id="bgVideo" class="page-video" autoplay loop muted playsinline>
-            <source src="background2.mp4" type="video/mp4">
+            <source src="page-bg.mp4" type="video/mp4">
         </video>
     </div>
     <div class="page-overlay"></div>
