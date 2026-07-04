@@ -15,8 +15,9 @@
             --card-border: rgba(255, 255, 255, 0.15);
             --bar-color: transparent; 
             --frame-bg: transparent; 
-            --royal-blue: #4169E1; /* Royal Blue base code */
-            --royal-blue-hover: #2752d8; /* Bahagyang mas malalim na asul para sa hover effect */
+            --royal-blue: #4169E1; 
+            --royal-blue-hover: #2752d8; 
+            --light-steel-blue: #B0C4DE; /* Bagong variable para sa About Me card */
         }
 
         body {
@@ -117,12 +118,12 @@
             color: #020617;
         }
 
-        /* --- ROYAL BLUE UPGRADE FOR CONTACT ME BUTTON --- */
+        /* ROYAL BLUE UPGRADE FOR CONTACT ME BUTTON */
         .navbar-right .nav-item {
             background-color: var(--royal-blue);
             border-color: var(--royal-blue);
             color: #ffffff !important; 
-            box-shadow: 0 4px 14px rgba(65, 105, 225, 0.4); /* Malambot na Royal Blue glow effect */
+            box-shadow: 0 4px 14px rgba(65, 105, 225, 0.4); 
         }
 
         .navbar-right .nav-item:hover {
@@ -133,12 +134,12 @@
         }
 
         /* STAGGERED ENTRANCE TIMING */
-        .nav-links .nav-item:nth-child(1) { animation-delay: 0.25s; } /* Home */
-        .nav-links .nav-item:nth-child(2) { animation-delay: 0.4s; }  /* About Me */
-        .nav-links .nav-item:nth-child(3) { animation-delay: 0.55s; } /* Tech Stack */
-        .nav-links .nav-item:nth-child(4) { animation-delay: 0.7s; }  /* Certifications */
-        .nav-links .nav-item:nth-child(5) { animation-delay: 0.85s; } /* Featured Projects */
-        .navbar-right .nav-item { animation-delay: 1s; }               /* Contact Me */
+        .nav-links .nav-item:nth-child(1) { animation-delay: 0.25s; } 
+        .nav-links .nav-item:nth-child(2) { animation-delay: 0.4s; }  
+        .nav-links .nav-item:nth-child(3) { animation-delay: 0.55s; } 
+        .nav-links .nav-item:nth-child(4) { animation-delay: 0.7s; }  
+        .nav-links .nav-item:nth-child(5) { animation-delay: 0.85s; } 
+        .navbar-right .nav-item { animation-delay: 1s; }               
 
         /* --- FULL VERTICAL LAYOUT ENGINE --- */
         .main-viewport {
@@ -228,6 +229,23 @@
             transform: scale(1);
         }
 
+        /* --- UNIQUE LIGHT STEEL BLUE STYLING FOR ABOUT ME CARD --- */
+        #about.content-card {
+            background: rgba(176, 196, 222, 0.85); /* Light Steel Blue na may kaunting opacity para makita pa rin ang background video */
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 35px 60px -25px rgba(176, 196, 222, 0.3);
+        }
+
+        /* Babaguhin ang kulay ng mga font sa loob ng About Me para madaling basahin sa ibabaw ng light background */
+        #about.content-card h2 {
+            color: #0f172a !important; /* Slate 900 / Dark text */
+            border-bottom: 2px solid rgba(15, 23, 42, 0.15);
+        }
+
+        #about.content-card p {
+            color: #1e293b !important; /* Slate 800 / Dark gray-blue text */
+        }
+
         /* --- STAGGERED INTERNAL ELEMENTS CONFIGURATION --- */
         .content-card h2, 
         .content-card p, 
@@ -271,6 +289,7 @@
 </head>
 <body>
 
+    <!-- VIDEO BACKGROUND CONTAINER -->
     <div class="page-background-container">
         <video id="bgVideo" class="page-video" autoplay loop muted playsinline>
             <source src="background2.mp4" type="video/mp4">
@@ -280,6 +299,7 @@
 
     <div class="window-frame">
         
+        <!-- FIXED NAVIGATION BAR -->
         <nav class="navbar">
             <div class="nav-links">
                 <a class="nav-item" data-scroll="top">Home</a>
@@ -295,6 +315,7 @@
 
         <main class="main-viewport">
             
+            <!-- UPPER PORTION: HERO INTRO BLOCK -->
             <section class="intro-section-hero">
                 <div class="intro-text-left">
                     <h1>HI, I'M MICKO.</h1>
@@ -302,13 +323,16 @@
                 </div>
             </section>
 
+            <!-- LOWER PORTION: EXPANDED SCROLLABLE CARDS -->
             <div class="vertical-cards-container">
                 
+                <!-- Card 1: About Me -->
                 <section id="about" class="content-card active-card">
                     <h2>About Me</h2>
                     <p>I am a Computer Engineering practitioner focusing on Software Quality Assurance and Test Automation frameworks. Passionate about ensuring high-fidelity systems execution and building stable test cycles.</p>
                 </section>
 
+                <!-- Card 2: Tech Stack -->
                 <section id="skills" class="content-card">
                     <h2>Tech Stack and tools</h2>
                     <p>The core technical frameworks and engineering instruments utilized for software validation environments:</p>
@@ -320,16 +344,19 @@
                     </ul>
                 </section>
 
+                <!-- Card 3: Certifications -->
                 <section id="certifications" class="content-card">
                     <h2>Certifications</h2>
                     <p>ISTQB Certified Tester credentials ongoing. Actively pursuing advanced technical specializations and professional portfolio courses for automated system deployments.</p>
                 </section>
 
+                <!-- Card 4: Featured Projects -->
                 <section id="projects" class="content-card">
                     <h2>Featured Projects</h2>
                     <p>An organized showcase of continuous integration test scripts, dynamic object models repositories, and comprehensive automation test suites designed for reliable deployment operations.</p>
                 </section>
 
+                <!-- Card 5: Contact -->
                 <section id="contact" class="content-card">
                     <h2>Contact Me</h2>
                     <p>Let's collaborate on optimization projects or QA structures. Reach out through my open communication lines:</p>
@@ -341,6 +368,7 @@
 
     </div>
 
+    <!-- DYNAMIC BACKGROUND FADE & HOVER TO SCROLL SYSTEM -->
     <script>
         // 1. VIDEO BACKGROUND FADE ENGINE
         const video = document.getElementById('bgVideo');
