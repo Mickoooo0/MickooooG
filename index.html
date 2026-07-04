@@ -18,7 +18,7 @@
             --royal-blue: #4169E1; 
             --royal-blue-hover: #2752d8; 
             --light-steel-blue: #B0C4DE; 
-            --sky-400: #38bdf8; /* Pinalitan mula Cyan patungong Sky 400 */
+            --sky-600: #0284c7;
         }
 
         body {
@@ -230,7 +230,7 @@
             transform: scale(1);
         }
 
-        /* --- UNIQUE LIGHT STEEL BLUE STYLING FOR ABOUT ME CARD --- */
+        /* --- ABOUT ME CARD (LIGHT STEEL BLUE) --- */
         #about.content-card {
             background: rgba(176, 196, 222, 0.85); 
             border-color: rgba(255, 255, 255, 0.4);
@@ -246,11 +246,11 @@
             color: #0f172a !important; 
         }
 
-        /* --- UPDATED: SKY 400 STYLING FOR TECH STACK CARD --- */
+        /* --- UPDATED: TECH STACK CARD (SKY 600 - LESS BRIGHT) --- */
         #skills.content-card {
-            background: rgba(56, 189, 248, 0.85); /* Sky 400 na may glassmorphism alpha */
-            border-color: rgba(255, 255, 255, 0.5);
-            box-shadow: 0 35px 60px -25px rgba(56, 189, 248, 0.4); /* Sky soft glow */
+            background: rgba(2, 132, 199, 0.85); /* Sky 600 with backdrop alpha */
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 35px 60px -25px rgba(2, 132, 199, 0.4); 
         }
 
         #skills.content-card h2 {
@@ -262,10 +262,27 @@
             color: #0f172a !important; 
         }
 
-        /* Dark blocks na may sky blue text para sa malinis na tech contrast */
+        /* High-contrast design update for the tags under Sky 600 */
         #skills.content-card .skills-list li {
-            background: #0f172a; 
-            color: #38bdf8; 
+            background: #ffffff; 
+            color: #0284c7; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- CERTIFICATIONS CARD (LIGHT STEEL BLUE) --- */
+        #certifications.content-card {
+            background: rgba(176, 196, 222, 0.85); 
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 35px 60px -25px rgba(176, 196, 222, 0.3);
+        }
+
+        #certifications.content-card h2 {
+            color: #0f172a !important; 
+            border-bottom: 2px solid rgba(15, 23, 42, 0.25); 
+        }
+
+        #certifications.content-card p {
+            color: #0f172a !important; 
         }
 
         /* --- STAGGERED INTERNAL ELEMENTS CONFIGURATION --- */
