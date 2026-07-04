@@ -115,10 +115,12 @@
             color: #020617;
         }
 
-        .nav-links .nav-item:nth-child(1) { animation-delay: 0.4s; }
-        .nav-links .nav-item:nth-child(2) { animation-delay: 0.55s; }
-        .nav-links .nav-item:nth-child(3) { animation-delay: 0.7s; }
-        .nav-links .nav-item:nth-child(4) { animation-delay: 0.85s; }
+        /* STAGGERED ENTRANCE TIMING (Kasama na ang Home sa unahan) */
+        .nav-links .nav-item:nth-child(1) { animation-delay: 0.25s; } /* Home */
+        .nav-links .nav-item:nth-child(2) { animation-delay: 0.4s; }  /* About Me */
+        .nav-links .nav-item:nth-child(3) { animation-delay: 0.55s; } /* Tech Stack */
+        .nav-links .nav-item:nth-child(4) { animation-delay: 0.7s; }  /* Certifications */
+        .nav-links .nav-item:nth-child(5) { animation-delay: 0.85s; } /* Featured Projects */
         .navbar-right .nav-item { animation-delay: 1s; } 
 
         /* --- FULL VERTICAL LAYOUT ENGINE --- */
@@ -198,7 +200,6 @@
             box-sizing: border-box;
             box-shadow: var(--bubble-shadow);
             
-            /* Unfocused Base Style */
             opacity: 0.2;
             transform: scale(0.98);
             transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
@@ -211,7 +212,6 @@
         }
 
         /* --- STAGGERED INTERNAL ELEMENTS CONFIGURATION --- */
-        /* Itatago muna ang text structures kapag walang active focus */
         .content-card h2, 
         .content-card p, 
         .content-card .skills-list,
@@ -220,23 +220,10 @@
             transform: translateY(20px);
         }
 
-        /* Pag naging active ang card, itritrigger na ang staggered pop animations natin */
-        .content-card.active-card h2 {
-            animation: revealStagger 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            animation-delay: 0.1s;
-        }
+        .content-card.active-card h2 { animation: revealStagger 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.1s; }
+        .content-card.active-card p { animation: revealStagger 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.25s; }
+        .content-card.active-card .skills-list { animation: revealStagger 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.35s; }
 
-        .content-card.active-card p {
-            animation: revealStagger 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            animation-delay: 0.25s;
-        }
-
-        .content-card.active-card .skills-list {
-            animation: revealStagger 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            animation-delay: 0.35s;
-        }
-
-        /* Tech Stack elements inner delay adjustments */
         .content-card.active-card .skills-list li:nth-child(1) { animation: revealStagger 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.45s; }
         .content-card.active-card .skills-list li:nth-child(2) { animation: revealStagger 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.55s; }
         .content-card.active-card .skills-list li:nth-child(3) { animation: revealStagger 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.65s; }
@@ -260,21 +247,9 @@
         .skills-list li { background: #0284c7; padding: 12px 24px; border-radius: 22px; font-weight: 600; font-size: 1.05rem; }
 
         /* --- KEYFRAME ANIMATIONS --- */
-        @keyframes fadeLeftAnimation {
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes fadeDownAnimation {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ANG STAGGERED FADE-IN TEXT ENGINE KEYFRAME */
-        @keyframes revealStagger {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        @keyframes fadeLeftAnimation { to { opacity: 1; transform: translateX(0); } }
+        @keyframes fadeDownAnimation { to { opacity: 1; transform: translateY(0); } }
+        @keyframes revealStagger { to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -290,6 +265,7 @@
         
         <nav class="navbar">
             <div class="nav-links">
+                <a class="nav-item" data-scroll="top">Home</a>
                 <a class="nav-item" data-scroll="about">About Me</a>
                 <a class="nav-item" data-scroll="skills">Tech Stack and tools</a>
                 <a class="nav-item" data-scroll="certifications">Certifications</a>
@@ -311,7 +287,8 @@
 
             <div class="vertical-cards-container">
                 
-                <section id="about" class="content-card active-card"> <h2>About Me</h2>
+                <section id="about" class="content-card active-card">
+                    <h2>About Me</h2>
                     <p>I am a Computer Engineering practitioner focusing on Software Quality Assurance and Test Automation frameworks. Passionate about ensuring high-fidelity systems execution and building stable test cycles.</p>
                 </section>
 
@@ -365,37 +342,50 @@
 
         navItems.forEach(item => {
             const targetId = item.getAttribute('data-scroll');
-            const targetCard = document.getElementById(targetId);
 
-            if (targetCard) {
-                item.addEventListener('mouseenter', () => {
-                    // Alisin ang active class para mag-reset ang keyframe animation cycles
+            item.addEventListener('mouseenter', () => {
+                // KONDISYON PARA SA HOME (SCROLL BACK TO THE VERY TOP)
+                if (targetId === "top") {
                     allCards.forEach(card => card.classList.remove('active-card'));
-                    
-                    // Force a reflow to restart CSS animations instantly
-                    void targetCard.offsetWidth;
-                    
-                    // E-inject ang active class para mag-simula ang staggered content entry
-                    targetCard.classList.add('active-card');
-
-                    // Kalkulahin ang saktong vertical landing location
-                    const bodyRect = document.body.getBoundingClientRect().top;
-                    const elementRect = targetCard.getBoundingClientRect().top;
-                    const elementPosition = elementRect - bodyRect;
-                    const offsetPosition = elementPosition - 75;
+                    // Automatic na ibabalik ang About Me bilang default active layout sa muling pagbaba
+                    document.getElementById('about').classList.add('active-card');
 
                     window.scrollTo({
-                        top: offsetPosition,
+                        top: 0,
                         behavior: 'smooth'
                     });
-                });
-            }
+                } else {
+                    // REGULAR CARDS SCROLL CONTROLLER
+                    const targetCard = document.getElementById(targetId);
+                    if (targetCard) {
+                        allCards.forEach(card => card.classList.remove('active-card'));
+                        void targetCard.offsetWidth; // Reflow reset
+                        targetCard.classList.add('active-card');
+
+                        const bodyRect = document.body.getBoundingClientRect().top;
+                        const elementRect = targetCard.getBoundingClientRect().top;
+                        const elementPosition = elementRect - bodyRect;
+                        const offsetPosition = elementPosition - 75;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
         });
 
-        // 3. SCROLL SPY ENGINE (Backup trigger kapag manually ginamit ang mouse wheel)
+        // 3. SCROLL SPY ENGINE
         window.addEventListener('scroll', () => {
+            // Kung malapit na sa dulo ng pinakatuktok ang user, i-reset ang card highlight classes
+            if (window.scrollY < 200) {
+                allCards.forEach(card => card.classList.remove('active-card'));
+                document.getElementById('about').classList.add('active-card');
+                return;
+            }
+
             let currentActive = "";
-            
             allCards.forEach(card => {
                 const cardTop = card.offsetTop;
                 if (window.scrollY >= (cardTop - 320)) {
