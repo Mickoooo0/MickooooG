@@ -18,7 +18,7 @@
             --royal-blue: #4169E1; 
             --royal-blue-hover: #2752d8; 
             --light-steel-blue: #B0C4DE; 
-            --cyan-400: #22d3ee; /* Idinagdag para sa Tech Stack card */
+            --sky-400: #38bdf8; /* Pinalitan mula Cyan patungong Sky 400 */
         }
 
         body {
@@ -102,7 +102,7 @@
             border: 2px solid var(--nav-item-border);
             padding: 8px 20px;
             border-radius: 20px;
-            text-decoration: none;
+            text-decoration: text-main;
             color: var(--nav-item-text);
             font-weight: 700; 
             font-size: 0.95rem; 
@@ -246,11 +246,11 @@
             color: #0f172a !important; 
         }
 
-        /* --- NEW: CYAN 400 STYLING FOR TECH STACK CARD --- */
+        /* --- UPDATED: SKY 400 STYLING FOR TECH STACK CARD --- */
         #skills.content-card {
-            background: rgba(34, 211, 238, 0.85); /* Cyan 400 na may glassmorphism opacity */
+            background: rgba(56, 189, 248, 0.85); /* Sky 400 na may glassmorphism alpha */
             border-color: rgba(255, 255, 255, 0.5);
-            box-shadow: 0 35px 60px -25px rgba(34, 211, 238, 0.4);
+            box-shadow: 0 35px 60px -25px rgba(56, 189, 248, 0.4); /* Sky soft glow */
         }
 
         #skills.content-card h2 {
@@ -262,10 +262,10 @@
             color: #0f172a !important; 
         }
 
-        /* Ginawang mas madilim ang list items para umangat sa cyan background */
+        /* Dark blocks na may sky blue text para sa malinis na tech contrast */
         #skills.content-card .skills-list li {
             background: #0f172a; 
-            color: #22d3ee; /* Cyan text sa loob ng dark badges */
+            color: #38bdf8; 
         }
 
         /* --- STAGGERED INTERNAL ELEMENTS CONFIGURATION --- */
@@ -320,7 +320,7 @@
     <!-- VIDEO BACKGROUND CONTAINER -->
     <div class="page-background-container">
         <video id="bgVideo" class="page-video" autoplay loop muted playsinline>
-            <source src="background2.mp4" type="video/mp4">
+            <source src="page-bg.mp4" type="video/mp4">
         </video>
     </div>
     <div class="page-overlay"></div>
