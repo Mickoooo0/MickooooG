@@ -11,14 +11,13 @@
             --nav-item-border: rgba(255, 255, 255, 0.3);
             --nav-item-text: #ffffff;
             --bubble-shadow: 0 35px 60px -25px rgba(0, 0, 0, 0.6); 
-            --card-bg: rgba(15, 23, 42, 0.75); 
-            --card-border: rgba(255, 255, 255, 0.15);
+            --card-border: rgba(255, 255, 255, 0.3);
             --bar-color: transparent; 
             --frame-bg: transparent; 
             --royal-blue: #4169E1; 
             --royal-blue-hover: #2752d8; 
-            --light-steel-blue: #B0C4DE; 
-            --sky-600: #0284c7;
+            --dark-blue-text: #0f172a;
+            --light-text: #ffffff;
         }
 
         body {
@@ -92,7 +91,6 @@
             z-index: 30; 
             background: transparent !important; 
             backdrop-filter: none !important; 
-            -webkit-backdrop-filter: none !important;
         }
 
         .nav-links { display: flex; gap: 16px; }
@@ -119,7 +117,6 @@
             color: #020617;
         }
 
-        /* ROYAL BLUE UPGRADE FOR CONTACT ME BUTTON */
         .navbar-right .nav-item {
             background-color: var(--royal-blue);
             border-color: var(--royal-blue);
@@ -203,15 +200,13 @@
             box-sizing: border-box;
         }
 
-        /* --- CONTENT CARDS MASTER LAYOUT --- */
+        /* --- MASTER CARD LAYOUT ENGINE --- */
         .content-card {
             width: 100%;
             min-height: 80vh; 
             display: flex;
             flex-direction: column;
             justify-content: center; 
-            
-            background: var(--card-bg);
             border: 1px solid var(--card-border);
             backdrop-filter: blur(16px); 
             padding: 5rem 5.5rem; 
@@ -224,66 +219,83 @@
             transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* ON HOVER SHOW STATE */
         .content-card.active-card {
             opacity: 1;
             transform: scale(1);
         }
 
-        /* --- ABOUT ME CARD (LIGHT STEEL BLUE) --- */
+        /* TYPOGRAPHY BASE SETTINGS */
+        .content-card h2 {
+            margin-top: 0;
+            padding-bottom: 1.2rem;
+            font-size: 2.7rem; 
+            font-weight: 800; 
+            letter-spacing: -0.5px;
+        }
+
+        .content-card p {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 1.35rem; 
+            line-height: 1.75;
+            font-weight: 550; 
+            letter-spacing: -0.2px; 
+        }
+
+        /* --- EACH CARD UNIQUE BLUE GRADATION CONFIG --- */
+        
+        /* Card 1: Light Steel Blue (Maliwanag) */
         #about.content-card {
             background: rgba(176, 196, 222, 0.85); 
-            border-color: rgba(255, 255, 255, 0.4);
-            box-shadow: 0 35px 60px -25px rgba(176, 196, 222, 0.3);
+            box-shadow: 0 35px 60px -25px rgba(176, 196, 222, 0.25);
         }
+        #about.content-card h2 { color: var(--dark-blue-text); border-bottom: 2px solid rgba(15, 23, 42, 0.2); }
+        #about.content-card p { color: var(--dark-blue-text); }
 
-        #about.content-card h2 {
-            color: #0f172a !important; 
-            border-bottom: 2px solid rgba(15, 23, 42, 0.25); 
-        }
-
-        #about.content-card p {
-            color: #0f172a !important; 
-        }
-
-        /* --- UPDATED: TECH STACK CARD (SKY 600 - LESS BRIGHT) --- */
+        /* Card 2: Slate 400 (Muted Blue-Gray) */
         #skills.content-card {
-            background: rgba(2, 132, 199, 0.85); /* Sky 600 with backdrop alpha */
-            border-color: rgba(255, 255, 255, 0.4);
-            box-shadow: 0 35px 60px -25px rgba(2, 132, 199, 0.4); 
+            background: rgba(148, 163, 184, 0.85); 
+            box-shadow: 0 35px 60px -25px rgba(148, 163, 184, 0.25);
+        }
+        #skills.content-card h2 { color: var(--dark-blue-text); border-bottom: 2px solid rgba(15, 23, 42, 0.2); }
+        #skills.content-card p { color: var(--dark-blue-text); }
+        
+        /* Tech Tags inside Slate 400 */
+        .skills-list { display: flex; flex-wrap: wrap; gap: 1rem; list-style: none; padding: 0; margin-top: 1.5rem; }
+        .skills-list li { 
+            background: #0f172a; 
+            color: #ffffff; 
+            padding: 12px 24px; 
+            border-radius: 22px; 
+            font-weight: 700; 
+            font-size: 1.05rem; 
         }
 
-        #skills.content-card h2 {
-            color: #0f172a !important; 
-            border-bottom: 2px solid rgba(15, 23, 42, 0.25); 
-        }
-
-        #skills.content-card p {
-            color: #0f172a !important; 
-        }
-
-        /* High-contrast design update for the tags under Sky 600 */
-        #skills.content-card .skills-list li {
-            background: #ffffff; 
-            color: #0284c7; 
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        /* --- CERTIFICATIONS CARD (LIGHT STEEL BLUE) --- */
+        /* Card 3: Indigo 400 (Modern Blue-Indigo) */
         #certifications.content-card {
-            background: rgba(176, 196, 222, 0.85); 
-            border-color: rgba(255, 255, 255, 0.4);
-            box-shadow: 0 35px 60px -25px rgba(176, 196, 222, 0.3);
+            background: rgba(129, 140, 248, 0.85); 
+            box-shadow: 0 35px 60px -25px rgba(129, 140, 248, 0.25);
         }
+        #certifications.content-card h2 { color: var(--dark-blue-text); border-bottom: 2px solid rgba(15, 23, 42, 0.2); }
+        #certifications.content-card p { color: var(--dark-blue-text); }
 
-        #certifications.content-card h2 {
-            color: #0f172a !important; 
-            border-bottom: 2px solid rgba(15, 23, 42, 0.25); 
+        /* Card 4: Slate 700 (Deep Ocean Blue - Dark Card) */
+        #projects.content-card {
+            background: rgba(51, 65, 85, 0.85); 
+            box-shadow: 0 35px 60px -25px rgba(51, 65, 85, 0.4);
+            border-color: rgba(255, 255, 255, 0.15);
         }
+        #projects.content-card h2 { color: var(--light-text); border-bottom: 2px solid rgba(255, 255, 255, 0.15); }
+        #projects.content-card p { color: rgba(255, 255, 255, 0.9); }
 
-        #certifications.content-card p {
-            color: #0f172a !important; 
+        /* Card 5: Slate 900 (Midnight Navy Blue - Darkest Card) */
+        #contact.content-card {
+            background: rgba(15, 23, 42, 0.85); 
+            box-shadow: 0 35px 60px -25px rgba(15, 23, 42, 0.5);
+            border-color: rgba(255, 255, 255, 0.1);
         }
+        #contact.content-card h2 { color: var(--light-text); border-bottom: 2px solid rgba(255, 255, 255, 0.1); }
+        #contact.content-card p { color: rgba(255, 255, 255, 0.9); }
+        .contact-accent { font-weight: 700; font-size: 1.4rem; margin-top: 0.5rem; color: #38bdf8 !important; }
 
         /* --- STAGGERED INTERNAL ELEMENTS CONFIGURATION --- */
         .content-card h2, 
@@ -303,29 +315,6 @@
         .content-card.active-card .skills-list li:nth-child(3) { animation: revealStagger 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.65s; }
         .content-card.active-card .skills-list li:nth-child(4) { animation: revealStagger 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.75s; }
 
-        .content-card h2 {
-            margin-top: 0;
-            color: #ffffff;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 1.2rem;
-            font-size: 2.7rem; 
-            font-weight: 800; 
-            letter-spacing: -0.5px;
-        }
-
-        /* --- SYSTEM UI FONT APPLIED TO DESCRIPTION --- */
-        .content-card p {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            font-size: 1.35rem; 
-            line-height: 1.75;
-            color: rgba(255, 255, 255, 0.95);
-            font-weight: 550; 
-            letter-spacing: -0.2px; 
-        }
-
-        .skills-list { display: flex; flex-wrap: wrap; gap: 1rem; list-style: none; padding: 0; margin-top: 1.5rem; }
-        .skills-list li { background: #0284c7; padding: 12px 24px; border-radius: 22px; font-weight: 700; font-size: 1.05rem; }
-
         /* --- KEYFRAME ANIMATIONS --- */
         @keyframes fadeLeftAnimation { to { opacity: 1; transform: translateX(0); } }
         @keyframes fadeDownAnimation { to { opacity: 1; transform: translateY(0); } }
@@ -337,7 +326,7 @@
     <!-- VIDEO BACKGROUND CONTAINER -->
     <div class="page-background-container">
         <video id="bgVideo" class="page-video" autoplay loop muted playsinline>
-            <source src="background2.mp4" type="video/mp4">
+            <source src="page-bg.mp4" type="video/mp4">
         </video>
     </div>
     <div class="page-overlay"></div>
@@ -371,13 +360,13 @@
             <!-- LOWER PORTION: EXPANDED SCROLLABLE CARDS -->
             <div class="vertical-cards-container">
                 
-                <!-- Card 1: About Me -->
+                <!-- Card 1: About Me (Light Steel Blue) -->
                 <section id="about" class="content-card active-card">
                     <h2>About Me</h2>
                     <p>I am a Computer Engineering practitioner focusing on Software Quality Assurance and Test Automation frameworks. Passionate about ensuring high-fidelity systems execution and building stable test cycles.</p>
                 </section>
 
-                <!-- Card 2: Tech Stack -->
+                <!-- Card 2: Tech Stack (Slate 400) -->
                 <section id="skills" class="content-card">
                     <h2>Tech Stack and tools</h2>
                     <p>The core technical frameworks and engineering instruments utilized for software validation environments:</p>
@@ -389,23 +378,23 @@
                     </ul>
                 </section>
 
-                <!-- Card 3: Certifications -->
+                <!-- Card 3: Certifications (Indigo 400) -->
                 <section id="certifications" class="content-card">
                     <h2>Certifications</h2>
                     <p>ISTQB Certified Tester credentials ongoing. Actively pursuing advanced technical specializations and professional portfolio courses for automated system deployments.</p>
                 </section>
 
-                <!-- Card 4: Featured Projects -->
+                <!-- Card 4: Featured Projects (Slate 700) -->
                 <section id="projects" class="content-card">
                     <h2>Featured Projects</h2>
                     <p>An organized showcase of continuous integration test scripts, dynamic object models repositories, and comprehensive automation test suites designed for reliable deployment operations.</p>
                 </section>
 
-                <!-- Card 5: Contact -->
+                <!-- Card 5: Contact (Slate 900) -->
                 <section id="contact" class="content-card">
                     <h2>Contact Me</h2>
                     <p>Let's collaborate on optimization projects or QA structures. Reach out through my open communication lines:</p>
-                    <p style="font-weight: 700; font-size: 1.4rem; margin-top: 0.5rem; color: #38bdf8;">Email: mickogarcia@example.com | Metro Manila, Philippines</p>
+                    <p class="contact-accent">Email: mickogarcia@example.com | Metro Manila, Philippines</p>
                 </section>
 
             </div>
