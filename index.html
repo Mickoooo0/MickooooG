@@ -17,7 +17,7 @@
             --frame-bg: transparent; 
             --royal-blue: #4169E1; 
             --royal-blue-hover: #2752d8; 
-            --light-steel-blue: #B0C4DE; /* Bagong variable para sa About Me card */
+            --light-steel-blue: #B0C4DE; 
         }
 
         body {
@@ -103,8 +103,8 @@
             border-radius: 20px;
             text-decoration: none;
             color: var(--nav-item-text);
-            font-weight: 600;
-            font-size: 0.9rem;
+            font-weight: 700; /* Ginawang mas makapal ang teksto sa navbar (mula 600) */
+            font-size: 0.95rem; /* Bahagyang pinalaki para sa mas magandang visibility */
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
             cursor: pointer;
             
@@ -231,19 +231,18 @@
 
         /* --- UNIQUE LIGHT STEEL BLUE STYLING FOR ABOUT ME CARD --- */
         #about.content-card {
-            background: rgba(176, 196, 222, 0.85); /* Light Steel Blue na may kaunting opacity para makita pa rin ang background video */
+            background: rgba(176, 196, 222, 0.85); 
             border-color: rgba(255, 255, 255, 0.4);
             box-shadow: 0 35px 60px -25px rgba(176, 196, 222, 0.3);
         }
 
-        /* Babaguhin ang kulay ng mga font sa loob ng About Me para madaling basahin sa ibabaw ng light background */
         #about.content-card h2 {
-            color: #0f172a !important; /* Slate 900 / Dark text */
-            border-bottom: 2px solid rgba(15, 23, 42, 0.15);
+            color: #0f172a !important; 
+            border-bottom: 2px solid rgba(15, 23, 42, 0.25); /* Ginawang mas matatag ang linya sa ilalim ng title */
         }
 
         #about.content-card p {
-            color: #1e293b !important; /* Slate 800 / Dark gray-blue text */
+            color: #0f172a !important; /* Mas pinaitim ang kulay para sa high-contrast boldness */
         }
 
         /* --- STAGGERED INTERNAL ELEMENTS CONFIGURATION --- */
@@ -269,17 +268,20 @@
             color: #ffffff;
             border-bottom: 2px solid rgba(255, 255, 255, 0.1);
             padding-bottom: 1.2rem;
-            font-size: 2.6rem; 
+            font-size: 2.7rem; 
+            font-weight: 800; /* GINAWANG EXTRA BOLD ANG MGA HEADINGS NG CARDS */
+            letter-spacing: -0.5px;
         }
 
         .content-card p {
-            font-size: 1.35rem; 
+            font-size: 1.4rem; 
             line-height: 1.8;
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 600; /* GINAWANG SEMI-BOLD/MAS MAKAPAL ANG MGA TALATA AT PARAGRAPHS */
         }
 
         .skills-list { display: flex; flex-wrap: wrap; gap: 1rem; list-style: none; padding: 0; margin-top: 1.5rem; }
-        .skills-list li { background: #0284c7; padding: 12px 24px; border-radius: 22px; font-weight: 600; font-size: 1.05rem; }
+        .skills-list li { background: #0284c7; padding: 12px 24px; border-radius: 22px; font-weight: 700; font-size: 1.05rem; }
 
         /* --- KEYFRAME ANIMATIONS --- */
         @keyframes fadeLeftAnimation { to { opacity: 1; transform: translateX(0); } }
@@ -360,7 +362,7 @@
                 <section id="contact" class="content-card">
                     <h2>Contact Me</h2>
                     <p>Let's collaborate on optimization projects or QA structures. Reach out through my open communication lines:</p>
-                    <p style="font-weight: 600; font-size: 1.4rem; margin-top: 0.5rem; color: #38bdf8;">Email: mickogarcia@example.com | Metro Manila, Philippines</p>
+                    <p style="font-weight: 700; font-size: 1.4rem; margin-top: 0.5rem; color: #38bdf8;">Email: mickogarcia@example.com | Metro Manila, Philippines</p>
                 </section>
 
             </div>
