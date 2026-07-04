@@ -18,6 +18,7 @@
             --royal-blue: #4169E1; 
             --royal-blue-hover: #2752d8; 
             --light-steel-blue: #B0C4DE; 
+            --cyan-400: #22d3ee; /* Idinagdag para sa Tech Stack card */
         }
 
         body {
@@ -245,6 +246,28 @@
             color: #0f172a !important; 
         }
 
+        /* --- NEW: CYAN 400 STYLING FOR TECH STACK CARD --- */
+        #skills.content-card {
+            background: rgba(34, 211, 238, 0.85); /* Cyan 400 na may glassmorphism opacity */
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 35px 60px -25px rgba(34, 211, 238, 0.4);
+        }
+
+        #skills.content-card h2 {
+            color: #0f172a !important; 
+            border-bottom: 2px solid rgba(15, 23, 42, 0.25); 
+        }
+
+        #skills.content-card p {
+            color: #0f172a !important; 
+        }
+
+        /* Ginawang mas madilim ang list items para umangat sa cyan background */
+        #skills.content-card .skills-list li {
+            background: #0f172a; 
+            color: #22d3ee; /* Cyan text sa loob ng dark badges */
+        }
+
         /* --- STAGGERED INTERNAL ELEMENTS CONFIGURATION --- */
         .content-card h2, 
         .content-card p, 
@@ -273,14 +296,14 @@
             letter-spacing: -0.5px;
         }
 
-        /* --- UPDATED: SYSTEM UI FONT APPLIED TO DESCRIPTION --- */
+        /* --- SYSTEM UI FONT APPLIED TO DESCRIPTION --- */
         .content-card p {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             font-size: 1.35rem; 
             line-height: 1.75;
             color: rgba(255, 255, 255, 0.95);
-            font-weight: 550; /* Ginawang solid pero smooth 550 weight para sa ultra-clean look */
-            letter-spacing: -0.2px; /* Bahagyang pinaglapit para sa high-end UI finish */
+            font-weight: 550; 
+            letter-spacing: -0.2px; 
         }
 
         .skills-list { display: flex; flex-wrap: wrap; gap: 1rem; list-style: none; padding: 0; margin-top: 1.5rem; }
