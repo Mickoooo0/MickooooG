@@ -243,7 +243,7 @@
 
         /* --- EACH CARD UNIQUE BLUE GRADATION CONFIG --- */
         
-        /* Card 1: Light Steel Blue (Maliwanag) */
+        /* Card 1: Light Steel Blue */
         #about.content-card {
             background: rgba(176, 196, 222, 0.85); 
             box-shadow: 0 35px 60px -25px rgba(176, 196, 222, 0.25);
@@ -259,7 +259,7 @@
         #skills.content-card h2 { color: var(--dark-blue-text); border-bottom: 2px solid rgba(15, 23, 42, 0.2); }
         #skills.content-card p { color: var(--dark-blue-text); }
         
-        /* Tech Tags inside Slate 400 */
+        /* Tech Tags */
         .skills-list { display: flex; flex-wrap: wrap; gap: 1rem; list-style: none; padding: 0; margin-top: 1.5rem; }
         .skills-list li { 
             background: #0f172a; 
@@ -278,14 +278,14 @@
         #certifications.content-card h2 { color: var(--dark-blue-text); border-bottom: 2px solid rgba(15, 23, 42, 0.2); }
         #certifications.content-card p { color: var(--dark-blue-text); }
 
-        /* Card 4: Slate 700 (Deep Ocean Blue - Dark Card) */
+        /* UPDATED: Card 4: Sky 500 (Sky Blue - Vibrant Card) */
         #projects.content-card {
-            background: rgba(51, 65, 85, 0.85); 
-            box-shadow: 0 35px 60px -25px rgba(51, 65, 85, 0.4);
-            border-color: rgba(255, 255, 255, 0.15);
+            background: rgba(14, 165, 233, 0.85); /* Sky 500 with backdrop alpha */
+            box-shadow: 0 35px 60px -25px rgba(14, 165, 233, 0.35);
+            border-color: rgba(255, 255, 255, 0.4);
         }
-        #projects.content-card h2 { color: var(--light-text); border-bottom: 2px solid rgba(255, 255, 255, 0.15); }
-        #projects.content-card p { color: rgba(255, 255, 255, 0.9); }
+        #projects.content-card h2 { color: var(--dark-blue-text); border-bottom: 2px solid rgba(15, 23, 42, 0.2); }
+        #projects.content-card p { color: var(--dark-blue-text); }
 
         /* Card 5: Slate 900 (Midnight Navy Blue - Darkest Card) */
         #contact.content-card {
@@ -311,7 +311,7 @@
         .content-card.active-card .skills-list { animation: revealStagger 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.35s; }
 
         .content-card.active-card .skills-list li:nth-child(1) { animation: revealStagger 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.45s; }
-        .content-card.active-card .skills-list li:nth-child(2) { animation: revealStagger 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.55s; }
+        .content-child.active-card .skills-list li:nth-child(2) { animation: revealStagger 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.55s; }
         .content-card.active-card .skills-list li:nth-child(3) { animation: revealStagger 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.65s; }
         .content-card.active-card .skills-list li:nth-child(4) { animation: revealStagger 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.75s; }
 
@@ -384,7 +384,7 @@
                     <p>ISTQB Certified Tester credentials ongoing. Actively pursuing advanced technical specializations and professional portfolio courses for automated system deployments.</p>
                 </section>
 
-                <!-- Card 4: Featured Projects (Slate 700) -->
+                <!-- Card 4: Featured Projects (Sky 500) -->
                 <section id="projects" class="content-card">
                     <h2>Featured Projects</h2>
                     <p>An organized showcase of continuous integration test scripts, dynamic object models repositories, and comprehensive automation test suites designed for reliable deployment operations.</p>
