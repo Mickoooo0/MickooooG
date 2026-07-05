@@ -276,12 +276,12 @@
             font-size: 0.98rem; 
         }
 
-        /* --- CERTIFICATIONS LAYOUT ADJUSTMENTS --- */
+        /* --- CERTIFICATIONS LAYOUT RE-ARCHITECTED --- */
         #certifications.content-card {
             background: rgba(129, 140, 248, 0.85); 
             box-shadow: 0 35px 60px -25px rgba(129, 140, 248, 0.25);
             margin-top: 6rem;
-            padding: 2.5rem 3.5rem 2rem 3.5rem; 
+            padding: 2.5rem 3.5rem 0.5rem 3.5rem; /* Binawasan ang bottom padding ng card upang hindi humaba sa screen */
             overflow: visible !important; 
         }
         #certifications.content-card h2 { 
@@ -301,7 +301,7 @@
         .certs-display-canvas {
             position: relative;
             width: 100%;
-            height: 350px; 
+            height: 310px; /* Mas siksik na height para siguradong kasya sa viewport nang walang scrolling */
             margin-top: 1.5rem;
             box-sizing: border-box;
         }
@@ -324,22 +324,22 @@
             z-index: 60 !important;
         }
 
-        /* --- ULTRA HIGHER Y-AXIS POSITIONING CODES --- */
+        /* --- MAXIMUM HIGHER POSITION ENGINE (ANTI-CLIP) --- */
         
-        /* Main Right Cert (gac6.jpg) - Pinuwesto lalo pataas katapat ng H2 section */
+        /* Main Right Cert (gac6.jpg) - Todo-angat para pumantay sa itaas na linya */
         .cert-pos-main-top {
             width: 255px; 
             right: 1%;
-            top: -190px; 
+            top: -210px; /* Mula -190px, tinaas sa -210px para mas mataas ang lundag */
             transform: rotate(1deg);
             z-index: 10;
         }
 
-        /* 5 Sub-Certificates (gac1.jpg to gac5.jpg) - Iniangat nang lubusan mula sa ilalim */
+        /* Limang sub-certs - Malaki ang inangat mula sa bottom border ng canvas area */
         .cert-pos-bottom-1 {
             width: 170px;
             left: 0%;
-            bottom: 125px; 
+            bottom: 170px; /* Mas mataas mula sa dating 125px */
             transform: rotate(-3deg);
             z-index: 5;
         }
@@ -347,7 +347,7 @@
         .cert-pos-bottom-2 {
             width: 170px;
             left: 21%;
-            bottom: 110px; 
+            bottom: 155px; /* Mas mataas mula sa dating 110px */
             transform: rotate(2deg);
             z-index: 4;
         }
@@ -355,7 +355,7 @@
         .cert-pos-bottom-3 {
             width: 170px;
             left: 42%;
-            bottom: 120px; 
+            bottom: 165px; /* Mas mataas mula sa dating 120px */
             transform: rotate(-1deg);
             z-index: 3;
         }
@@ -363,7 +363,7 @@
         .cert-pos-bottom-4 {
             width: 170px;
             left: 63%;
-            bottom: 110px; 
+            bottom: 155px; /* Mas mataas mula sa dating 110px */
             transform: rotate(3deg);
             z-index: 2;
         }
@@ -371,7 +371,7 @@
         .cert-pos-bottom-5 {
             width: 170px;
             right: 0%;
-            bottom: 115px; 
+            bottom: 160px; /* Mas mataas mula sa dating 115px */
             transform: rotate(-2deg);
             z-index: 1;
         }
@@ -621,8 +621,9 @@
                         const elementPosition = elementRect - bodyRect;
                         
                         let offsetPosition;
+                        // Dinagdagan ang minus offset (-160) para mas i-center ng scroll engine ang card sa window area
                         if (targetId === "skills" || targetId === "certifications") {
-                            offsetPosition = elementPosition - 95; 
+                            offsetPosition = elementPosition - 160; 
                         } else {
                             offsetPosition = elementPosition - 120; 
                         }
