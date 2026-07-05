@@ -205,13 +205,13 @@
         /* --- MASTER CARD LAYOUT ENGINE --- */
         .content-card {
             width: 100%;
-            min-height: 80vh; 
+            min-height: 65vh; /* Binabaan mula 80vh para mas compact at flexible sa desktop screens */
             display: flex;
             flex-direction: column;
             justify-content: center; 
             border: 1px solid var(--card-border);
             backdrop-filter: blur(16px); 
-            padding: 5rem 5.5rem; 
+            padding: 3.5rem 5.5rem; /* Ginawang 3.5rem mula 5rem para umakyat ang contents at title */
             border-radius: 50px; 
             box-sizing: border-box;
             box-shadow: var(--bubble-shadow);
@@ -229,6 +229,7 @@
         /* TYPOGRAPHY BASE SETTINGS */
         .content-card h2 {
             margin-top: 0;
+            margin-bottom: 1rem;
             padding-bottom: 1.2rem;
             font-size: 2.7rem; 
             font-weight: 800; 
@@ -241,6 +242,7 @@
             line-height: 1.75;
             font-weight: 550; 
             letter-spacing: -0.2px; 
+            margin-top: 0;
         }
 
         /* SUB-HEADINGS FOR TECH STACK CARD */
@@ -249,7 +251,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin: 1.5rem 0 0.5rem 0;
+            margin: 1.25rem 0 0.5rem 0;
             color: rgba(15, 23, 42, 0.65);
         }
 
@@ -272,7 +274,7 @@
         #skills.content-card p { color: var(--dark-blue-text); margin-bottom: 0.5rem; }
         
         /* Tech Tags */
-        .skills-list { display: flex; flex-wrap: wrap; gap: 0.75rem; list-style: none; padding: 0; margin-top: 0; margin-bottom: 1.5rem; }
+        .skills-list { display: flex; flex-wrap: wrap; gap: 0.75rem; list-style: none; padding: 0; margin-top: 0; margin-bottom: 1.25rem; }
         .skills-list li { 
             background: #0f172a; 
             color: #ffffff; 
@@ -282,7 +284,7 @@
             font-size: 1rem; 
         }
 
-        /* Card 3: Indigo 400 (Modern Blue-Indigo) */
+        /* Card 3: Certifications (Indigo 400) */
         #certifications.content-card {
             background: rgba(129, 140, 248, 0.85); 
             box-shadow: 0 35px 60px -25px rgba(129, 140, 248, 0.25);
@@ -290,7 +292,7 @@
         #certifications.content-card h2 { color: var(--dark-blue-text); border-bottom: 2px solid rgba(15, 23, 42, 0.2); }
         #certifications.content-card p { color: var(--dark-blue-text); }
 
-        /* Card 4: Sky 500 (Sky Blue Theme Accent) */
+        /* Card 4: Featured Projects (Sky 500) */
         #projects.content-card {
             background: rgba(14, 165, 233, 0.85); 
             box-shadow: 0 35px 60px -25px rgba(14, 165, 233, 0.35);
