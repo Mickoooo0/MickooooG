@@ -289,6 +289,11 @@
             margin-top: 1.5rem;
         }
 
+        .cert-link-wrapper {
+            text-decoration: none;
+            display: block;
+        }
+
         .cert-item {
             display: flex;
             flex-direction: column;
@@ -299,9 +304,11 @@
             border-radius: 20px;
             border: 1px solid rgba(15, 23, 42, 0.1);
             transition: transform 0.3s ease, background-color 0.3s ease;
+            height: 100%;
+            box-sizing: border-box;
         }
 
-        .cert-item:hover {
+        .cert-link-wrapper:hover .cert-item {
             transform: translateY(-5px);
             background: rgba(15, 23, 42, 0.25);
         }
@@ -405,7 +412,6 @@
 </head>
 <body>
 
-    <!-- VIDEO BACKGROUND CONTAINER -->
     <div class="page-background-container">
         <video id="bgVideo" class="page-video" autoplay loop muted playsinline>
             <source src="background12.mp4" type="video/mp4">
@@ -415,7 +421,6 @@
 
     <div class="window-frame">
         
-        <!-- FIXED NAVIGATION BAR -->
         <nav class="navbar">
             <div class="nav-links">
                 <a class="nav-item" data-scroll="top">Home</a>
@@ -431,7 +436,6 @@
 
         <main class="main-viewport">
             
-            <!-- UPPER PORTION: TRIPLE LINE TAGLINE HERO BLOCK -->
             <section class="intro-section-hero">
                 <div class="intro-text-left">
                     <h1>HI, I'M MICKO.</h1>
@@ -439,22 +443,18 @@
                 </div>
             </section>
 
-            <!-- LOWER PORTION: EXPANDED SCROLLABLE CARDS -->
             <div class="vertical-cards-container">
                 
-                <!-- Card 1: About Me (Light Steel Blue) -->
                 <section id="about" class="content-card active-card">
                     <h2>About Me</h2>
                     <p>Hi, I'm Micko Luis P. Garcia. I am a Computer Engineering practitioner focusing on Software Quality Assurance, spanning both manual testing methodologies and Test Automation Frameworks. Backed by a Google IT Support certification and a strong foundation in UI design, I aim to deliver fast, flawless, and high-fidelity technical solutions.</p>
                 </section>
 
-                <!-- Card 2: Tech Stack (Slate 400) -->
                 <section id="skills" class="content-card">
                     <h2>Tech Stack and tools</h2>
                     <p>These are the core applications, frameworks, and tools I use to perform systems verification and continuous integration operations:</p>
                     
                     <div class="skills-grid-layout">
-                        <!-- Column 1 -->
                         <div class="skills-column">
                             <div class="tech-category-title">Testing Frameworks</div>
                             <ul class="skills-list">
@@ -466,7 +466,6 @@
                             </ul>
                         </div>
 
-                        <!-- Column 2 -->
                         <div class="skills-column">
                             <div class="tech-category-title">Management & Tools</div>
                             <ul class="skills-list">
@@ -479,7 +478,6 @@
                             </ul>
                         </div>
 
-                        <!-- Column 3 -->
                         <div class="skills-column">
                             <div class="tech-category-title">Languages</div>
                             <ul class="skills-list">
@@ -493,43 +491,53 @@
                     </div>
                 </section>
 
-                <!-- Card 3: Certifications (Indigo 400) -->
                 <section id="certifications" class="content-card">
                     <h2>Certifications</h2>
                     <p>I hold a <strong>Google IT Support Professional Certificate</strong> covering foundational IT operations, networking, and security. To further elevate my expertise in Software Quality Assurance, my next professional target is to acquire the ISTQB Certified Tester certification. <strong>Below are the five core sub-certificates I earned under the Google IT Support program:</strong></p>
                     
-                    <!-- 5-COLUMN CERTIFICATE IMAGES GRID -->
                     <div class="certs-grid-layout">
-                        <div class="cert-item">
-                            <img src="google-cert1.png" alt="Technical Support Fundamentals" class="cert-photo">
-                            <div class="cert-title">Technical Support Fundamentals</div>
-                        </div>
-                        <div class="cert-item">
-                            <img src="google-cert2.png" alt="The Bits and Bytes of Networking" class="cert-photo">
-                            <div class="cert-title">The Bits and Bytes of Networking</div>
-                        </div>
-                        <div class="cert-item">
-                            <img src="google-cert3.png" alt="Operating Systems and You" class="cert-photo">
-                            <div class="cert-title">Operating Systems and You</div>
-                        </div>
-                        <div class="cert-item">
-                            <img src="google-cert4.png" alt="System Administration & IT Infrastructure" class="cert-photo">
-                            <div class="cert-title">System Admin & IT Infrastructure</div>
-                        </div>
-                        <div class="cert-item">
-                            <img src="google-cert5.png" alt="IT Security: Defense against the digital dark arts" class="cert-photo">
-                            <div class="cert-title">IT Security & Defense</div>
-                        </div>
+                        <a href="gc1.png" target="_blank" class="cert-link-wrapper">
+                            <div class="cert-item">
+                                <img src="gc1.png" alt="Technical Support Fundamentals" class="cert-photo">
+                                <div class="cert-title">Technical Support Fundamentals</div>
+                            </div>
+                        </a>
+                        
+                        <a href="gc2.png" target="_blank" class="cert-link-wrapper">
+                            <div class="cert-item">
+                                <img src="gc2.png" alt="The Bits and Bytes of Networking" class="cert-photo">
+                                <div class="cert-title">The Bits and Bytes of Networking</div>
+                            </div>
+                        </a>
+
+                        <a href="gc3.png" target="_blank" class="cert-link-wrapper">
+                            <div class="cert-item">
+                                <img src="gc3.png" alt="Operating Systems and You" class="cert-photo">
+                                <div class="cert-title">Operating Systems and You</div>
+                            </div>
+                        </a>
+
+                        <a href="gc4.png" target="_blank" class="cert-link-wrapper">
+                            <div class="cert-item">
+                                <img src="gc4.png" alt="System Administration & IT Infrastructure" class="cert-photo">
+                                <div class="cert-title">System Admin & IT Infrastructure</div>
+                            </div>
+                        </a>
+
+                        <a href="gc5.png" target="_blank" class="cert-link-wrapper">
+                            <div class="cert-item">
+                                <img src="gc5.png" alt="IT Security: Defense against the digital dark arts" class="cert-photo">
+                                <div class="cert-title">IT Security & Defense</div>
+                            </div>
+                        </a>
                     </div>
                 </section>
 
-                <!-- Card 4: Featured Projects (Sky 500) -->
                 <section id="projects" class="content-card">
                     <h2>Featured Projects</h2>
                     <p>An organized showcase of continuous integration test scripts, dynamic object models repositories, and comprehensive automation test suites designed for reliable deployment operations.</p>
                 </section>
 
-                <!-- Card 5: Contact (Slate 900) -->
                 <section id="contact" class="content-card">
                     <h2>Contact Me</h2>
                     <p>Let's collaborate on optimization projects or QA structures. Reach out through my open communication lines:</p>
@@ -541,7 +549,6 @@
 
     </div>
 
-    <!-- DYNAMIC BACKGROUND FADE & HOVER TO PERFECT SCROLL SYSTEM -->
     <script>
         // 1. VIDEO BACKGROUND FADE ENGINE
         const video = document.getElementById('bgVideo');
