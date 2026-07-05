@@ -277,13 +277,17 @@
         }
 
         /* --- CERTIFICATIONS LAYOUT RE-ARCHITECTED --- */
-        #certifications.content-card {
-            background: rgba(129, 140, 248, 0.85); 
-            box-shadow: 0 35px 60px -25px rgba(129, 140, 248, 0.25);
-            margin-top: -3.2rem !important; /* Lumalapit nang maayos sa buttons base sa image_52f3c2.jpg */
-            padding: 2.5rem 3.5rem 3rem 3.5rem; /* Sapat na space sa ilalim para sa cert containment */
-            overflow: visible !important; 
-        }
+     #certifications.content-card {
+    background: rgba(129, 140, 248, 0.85);
+    box-shadow: 0 35px 60px -25px rgba(129, 140, 248, 0.25);
+    margin-top: -3.2rem !important;
+
+    padding: 2.5rem 3.5rem 1.5rem 3.5rem; /* less bottom space */
+
+    min-height: 520px; /* shorter card */
+
+    overflow: visible !important;
+}
         #certifications.content-card h2 { 
             color: var(--dark-blue-text); 
             border-bottom: 2px solid rgba(15, 23, 42, 0.2); 
@@ -298,11 +302,14 @@
             margin-bottom: 0.8rem;
         }
 
-    .certs-display-canvas {
+.certs-display-canvas {
     position: relative;
     width: 100%;
-    height: 350px;
-    margin-top: 1rem;
+
+    height: 180px;   /* much shorter */
+
+    margin-top: 40px; /* about 1 cm below the last sentence */
+
     box-sizing: border-box;
 }
 
@@ -325,51 +332,55 @@
         }
 
         /* --- POSITION ENGINE FOR MAIN CERT --- */
-      .cert-pos-main-top {
-    width: 255px;
-    right: 1%;
-    top: -180px;
+.cert-pos-main-top {
+    width: 380px;
+
+    right: 20px;
+
+    top: -320px;   /* pushes it near the title line */
+
     transform: rotate(1deg);
+
     z-index: 10;
 }
 
         /* --- HIGHER SUB-CERTIFICATE SYSTEM (FULLY CONTRAINED) --- */
-       .cert-pos-bottom-1 {
-    width: 170px;
+      .cert-pos-bottom-1 {
+    width: 155px;
     left: 0%;
-    bottom: 60px;
+    top: 20px;
     transform: rotate(-3deg);
     z-index: 5;
 }
 
 .cert-pos-bottom-2 {
-    width: 170px;
-    left: 21%;
-    bottom: 50px;
+    width: 155px;
+    left: 19%;
+    top: 25px;
     transform: rotate(2deg);
     z-index: 4;
 }
 
 .cert-pos-bottom-3 {
-    width: 170px;
-    left: 42%;
-    bottom: 55px;
+    width: 155px;
+    left: 38%;
+    top: 20px;
     transform: rotate(-1deg);
     z-index: 3;
 }
 
 .cert-pos-bottom-4 {
-    width: 170px;
-    left: 63%;
-    bottom: 50px;
+    width: 155px;
+    left: 57%;
+    top: 25px;
     transform: rotate(3deg);
     z-index: 2;
 }
 
 .cert-pos-bottom-5 {
-    width: 170px;
-    right: 0%;
-    bottom: 55px;
+    width: 155px;
+    left: 76%;
+    top: 20px;
     transform: rotate(-2deg);
     z-index: 1;
 }
