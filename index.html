@@ -95,7 +95,6 @@
 
         .nav-links { display: flex; gap: 16px; }
 
-        /* NAVBAR BUTTONS */
         .nav-item {
             border: 2px solid var(--nav-item-border);
             padding: 8px 20px;
@@ -131,7 +130,6 @@
             transform: translateY(-2px); 
         }
 
-        /* STAGGERED ENTRANCE TIMING */
         .nav-links .nav-item:nth-child(1) { animation-delay: 0.25s; } 
         .nav-links .nav-item:nth-child(2) { animation-delay: 0.4s; }  
         .nav-links .nav-item:nth-child(3) { animation-delay: 0.55s; } 
@@ -226,7 +224,6 @@
             transform: scale(1);
         }
 
-        /* TYPOGRAPHY BASE SETTINGS */
         .content-card h2 {
             margin-top: 0;
             margin-bottom: 1.2rem; 
@@ -269,7 +266,6 @@
             color: rgba(15, 23, 42, 0.75);
         }
 
-        /* Tech Tags Base Config */
         .skills-list { display: flex; flex-wrap: wrap; gap: 0.6rem; list-style: none; padding: 0; margin: 0; }
         .skills-list li { 
             background: #0f172a; 
@@ -280,33 +276,33 @@
             font-size: 0.98rem; 
         }
 
-        /* --- UPDATED COMPACT HIGH-PLACEMENT CERTIFICATIONS ENGINE --- */
+        /* --- UPDATED & ADJUSTED CERTIFICATIONS SECTION --- */
         #certifications.content-card {
             background: rgba(129, 140, 248, 0.85); 
             box-shadow: 0 35px 60px -25px rgba(129, 140, 248, 0.25);
             margin-top: 6rem;
-            padding: 2rem 3.5rem;
+            padding: 2.5rem 3.5rem 1.5rem 3.5rem; /* Pinalawak nang bahagya ang box padding */
             overflow: visible !important; 
         }
         #certifications.content-card h2 { 
             color: var(--dark-blue-text); 
             border-bottom: 2px solid rgba(15, 23, 42, 0.2); 
-            font-size: 2.2rem; 
-            margin-bottom: 0.8rem;
+            font-size: 2.5rem; /* Mas malaking heading */
+            margin-bottom: 1rem;
         }
         #certifications.content-card p { 
             color: var(--dark-blue-text); 
-            font-size: 1.15rem; 
-            line-height: 1.5;
-            max-width: 55%; 
-            margin-bottom: 0.5rem;
+            font-size: 1.35rem; /* Mas malaki at malinaw na font size batay sa request mo */
+            line-height: 1.6;
+            max-width: 58%; 
+            margin-bottom: 0.8rem;
         }
 
         .certs-display-canvas {
             position: relative;
             width: 100%;
-            height: 310px; /* Mas pinasikip para umakyat pa lalo ang mga sub-certs */
-            margin-top: 0.5rem;
+            height: 340px; /* Dagdag vertical working area */
+            margin-top: 1rem;
             box-sizing: border-box;
         }
 
@@ -322,59 +318,60 @@
             display: inline-block;
         }
 
-        /* Hover Physics Setup */
         .cert-card-interactive:hover {
-            transform: scale(1.1) translateY(-10px) rotate(0deg) !important;
+            transform: scale(1.1) translateY(-12px) rotate(0deg) !important;
             box-shadow: 0 20px 35px rgba(0, 0, 0, 0.35);
             z-index: 60 !important;
         }
 
-        /* coordinates mapping (Mas mataas na elevations para iwas-scroll) */
+        /* --- UPDATED HIGHER POSITIONS FOR ALL CERTS --- */
+        
+        /* Main Right Cert - Mas mataas na pagkakalagay sa gilid */
         .cert-pos-main-top {
-            width: 240px; 
-            right: 2%;
-            top: -125px; /* Iniangat pa lalo sa tabi ng description text block */
+            width: 250px; 
+            right: 1%;
+            top: -165px; /* Mula -125px ginawang -165px para mas umakyat pa */
             transform: rotate(1deg);
             z-index: 10;
         }
 
-        /* Limang sub-certs (Iniaangat nang tuluyan sa loob ng card border) */
+        /* Limang sub-certs sa ilalim - Lahat inangat nang husto para iwas-overlap sa borders */
         .cert-pos-bottom-1 {
-            width: 165px;
+            width: 170px;
             left: 0%;
-            bottom: 45px; /* Mula 25px ginawang 45px para siguradong pumasok sa frame */
+            bottom: 85px; /* Tinulak pataas mula sa dating 45px */
             transform: rotate(-3deg);
             z-index: 5;
         }
 
         .cert-pos-bottom-2 {
-            width: 165px;
+            width: 170px;
             left: 21%;
-            bottom: 35px; /* Mula 15px ginawang 35px */
+            bottom: 75px; /* Tinulak pataas mula sa dating 35px */
             transform: rotate(2deg);
             z-index: 4;
         }
 
         .cert-pos-bottom-3 {
-            width: 165px;
+            width: 170px;
             left: 42%;
-            bottom: 40px; /* Mula 20px ginawang 40px */
+            bottom: 80px; /* Tinulak pataas mula sa dating 40px */
             transform: rotate(-1deg);
             z-index: 3;
         }
 
         .cert-pos-bottom-4 {
-            width: 165px;
+            width: 170px;
             left: 63%;
-            bottom: 30px; /* Mula 10px ginawang 30px */
+            bottom: 70px; /* Tinulak pataas mula sa dating 30px */
             transform: rotate(3deg);
             z-index: 2;
         }
 
         .cert-pos-bottom-5 {
-            width: 165px;
+            width: 170px;
             right: 0%;
-            bottom: 35px; /* Mula 15px ginawang 35px */
+            bottom: 75px; /* Tinulak pataas mula sa dating 35px */
             transform: rotate(-2deg);
             z-index: 1;
         }
@@ -388,8 +385,6 @@
         }
 
         /* --- EACH CARD UNIQUE BLUE GRADATION CONFIG --- */
-        
-        /* Card 1: About Me (Light Steel Blue) */
         #about.content-card {
             background: rgba(176, 196, 222, 0.85); 
             box-shadow: 0 35px 60px -25px rgba(176, 196, 222, 0.25);
@@ -397,7 +392,6 @@
         #about.content-card h2 { color: var(--dark-blue-text); border-bottom: 2px solid rgba(15, 23, 42, 0.2); }
         #about.content-card p { color: var(--dark-blue-text); }
 
-        /* Card 2: Slate 400 (Muted Blue-Gray) */
         #skills.content-card {
             background: rgba(148, 163, 184, 0.85); 
             box-shadow: 0 35px 60px -25px rgba(148, 163, 184, 0.25);
@@ -406,7 +400,6 @@
         #skills.content-card h2 { color: var(--dark-blue-text); border-bottom: 2px solid rgba(15, 23, 42, 0.2); }
         #skills.content-card p { color: var(--dark-blue-text); }
 
-        /* Card 4: Featured Projects (Sky 500) */
         #projects.content-card {
             background: rgba(14, 165, 233, 0.85); 
             box-shadow: 0 35px 60px -25px rgba(14, 165, 233, 0.35);
@@ -416,7 +409,6 @@
         #projects.content-card h2 { color: var(--dark-blue-text); border-bottom: 2px solid rgba(15, 23, 42, 0.2); }
         #projects.content-card p { color: var(--dark-blue-text); }
 
-        /* Card 5: Slate 900 (Midnight Navy Blue) */
         #contact.content-card {
             background: rgba(15, 23, 42, 0.85); 
             box-shadow: 0 35px 60px -25px rgba(15, 23, 42, 0.5);
@@ -441,12 +433,10 @@
         .content-card.active-card .skills-grid-layout { animation: revealStagger 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.25s; }
         .content-card.active-card .certs-display-canvas { animation: revealStagger 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.25s; }
 
-        /* --- KEYFRAME ANIMATIONS --- */
         @keyframes fadeLeftAnimation { to { opacity: 1; transform: translateX(0); } }
         @keyframes fadeDownAnimation { to { opacity: 1; transform: translateY(0); } }
         @keyframes revealStagger { to { opacity: 1; transform: translateY(0); } }
 
-        /* Responsive handling for mobile/tablet screens */
         @media (max-width: 950px) {
             #certifications.content-card p { max-width: 100%; }
             .certs-display-canvas { height: auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
@@ -548,10 +538,12 @@
                     
                     <div class="certs-display-canvas">
                         
+                        <!-- Main Top Right Highlight Certificate (Elevated higher) -->
                         <a href="gac6.jpg" target="_blank" class="cert-card-interactive cert-pos-main-top">
                             <img src="gac6.jpg" alt="Google IT Support Professional Certificate" class="cert-img-fluid">
                         </a>
                         
+                        <!-- 5 Highly Elevated Sub-Certificates -->
                         <a href="gac1.jpg" target="_blank" class="cert-card-interactive cert-pos-bottom-1">
                             <img src="gac1.jpg" alt="Technical Support Fundamentals" class="cert-img-fluid">
                         </a>
@@ -630,7 +622,6 @@
                         const elementRect = targetCard.getBoundingClientRect().top;
                         const elementPosition = elementRect - bodyRect;
                         
-                        // DYNAMIC CONDITIONAL SCROLL ENGINE
                         let offsetPosition;
                         if (targetId === "skills" || targetId === "certifications") {
                             offsetPosition = elementPosition - 95; 
