@@ -280,53 +280,89 @@
             font-size: 0.98rem; 
         }
 
-        /* --- GRID ENGINE FOR CERTIFICATIONS (5 COLUMNS) --- */
-        .certs-grid-layout {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 1.2rem;
+        /* --- INTERACTIVE CANVAS FOR CERTIFICATIONS (SCATTER SCENE) --- */
+        .certs-display-canvas {
+            position: relative;
             width: 100%;
-            margin-top: 1.5rem;
-        }
-
-        .cert-link-wrapper {
-            text-decoration: none;
-            display: block;
-        }
-
-        .cert-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            background: rgba(15, 23, 42, 0.15);
-            padding: 14px 10px;
-            border-radius: 20px;
-            border: 1px solid rgba(15, 23, 42, 0.1);
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            height: 100%;
+            height: 520px; 
+            margin-top: 3rem;
             box-sizing: border-box;
         }
 
-        .cert-link-wrapper:hover .cert-item {
-            transform: translateY(-5px);
-            background: rgba(15, 23, 42, 0.25);
-        }
-
-        .cert-photo {
-            width: 100%;
-            max-width: 110px;
-            height: auto;
-            object-fit: contain;
+        .cert-card-interactive {
+            position: absolute;
+            background: #ffffff;
+            padding: 8px;
             border-radius: 8px;
-            margin-bottom: 0.6rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25), 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        .cert-title {
-            font-size: 0.82rem;
-            font-weight: 700;
-            color: var(--dark-blue-text);
-            line-height: 1.3;
+        /* Hover Physics Effect */
+        .cert-card-interactive:hover {
+            transform: scale(1.08) translateY(-15px) rotate(0deg) !important;
+            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.4);
+            z-index: 50 !important;
+        }
+
+        /* Layer Coordinates Mapping */
+        .cert-pos-main-top {
+            width: 280px;
+            right: 4%;
+            top: 0px;
+            transform: rotate(2deg);
+            z-index: 5;
+        }
+
+        .cert-pos-middle-left {
+            width: 250px;
+            left: 18%;
+            top: 130px;
+            transform: rotate(-1deg);
+            z-index: 3;
+        }
+
+        .cert-pos-middle-right {
+            width: 240px;
+            right: 24%;
+            top: 140px;
+            transform: rotate(-3deg);
+            z-index: 4;
+        }
+
+        .cert-pos-bottom-left1 {
+            width: 240px;
+            left: 4%;
+            bottom: -10px;
+            transform: rotate(1deg);
+            z-index: 2;
+        }
+
+        .cert-pos-bottom-left2 {
+            width: 240px;
+            left: 34%;
+            bottom: -30px;
+            transform: rotate(-1deg);
+            z-index: 1;
+        }
+
+        .cert-pos-bottom-right {
+            width: 240px;
+            right: 6%;
+            bottom: -50px;
+            transform: rotate(2deg);
+            z-index: 2;
+        }
+
+        .cert-img-fluid {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 4px;
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
         /* --- EACH CARD UNIQUE BLUE GRADATION CONFIG --- */
@@ -382,7 +418,7 @@
         .content-card h2, 
         .content-card p,
         .content-card .skills-grid-layout,
-        .content-card .certs-grid-layout {
+        .content-card .certs-display-canvas {
             opacity: 0;
             transform: translateY(15px);
         }
@@ -390,7 +426,7 @@
         .content-card.active-card h2 { animation: revealStagger 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.1s; }
         .content-card.active-card p { animation: revealStagger 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.2s; }
         .content-card.active-card .skills-grid-layout { animation: revealStagger 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.25s; }
-        .content-card.active-card .certs-grid-layout { animation: revealStagger 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.25s; }
+        .content-card.active-card .certs-display-canvas { animation: revealStagger 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.25s; }
 
         /* --- KEYFRAME ANIMATIONS --- */
         @keyframes fadeLeftAnimation { to { opacity: 1; transform: translateX(0); } }
@@ -399,14 +435,15 @@
 
         /* Responsive handling for smaller screens */
         @media (max-width: 950px) {
-            .certs-grid-layout { grid-template-columns: repeat(3, 1fr); }
+            .certs-display-canvas { height: auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+            .cert-card-interactive { position: static !important; transform: none !important; width: 100% !important; box-sizing: border-box; }
         }
         @media (max-width: 768px) {
             .skills-grid-layout { grid-template-columns: 1fr; gap: 1.2rem; }
             .content-card { padding: 2rem; }
         }
-        @media (max-width: 600px) {
-            .certs-grid-layout { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+        @media (max-width: 550px) {
+            .certs-display-canvas { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -493,43 +530,34 @@
 
                 <section id="certifications" class="content-card">
                     <h2>Certifications</h2>
-                    <p>I hold a <strong>Google IT Support Professional Certificate</strong> covering foundational IT operations, networking, and security. To further elevate my expertise in Software Quality Assurance, my next professional target is to acquire the ISTQB Certified Tester certification. <strong>Below are the five core sub-certificates I earned under the Google IT Support program:</strong></p>
+                    <p>I hold a <strong>Google IT Support Professional Certificate</strong> covering foundational IT operations, networking, and security. To further elevate my expertise in Software Quality Assurance, my next professional target is to acquire the ISTQB Certified Tester certification. <strong>Below are the certificates I earned:</strong></p>
                     
-                    <div class="certs-grid-layout">
-                        <a href="gc1.jpg" target="_blank" class="cert-link-wrapper">
-                            <div class="cert-item">
-                                <img src="gc1.jpg" alt="Technical Support Fundamentals" class="cert-photo">
-                                <div class="cert-title">Technical Support Fundamentals</div>
-                            </div>
+                    <div class="certs-display-canvas">
+                        
+                        <a href="gc1.jpg" target="_blank" class="cert-card-interactive cert-pos-main-top">
+                            <img src="gc1.jpg" alt="Google IT Support Professional Certificate" class="cert-img-fluid">
                         </a>
                         
-                        <a href="gc2.jpg" target="_blank" class="cert-link-wrapper">
-                            <div class="cert-item">
-                                <img src="gc2.jpg" alt="The Bits and Bytes of Networking" class="cert-photo">
-                                <div class="cert-title">The Bits and Bytes of Networking</div>
-                            </div>
+                        <a href="gc1.jpg" target="_blank" class="cert-card-interactive cert-pos-middle-left">
+                            <img src="gc1.jpg" alt="Technical Support Fundamentals" class="cert-img-fluid">
                         </a>
 
-                        <a href="gc3.jpg" target="_blank" class="cert-link-wrapper">
-                            <div class="cert-item">
-                                <img src="gc3.jpg" alt="Operating Systems and You" class="cert-photo">
-                                <div class="cert-title">Operating Systems and You</div>
-                            </div>
+                        <a href="gc2.jpg" target="_blank" class="cert-card-interactive cert-pos-middle-right">
+                            <img src="gc2.jpg" alt="The Bits and Bytes of Networking" class="cert-img-fluid">
                         </a>
 
-                        <a href="gc4.jpg" target="_blank" class="cert-link-wrapper">
-                            <div class="cert-item">
-                                <img src="gc4.jpg" alt="System Administration & IT Infrastructure" class="cert-photo">
-                                <div class="cert-title">System Admin & IT Infrastructure</div>
-                            </div>
+                        <a href="gc3.jpg" target="_blank" class="cert-card-interactive cert-pos-bottom-left1">
+                            <img src="gc3.jpg" alt="Operating Systems and You" class="cert-img-fluid">
                         </a>
 
-                        <a href="gc5.jpg" target="_blank" class="cert-link-wrapper">
-                            <div class="cert-item">
-                                <img src="gc5.jpg" alt="IT Security: Defense against the digital dark arts" class="cert-photo">
-                                <div class="cert-title">IT Security & Defense</div>
-                            </div>
+                        <a href="gc4.jpg" target="_blank" class="cert-card-interactive cert-pos-bottom-left2">
+                            <img src="gc4.jpg" alt="System Administration & IT Infrastructure" class="cert-img-fluid">
                         </a>
+
+                        <a href="gc5.jpg" target="_blank" class="cert-card-interactive cert-pos-bottom-right">
+                            <img src="gc5.jpg" alt="IT Security & Defense" class="cert-img-fluid">
+                        </a>
+
                     </div>
                 </section>
 
