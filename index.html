@@ -194,10 +194,10 @@
         .vertical-cards-container {
             display: flex;
             flex-direction: column;
-            gap: 15rem; 
+            gap: 16rem; 
             width: 100%;
             max-width: 1100px; 
-            margin-top: 18vh; 
+            margin-top: 22vh;
             padding-bottom: 25rem; 
             box-sizing: border-box;
         }
@@ -205,14 +205,14 @@
         /* --- MASTER CARD LAYOUT ENGINE --- */
         .content-card {
             width: 100%;
-            min-height: 80vh; 
+            min-height: 45vh; 
             display: flex;
             flex-direction: column;
             justify-content: center; 
             border: 1px solid var(--card-border);
             backdrop-filter: blur(16px); 
-            padding: 5rem 5.5rem; 
-            border-radius: 50px; 
+            padding: 2.8rem 4.8rem; 
+            border-radius: 40px; 
             box-sizing: border-box;
             box-shadow: var(--bubble-shadow);
             
@@ -229,8 +229,9 @@
         /* TYPOGRAPHY BASE SETTINGS */
         .content-card h2 {
             margin-top: 0;
-            padding-bottom: 1.2rem;
-            font-size: 2.7rem; 
+            margin-bottom: 1.2rem; 
+            padding-bottom: 0.5rem;
+            font-size: 2.5rem; 
             font-weight: 800; 
             letter-spacing: -0.5px;
         }
@@ -238,19 +239,94 @@
         .content-card p {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             font-size: 1.35rem; 
-            line-height: 1.75;
+            line-height: 1.65;
             font-weight: 550; 
             letter-spacing: -0.2px; 
+            margin-top: 0;
+            margin-bottom: 1.2rem;
         }
 
-        /* SUB-HEADINGS FOR TECH STACK CARD */
+        /* --- GRID ENGINE FOR TECH STACK --- */
+        .skills-grid-layout {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 1.8rem;
+            width: 100%;
+            margin-top: 0.8rem;
+        }
+
+        .skills-column {
+            display: flex;
+            flex-direction: column;
+        }
+
         .tech-category-title {
-            font-size: 1.15rem;
+            font-size: 1.05rem; 
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin: 1.5rem 0 0.5rem 0;
-            color: rgba(15, 23, 42, 0.65);
+            margin: 0 0 0.8rem 0; 
+            color: rgba(15, 23, 42, 0.75);
+        }
+
+        /* Tech Tags Base Config */
+        .skills-list { display: flex; flex-wrap: wrap; gap: 0.6rem; list-style: none; padding: 0; margin: 0; }
+        .skills-list li { 
+            background: #0f172a; 
+            color: #ffffff; 
+            padding: 8px 16px; 
+            border-radius: 20px; 
+            font-weight: 700; 
+            font-size: 0.98rem; 
+        }
+
+        /* --- GRID ENGINE FOR CERTIFICATIONS (5 COLUMNS) --- */
+        .certs-grid-layout {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.2rem;
+            width: 100%;
+            margin-top: 1.5rem;
+        }
+
+        .cert-link-wrapper {
+            text-decoration: none;
+            display: block;
+        }
+
+        .cert-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: rgba(15, 23, 42, 0.15);
+            padding: 14px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(15, 23, 42, 0.1);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        .cert-link-wrapper:hover .cert-item {
+            transform: translateY(-5px);
+            background: rgba(15, 23, 42, 0.25);
+        }
+
+        .cert-photo {
+            width: 100%;
+            max-width: 110px;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+        }
+
+        .cert-title {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--dark-blue-text);
+            line-height: 1.3;
         }
 
         /* --- EACH CARD UNIQUE BLUE GRADATION CONFIG --- */
@@ -267,177 +343,84 @@
         #skills.content-card {
             background: rgba(148, 163, 184, 0.85); 
             box-shadow: 0 35px 60px -25px rgba(148, 163, 184, 0.25);
+            margin-top: 1.5rem; 
         }
         #skills.content-card h2 { color: var(--dark-blue-text); border-bottom: 2px solid rgba(15, 23, 42, 0.2); }
-        #skills.content-card p { color: var(--dark-blue-text); margin-bottom: 0.5rem; }
-        
-        /* Tech Tags */
-        .skills-list { display: flex; flex-wrap: wrap; gap: 0.75rem; list-style: none; padding: 0; margin-top: 0; margin-bottom: 1.5rem; }
-        .skills-list li { 
-            background: #0f172a; 
-            color: #ffffff; 
-            padding: 10px 20px; 
-            border-radius: 22px; 
-            font-weight: 700; 
-            font-size: 1rem; 
-        }
+        #skills.content-card p { color: var(--dark-blue-text); }
 
-        /* Card 3: Indigo 400 (Certifications Layout with Dynamic Pictures Display) */
+        /* Card 3: Certifications (Indigo 400) */
         #certifications.content-card {
             background: rgba(129, 140, 248, 0.85); 
             box-shadow: 0 35px 60px -25px rgba(129, 140, 248, 0.25);
+            margin-top: 6rem; 
         }
         #certifications.content-card h2 { color: var(--dark-blue-text); border-bottom: 2px solid rgba(15, 23, 42, 0.2); }
         #certifications.content-card p { color: var(--dark-blue-text); }
-
-        /* CERTIFICATES MULTI-IMAGE PRESENTATION STYLES */
-        .cert-display-container {
-            display: flex;
-            flex-direction: column;
-            gap: 2.5rem;
-            margin-top: 1.5rem;
-            width: 100%;
-        }
-
-        .cert-upper-split {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 2.5rem;
-        }
-
-        .cert-main-info {
-            flex: 1;
-        }
-
-        .profile-photo-frame {
-            position: relative;
-            width: 140px;
-            height: 175px;
-            background: #cbd5e1;
-            border: 4px solid #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-            overflow: hidden;
-            flex-shrink: 0;
-        }
-
-        .profile-photo-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .profile-label {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(15, 23, 42, 0.75);
-            color: #ffffff;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-align: center;
-            padding: 4px 0;
-        }
-
-        /* FANNING STACK LOWER GRID LAYOUT */
-        .cert-images-fan-stack {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            width: 100%;
-            height: 280px;
-            margin-top: 1.5rem;
-        }
-
-        .cert-mock-photo {
-            position: absolute;
-            width: 290px;
-            height: 200px;
-            background: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
-            border: 4px solid #ffffff;
-            overflow: hidden;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), z-index 0.1s;
-        }
-
-        /* Exact overlay/offset fanning calculation from preview layout */
-        .cert-mock-photo:nth-child(1) { transform: translate(-140px, 20px) rotate(-8deg); z-index: 10; }
-        .cert-mock-photo:nth-child(2) { transform: translate(-60px, -20px) rotate(-3deg); z-index: 15; }
-        .cert-mock-photo:nth-child(3) { transform: translate(40px, -30px) rotate(2deg); z-index: 20; }
-        .cert-mock-photo:nth-child(4) { transform: translate(120px, 15px) rotate(6deg); z-index: 14; }
-        .cert-mock-photo:nth-child(5) { transform: translate(220px, -10px) rotate(4deg); z-index: 12; }
-
-        /* Interactive pop-out on hover */
-        .cert-mock-photo:hover {
-            z-index: 50 !important;
-            transform: scale(1.1) translateY(-15px) rotate(0deg) !important;
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
-        }
-
-        .cert-mock-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
 
         /* Card 4: Featured Projects (Sky 500) */
         #projects.content-card {
             background: rgba(14, 165, 233, 0.85); 
             box-shadow: 0 35px 60px -25px rgba(14, 165, 233, 0.35);
             border-color: rgba(255, 255, 255, 0.4);
+            margin-top: 6rem;
         }
         #projects.content-card h2 { color: var(--dark-blue-text); border-bottom: 2px solid rgba(15, 23, 42, 0.2); }
         #projects.content-card p { color: var(--dark-blue-text); }
 
-        /* Card 5: Contact (Slate 900) */
+        /* Card 5: Slate 900 (Midnight Navy Blue) */
         #contact.content-card {
             background: rgba(15, 23, 42, 0.85); 
             box-shadow: 0 35px 60px -25px rgba(15, 23, 42, 0.5);
             border-color: rgba(255, 255, 255, 0.1);
+            margin-top: 6rem;
         }
         #contact.content-card h2 { color: var(--light-text); border-bottom: 2px solid rgba(255, 255, 255, 0.1); }
         #contact.content-card p { color: rgba(255, 255, 255, 0.9); }
-        .contact-accent { font-weight: 700; font-size: 1.4rem; margin-top: 0.5rem; color: #38bdf8 !important; }
+        .contact-accent { font-weight: 700; font-size: 1.5rem; margin-top: 0.5rem; color: #38bdf8 !important; }
 
         /* --- STAGGERED INTERNAL ELEMENTS CONFIGURATION --- */
         .content-card h2, 
-        .content-card p, 
-        .content-card .tech-category-title,
-        .content-card .skills-list,
-        .cert-display-container {
+        .content-card p,
+        .content-card .skills-grid-layout,
+        .content-card .certs-grid-layout {
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(15px);
         }
 
         .content-card.active-card h2 { animation: revealStagger 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.1s; }
         .content-card.active-card p { animation: revealStagger 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.2s; }
-        .content-card.active-card .tech-category-title { animation: revealStagger 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.25s; }
-        .content-card.active-card .skills-list { animation: revealStagger 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.3s; }
-        .content-card.active-card .cert-display-container { animation: revealStagger 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.25s; }
+        .content-card.active-card .skills-grid-layout { animation: revealStagger 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.25s; }
+        .content-card.active-card .certs-grid-layout { animation: revealStagger 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.25s; }
 
         /* --- KEYFRAME ANIMATIONS --- */
         @keyframes fadeLeftAnimation { to { opacity: 1; transform: translateX(0); } }
         @keyframes fadeDownAnimation { to { opacity: 1; transform: translateY(0); } }
         @keyframes revealStagger { to { opacity: 1; transform: translateY(0); } }
+
+        /* Responsive handling for smaller screens */
+        @media (max-width: 950px) {
+            .certs-grid-layout { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .skills-grid-layout { grid-template-columns: 1fr; gap: 1.2rem; }
+            .content-card { padding: 2rem; }
+        }
+        @media (max-width: 600px) {
+            .certs-grid-layout { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- VIDEO BACKGROUND CONTAINER -->
     <div class="page-background-container">
         <video id="bgVideo" class="page-video" autoplay loop muted playsinline>
-            <source src="page-bg.mp4" type="video/mp4">
+            <source src="background12.mp4" type="video/mp4">
         </video>
     </div>
     <div class="page-overlay"></div>
 
     <div class="window-frame">
         
-        <!-- FIXED NAVIGATION BAR -->
         <nav class="navbar">
             <div class="nav-links">
                 <a class="nav-item" data-scroll="top">Home</a>
@@ -453,7 +436,6 @@
 
         <main class="main-viewport">
             
-            <!-- UPPER PORTION: TRIPLE LINE TAGLINE HERO BLOCK -->
             <section class="intro-section-hero">
                 <div class="intro-text-left">
                     <h1>HI, I'M MICKO.</h1>
@@ -461,94 +443,101 @@
                 </div>
             </section>
 
-            <!-- LOWER PORTION: EXPANDED SCROLLABLE CARDS -->
             <div class="vertical-cards-container">
                 
-                <!-- Card 1: About Me (Light Steel Blue) -->
                 <section id="about" class="content-card active-card">
                     <h2>About Me</h2>
                     <p>Hi, I'm Micko Luis P. Garcia. I am a Computer Engineering practitioner focusing on Software Quality Assurance, spanning both manual testing methodologies and Test Automation Frameworks. Backed by a Google IT Support certification and a strong foundation in UI design, I aim to deliver fast, flawless, and high-fidelity technical solutions.</p>
                 </section>
 
-                <!-- Card 2: Tech Stack (Slate 400) -->
                 <section id="skills" class="content-card">
                     <h2>Tech Stack and tools</h2>
-                    <p>The core applications, frameworks, and tools used to perform systems verification and continuous integration operations:</p>
+                    <p>These are the core applications, frameworks, and tools I use to perform systems verification and continuous integration operations:</p>
                     
-                    <div class="tech-category-title">Testing Frameworks & Tools</div>
-                    <ul class="skills-list">
-                        <li>Cypress</li>
-                        <li>Playwright</li>
-                        <li>Selenium</li>
-                        <li>Postman</li>
-                        <li>Chrome DevTools</li>
-                    </ul>
-
-                    <div class="tech-category-title">Project Management & Utilities</div>
-                    <ul class="skills-list">
-                        <li>GitHub</li>
-                        <li>Jira</li>
-                        <li>Trello</li>
-                        <li>Visual Studio Code</li>
-                        <li>QT</li>
-                        <li>MySQL</li>
-                    </ul>
-
-                    <div class="tech-category-title">Programming Languages</div>
-                    <ul class="skills-list">
-                        <li>C++</li>
-                        <li>C#</li>
-                        <li>Java</li>
-                        <li>JavaScript</li>
-                        <li>Python</li>
-                    </ul>
-                </section>
-
-                <!-- Card 3: Certifications (Indigo 400 - Full Visual Layout) -->
-                <section id="certifications" class="content-card">
-                    <h2>Certifications</h2>
-                    
-                    <div class="cert-display-container">
-                        <!-- Upper Section split -->
-                        <div class="cert-upper-split">
-                            <div class="cert-main-info">
-                                <p>ISTQB Certified Tester credentials ongoing. Actively pursuing advanced technical specializations, professional modular verifications, and comprehensive validation portfolio courses for systems deployment operations.</p>
-                            </div>
-                            <!-- Right aligned ID profile picture frame -->
-                            <div class="profile-photo-frame">
-                                <img src="gc7.jpg" alt="Micko Garcia">
-                                <div class="profile-label">Micko Garcia</div>
-                            </div>
+                    <div class="skills-grid-layout">
+                        <div class="skills-column">
+                            <div class="tech-category-title">Testing Frameworks</div>
+                            <ul class="skills-list">
+                                <li>Cypress</li>
+                                <li>Playwright</li>
+                                <li>Selenium</li>
+                                <li>Postman</li>
+                                <li>Chrome DevTools</li>
+                            </ul>
                         </div>
 
-                        <!-- Fanning stack of certificate images underneath -->
-                        <div class="cert-images-fan-stack">
-                            <div class="cert-mock-photo">
-                                <img src="google-it-cert.jpg" alt="Google IT Support Certificate">
-                            </div>
-                            <div class="cert-mock-photo">
-                                <img src="istqb-cert.jpg" alt="ISTQB Foundation Level">
-                            </div>
-                            <div class="cert-mock-photo">
-                                <img src="automation-cert.jpg" alt="Automation Specialist">
-                            </div>
-                            <div class="cert-mock-photo">
-                                <img src="qa-advanced-cert.jpg" alt="Advanced Verification Certificate">
-                            </div>
-                            <div class="cert-mock-photo">
-                                <img src="systems-cert.jpg" alt="Systems Support Path">
-                            </div>
+                        <div class="skills-column">
+                            <div class="tech-category-title">Management & Tools</div>
+                            <ul class="skills-list">
+                                <li>GitHub</li>
+                                <li>Jira</li>
+                                <li>Trello</li>
+                                <li>Visual Studio Code</li>
+                                <li>QT</li>
+                                <li>MySQL</li>
+                            </ul>
+                        </div>
+
+                        <div class="skills-column">
+                            <div class="tech-category-title">Languages</div>
+                            <ul class="skills-list">
+                                <li>C++</li>
+                                <li>C#</li>
+                                <li>Java</li>
+                                <li>JavaScript</li>
+                                <li>Python</li>
+                            </ul>
                         </div>
                     </div>
                 </section>
 
-                <!-- Card 4: Featured Projects (Sky 500) -->
+                <section id="certifications" class="content-card">
+                    <h2>Certifications</h2>
+                    <p>I hold a <strong>Google IT Support Professional Certificate</strong> covering foundational IT operations, networking, and security. To further elevate my expertise in Software Quality Assurance, my next professional target is to acquire the ISTQB Certified Tester certification. <strong>Below are the five core sub-certificates I earned under the Google IT Support program:</strong></p>
+                    
+                    <div class="certs-grid-layout">
+                        <a href="gc1.jpg" target="_blank" class="cert-link-wrapper">
+                            <div class="cert-item">
+                                <img src="gc1.jpg" alt="Technical Support Fundamentals" class="cert-photo">
+                                <div class="cert-title">Technical Support Fundamentals</div>
+                            </div>
+                        </a>
+                        
+                        <a href="gc2.jpg" target="_blank" class="cert-link-wrapper">
+                            <div class="cert-item">
+                                <img src="gc2.jpg" alt="The Bits and Bytes of Networking" class="cert-photo">
+                                <div class="cert-title">The Bits and Bytes of Networking</div>
+                            </div>
+                        </a>
+
+                        <a href="gc3.jpg" target="_blank" class="cert-link-wrapper">
+                            <div class="cert-item">
+                                <img src="gc3.jpg" alt="Operating Systems and You" class="cert-photo">
+                                <div class="cert-title">Operating Systems and You</div>
+                            </div>
+                        </a>
+
+                        <a href="gc4.jpg" target="_blank" class="cert-link-wrapper">
+                            <div class="cert-item">
+                                <img src="gc4.jpg" alt="System Administration & IT Infrastructure" class="cert-photo">
+                                <div class="cert-title">System Admin & IT Infrastructure</div>
+                            </div>
+                        </a>
+
+                        <a href="gc5.jpg" target="_blank" class="cert-link-wrapper">
+                            <div class="cert-item">
+                                <img src="gc5.jpg" alt="IT Security: Defense against the digital dark arts" class="cert-photo">
+                                <div class="cert-title">IT Security & Defense</div>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+
                 <section id="projects" class="content-card">
                     <h2>Featured Projects</h2>
                     <p>An organized showcase of continuous integration test scripts, dynamic object models repositories, and comprehensive automation test suites designed for reliable deployment operations.</p>
                 </section>
 
-                <!-- Card 5: Contact (Slate 900) -->
                 <section id="contact" class="content-card">
                     <h2>Contact Me</h2>
                     <p>Let's collaborate on optimization projects or QA structures. Reach out through my open communication lines:</p>
@@ -560,7 +549,6 @@
 
     </div>
 
-    <!-- DYNAMIC BACKGROUND FADE & HOVER TO SCROLL SYSTEM -->
     <script>
         // 1. VIDEO BACKGROUND FADE ENGINE
         const video = document.getElementById('bgVideo');
@@ -599,7 +587,14 @@
                         const bodyRect = document.body.getBoundingClientRect().top;
                         const elementRect = targetCard.getBoundingClientRect().top;
                         const elementPosition = elementRect - bodyRect;
-                        const offsetPosition = elementPosition - 75;
+                        
+                        // DYNAMIC CONDITIONAL SCROLL ENGINE
+                        let offsetPosition;
+                        if (targetId === "skills" || targetId === "certifications") {
+                            offsetPosition = elementPosition - 95; 
+                        } else {
+                            offsetPosition = elementPosition - 120; 
+                        }
 
                         window.scrollTo({
                             top: offsetPosition,
@@ -621,7 +616,7 @@
             let currentActive = "";
             allCards.forEach(card => {
                 const cardTop = card.offsetTop;
-                if (window.scrollY >= (cardTop - 320)) {
+                if (window.scrollY >= (cardTop - 240)) {
                     currentActive = card.getAttribute('id');
                 }
             });
@@ -633,6 +628,7 @@
                             card.classList.add('active-card');
                         }
                     } else {
+                        card.classList.remove('remove-card'); 
                         card.classList.remove('active-card');
                     }
                 });
