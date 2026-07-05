@@ -632,13 +632,15 @@
                         const elementPosition = elementRect - bodyRect;
                         
                         let offsetPosition;
-                        if (targetId === "certifications") {
-                            offsetPosition = elementPosition - 95; 
-                        } else if (targetId === "skills") {
-                            offsetPosition = elementPosition - 160;
-                        } else {
-                            offsetPosition = elementPosition - 120; 
-                        }
+                       if (targetId === "certifications") {
+    offsetPosition = elementPosition - 25; // matches your 2nd screenshot
+}
+else if (targetId === "skills") {
+    offsetPosition = elementPosition - 160;
+}
+else {
+    offsetPosition = elementPosition - 120;
+}
 
                         window.scrollTo({
                             top: offsetPosition,
