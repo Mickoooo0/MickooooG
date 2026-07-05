@@ -205,13 +205,13 @@
         /* --- MASTER CARD LAYOUT ENGINE --- */
         .content-card {
             width: 100%;
-            min-height: 60vh; /* Mas pinaliit para magkasya lahat sa compact screens */
+            min-height: 60vh; 
             display: flex;
             flex-direction: column;
             justify-content: center; 
             border: 1px solid var(--card-border);
             backdrop-filter: blur(16px); 
-            padding: 2rem 5.5rem 3rem 5.5rem; /* Pinalitan ang top padding sa 2rem para umakyat ang title */
+            padding: 2rem 5.5rem 3rem 5.5rem; 
             border-radius: 50px; 
             box-sizing: border-box;
             box-shadow: var(--bubble-shadow);
@@ -229,7 +229,7 @@
         /* TYPOGRAPHY BASE SETTINGS */
         .content-card h2 {
             margin-top: 0;
-            margin-bottom: 0.75rem; /* Binawasan para dikit ang contents */
+            margin-bottom: 0.75rem; 
             padding-bottom: 0.75rem;
             font-size: 2.7rem; 
             font-weight: 800; 
@@ -238,7 +238,7 @@
 
         .content-card p {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            font-size: 1.25rem; /* Medyo pinaliit para iwas vertical spillover */
+            font-size: 1.25rem; 
             line-height: 1.65;
             font-weight: 550; 
             letter-spacing: -0.2px; 
@@ -252,7 +252,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin: 0.85rem 0 0.4rem 0; /* Ginawang mas compact ang padding */
+            margin: 0.85rem 0 0.4rem 0; 
             color: rgba(15, 23, 42, 0.65);
         }
 
@@ -270,6 +270,7 @@
         #skills.content-card {
             background: rgba(148, 163, 184, 0.85); 
             box-shadow: 0 35px 60px -25px rgba(148, 163, 184, 0.25);
+            margin-top: 5rem; /* Idinagdag para ibaba nang kaunti ang Tech Stack card */
         }
         #skills.content-card h2 { color: var(--dark-blue-text); border-bottom: 2px solid rgba(15, 23, 42, 0.2); }
         #skills.content-card p { color: var(--dark-blue-text); margin-bottom: 0.25rem; }
@@ -279,7 +280,7 @@
         .skills-list li { 
             background: #0f172a; 
             color: #ffffff; 
-            padding: 8px 16px; /* Optimized padding para tipid sa vertical viewport */
+            padding: 8px 16px; 
             border-radius: 22px; 
             font-weight: 700; 
             font-size: 0.95rem; 
@@ -461,7 +462,7 @@
                         void targetCard.offsetWidth; 
                         targetCard.classList.add('active-card');
 
-                        // Ginagamit natin ang window innerHeight para i-calculate ang saktong gitna (Perfect Middle Alignment)
+                        // Paggitna ng card sa viewport base sa taas nito
                         const cardHeight = targetCard.offsetHeight;
                         const viewportHeight = window.innerHeight;
                         
@@ -469,7 +470,6 @@
                         const elementRect = targetCard.getBoundingClientRect().top;
                         const elementPosition = elementRect - bodyRect;
                         
-                        // Dynamic calculation para mailagay ang card sa eksaktong gitna ng screen
                         const offsetPosition = elementPosition - ((viewportHeight - cardHeight) / 2);
 
                         window.scrollTo({
