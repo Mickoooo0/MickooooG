@@ -100,7 +100,7 @@
             border: 2px solid var(--nav-item-border);
             padding: 8px 20px;
             border-radius: 20px;
-            text-decoration: none; /* Inayos mula sa text-main */
+            text-decoration: text-main;
             color: var(--nav-item-text);
             font-weight: 700; 
             font-size: 0.95rem; 
@@ -493,4 +493,148 @@
 
                 <section id="certifications" class="content-card">
                     <h2>Certifications</h2>
-                    <p>I hold a <strong>Google IT
+                    <p>I hold a <strong>Google IT Support Professional Certificate</strong> covering foundational IT operations, networking, and security. To further elevate my expertise in Software Quality Assurance, my next professional target is to acquire the ISTQB Certified Tester certification. <strong>Below are the five core sub-certificates I earned under the Google IT Support program:</strong></p>
+                    
+                    <div class="certs-grid-layout">
+                        <a href="gc1.jpg" target="_blank" class="cert-link-wrapper">
+                            <div class="cert-item">
+                                <img src="gc1.jpg" alt="Technical Support Fundamentals" class="cert-photo">
+                                <div class="cert-title">Technical Support Fundamentals</div>
+                            </div>
+                        </a>
+                        
+                        <a href="gc2.jpg" target="_blank" class="cert-link-wrapper">
+                            <div class="cert-item">
+                                <img src="gc2.jpg" alt="The Bits and Bytes of Networking" class="cert-photo">
+                                <div class="cert-title">The Bits and Bytes of Networking</div>
+                            </div>
+                        </a>
+
+                        <a href="gc3.jpg" target="_blank" class="cert-link-wrapper">
+                            <div class="cert-item">
+                                <img src="gc3.jpg" alt="Operating Systems and You" class="cert-photo">
+                                <div class="cert-title">Operating Systems and You</div>
+                            </div>
+                        </a>
+
+                        <a href="gc4.jpg" target="_blank" class="cert-link-wrapper">
+                            <div class="cert-item">
+                                <img src="gc4.jpg" alt="System Administration & IT Infrastructure" class="cert-photo">
+                                <div class="cert-title">System Admin & IT Infrastructure</div>
+                            </div>
+                        </a>
+
+                        <a href="gc5.jpg" target="_blank" class="cert-link-wrapper">
+                            <div class="cert-item">
+                                <img src="gc5.jpg" alt="IT Security: Defense against the digital dark arts" class="cert-photo">
+                                <div class="cert-title">IT Security & Defense</div>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+
+                <section id="projects" class="content-card">
+                    <h2>Featured Projects</h2>
+                    <p>An organized showcase of continuous integration test scripts, dynamic object models repositories, and comprehensive automation test suites designed for reliable deployment operations.</p>
+                </section>
+
+                <section id="contact" class="content-card">
+                    <h2>Contact Me</h2>
+                    <p>Let's collaborate on optimization projects or QA structures. Reach out through my open communication lines:</p>
+                    <p class="contact-accent">Email: mickogarcia@example.com | Metro Manila, Philippines</p>
+                </section>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        // 1. VIDEO BACKGROUND FADE ENGINE
+        const video = document.getElementById('bgVideo');
+
+        video.addEventListener('canplaythrough', () => {
+            setTimeout(() => { video.style.opacity = '1'; }, 400); 
+        });
+
+        if (video.readyState >= 3) {
+            setTimeout(() => { video.style.opacity = '1'; }, 400);
+        }
+
+        // 2. ABSOLUTE OFFSET SCROLL & RE-TRIGGER CONTROLLER
+        const navItems = document.querySelectorAll('.nav-item');
+        const allCards = document.querySelectorAll('.content-card');
+
+        navItems.forEach(item => {
+            const targetId = item.getAttribute('data-scroll');
+
+            item.addEventListener('mouseenter', () => {
+                if (targetId === "top") {
+                    allCards.forEach(card => card.classList.remove('active-card'));
+                    document.getElementById('about').classList.add('active-card');
+
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                } else {
+                    const targetCard = document.getElementById(targetId);
+                    if (targetCard) {
+                        allCards.forEach(card => card.classList.remove('active-card'));
+                        void targetCard.offsetWidth; 
+                        targetCard.classList.add('active-card');
+
+                        const bodyRect = document.body.getBoundingClientRect().top;
+                        const elementRect = targetCard.getBoundingClientRect().top;
+                        const elementPosition = elementRect - bodyRect;
+                        
+                        // DYNAMIC CONDITIONAL SCROLL ENGINE
+                        let offsetPosition;
+                        if (targetId === "skills" || targetId === "certifications") {
+                            offsetPosition = elementPosition - 95; 
+                        } else {
+                            offsetPosition = elementPosition - 120; 
+                        }
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        // 3. SCROLL SPY ENGINE
+        window.addEventListener('scroll', () => {
+            if (window.scrollY < 200) {
+                allCards.forEach(card => card.classList.remove('active-card'));
+                document.getElementById('about').classList.add('active-card');
+                return;
+            }
+
+            let currentActive = "";
+            allCards.forEach(card => {
+                const cardTop = card.offsetTop;
+                if (window.scrollY >= (cardTop - 240)) {
+                    currentActive = card.getAttribute('id');
+                }
+            });
+
+            if (currentActive) {
+                allCards.forEach(card => {
+                    if (card.getAttribute('id') === currentActive) {
+                        if (!card.classList.contains('active-card')) {
+                            card.classList.add('active-card');
+                        }
+                    } else {
+                        card.classList.remove('remove-card'); 
+                        card.classList.remove('active-card');
+                    }
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
