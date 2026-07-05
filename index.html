@@ -324,9 +324,7 @@
             z-index: 60 !important;
         }
 
-        /* --- RE-ELEVATED POSITION ENGINE FOR RIGHT CERT --- */
-        
-        /* Main Right Cert (gac6.jpg) - Todo-angat pa lalo mula -210px patungong -260px para lumayo sa mga certs sa ilalim */
+        /* --- HIGHER POSITION ENGINE FOR RIGHT CERT --- */
         .cert-pos-main-top {
             width: 255px; 
             right: 1%;
@@ -335,7 +333,7 @@
             z-index: 10;
         }
 
-        /* Limang sub-certs - Nananatiling mataas mula sa bottom border upang manatili sa safe boundary */
+        /* Sub-certificates */
         .cert-pos-bottom-1 {
             width: 170px;
             left: 0%;
@@ -621,8 +619,11 @@
                         const elementPosition = elementRect - bodyRect;
                         
                         let offsetPosition;
-                        if (targetId === "skills" || targetId === "certifications") {
-                            offsetPosition = elementPosition - 160; 
+                        // Mula -160, ginawang -200 para mas itulak pataas ang viewport at umakyat ang card kapag nag-hover/click ang user
+                        if (targetId === "certifications") {
+                            offsetPosition = elementPosition - 200; 
+                        } else if (targetId === "skills") {
+                            offsetPosition = elementPosition - 160;
                         } else {
                             offsetPosition = elementPosition - 120; 
                         }
