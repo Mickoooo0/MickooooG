@@ -243,6 +243,16 @@
             letter-spacing: -0.2px; 
         }
 
+        /* SUB-HEADINGS FOR TECH STACK CARD */
+        .tech-category-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 1.5rem 0 0.5rem 0;
+            color: rgba(15, 23, 42, 0.65);
+        }
+
         /* --- EACH CARD UNIQUE BLUE GRADATION CONFIG --- */
         
         /* Card 1: About Me (Light Steel Blue) */
@@ -259,10 +269,10 @@
             box-shadow: 0 35px 60px -25px rgba(148, 163, 184, 0.25);
         }
         #skills.content-card h2 { color: var(--dark-blue-text); border-bottom: 2px solid rgba(15, 23, 42, 0.2); }
-        #skills.content-card p { color: var(--dark-blue-text); margin-bottom: 2rem; }
+        #skills.content-card p { color: var(--dark-blue-text); margin-bottom: 0.5rem; }
         
         /* Tech Tags */
-        .skills-list { display: flex; flex-wrap: wrap; gap: 0.75rem; list-style: none; padding: 0; margin: 0; }
+        .skills-list { display: flex; flex-wrap: wrap; gap: 0.75rem; list-style: none; padding: 0; margin-top: 0; margin-bottom: 1.5rem; }
         .skills-list li { 
             background: #0f172a; 
             color: #ffffff; 
@@ -301,7 +311,8 @@
 
         /* --- STAGGERED INTERNAL ELEMENTS CONFIGURATION --- */
         .content-card h2, 
-        .content-card p, 
+        .content-card p,
+        .content-card .tech-category-title,
         .content-card .skills-list {
             opacity: 0;
             transform: translateY(20px);
@@ -309,6 +320,7 @@
 
         .content-card.active-card h2 { animation: revealStagger 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.1s; }
         .content-card.active-card p { animation: revealStagger 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.2s; }
+        .content-card.active-card .tech-category-title { animation: revealStagger 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.25s; }
         .content-card.active-card .skills-list { animation: revealStagger 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.3s; }
 
         /* --- KEYFRAME ANIMATIONS --- */
@@ -365,14 +377,34 @@
                 <!-- Card 2: Tech Stack (Slate 400) -->
                 <section id="skills" class="content-card">
                     <h2>Tech Stack and tools</h2>
-                    <p>The core applications, frameworks, and structural tools used to perform validation operations and system deployments:</p>
+                    <p>The core applications, frameworks, and tools used to perform systems verification and continuous integration operations:</p>
+                    
+                    <div class="tech-category-title">Testing Frameworks & Tools</div>
                     <ul class="skills-list">
                         <li>Cypress</li>
-                        <li>Selenium</li>
                         <li>Playwright</li>
+                        <li>Selenium</li>
                         <li>Postman</li>
+                        <li>Chrome DevTools</li>
+                    </ul>
+
+                    <div class="tech-category-title">Project Management & Utilities</div>
+                    <ul class="skills-list">
                         <li>GitHub</li>
                         <li>Jira</li>
+                        <li>Trello</li>
+                        <li>Visual Studio Code</li>
+                        <li>QT</li>
+                        <li>MySQL</li>
+                    </ul>
+
+                    <div class="tech-category-title">Programming Languages</div>
+                    <ul class="skills-list">
+                        <li>C++</li>
+                        <li>C#</li>
+                        <li>Java</li>
+                        <li>JavaScript</li>
+                        <li>Python</li>
                     </ul>
                 </section>
 
