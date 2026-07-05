@@ -282,7 +282,7 @@
             font-size: 1rem; 
         }
 
-        /* Card 3: Indigo 400 (Modern Blue-Indigo) */
+        /* Card 3: Indigo 400 (Certifications Layout with Dynamic Pictures Display) */
         #certifications.content-card {
             background: rgba(129, 140, 248, 0.85); 
             box-shadow: 0 35px 60px -25px rgba(129, 140, 248, 0.25);
@@ -290,7 +290,101 @@
         #certifications.content-card h2 { color: var(--dark-blue-text); border-bottom: 2px solid rgba(15, 23, 42, 0.2); }
         #certifications.content-card p { color: var(--dark-blue-text); }
 
-        /* Card 4: Sky 500 (Sky Blue Theme Accent) */
+        /* CERTIFICATES MULTI-IMAGE PRESENTATION STYLES */
+        .cert-display-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            margin-top: 1.5rem;
+            width: 100%;
+        }
+
+        .cert-upper-split {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 2.5rem;
+        }
+
+        .cert-main-info {
+            flex: 1;
+        }
+
+        .profile-photo-frame {
+            position: relative;
+            width: 140px;
+            height: 175px;
+            background: #cbd5e1;
+            border: 4px solid #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .profile-photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.75);
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-align: center;
+            padding: 4px 0;
+        }
+
+        /* FANNING STACK LOWER GRID LAYOUT */
+        .cert-images-fan-stack {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 100%;
+            height: 280px;
+            margin-top: 1.5rem;
+        }
+
+        .cert-mock-photo {
+            position: absolute;
+            width: 290px;
+            height: 200px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+            border: 4px solid #ffffff;
+            overflow: hidden;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), z-index 0.1s;
+        }
+
+        /* Exact overlay/offset fanning calculation from preview layout */
+        .cert-mock-photo:nth-child(1) { transform: translate(-140px, 20px) rotate(-8deg); z-index: 10; }
+        .cert-mock-photo:nth-child(2) { transform: translate(-60px, -20px) rotate(-3deg); z-index: 15; }
+        .cert-mock-photo:nth-child(3) { transform: translate(40px, -30px) rotate(2deg); z-index: 20; }
+        .cert-mock-photo:nth-child(4) { transform: translate(120px, 15px) rotate(6deg); z-index: 14; }
+        .cert-mock-photo:nth-child(5) { transform: translate(220px, -10px) rotate(4deg); z-index: 12; }
+
+        /* Interactive pop-out on hover */
+        .cert-mock-photo:hover {
+            z-index: 50 !important;
+            transform: scale(1.1) translateY(-15px) rotate(0deg) !important;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+        }
+
+        .cert-mock-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Card 4: Featured Projects (Sky 500) */
         #projects.content-card {
             background: rgba(14, 165, 233, 0.85); 
             box-shadow: 0 35px 60px -25px rgba(14, 165, 233, 0.35);
@@ -299,7 +393,7 @@
         #projects.content-card h2 { color: var(--dark-blue-text); border-bottom: 2px solid rgba(15, 23, 42, 0.2); }
         #projects.content-card p { color: var(--dark-blue-text); }
 
-        /* Card 5: Slate 900 (Midnight Navy Blue - Darkest Card) */
+        /* Card 5: Contact (Slate 900) */
         #contact.content-card {
             background: rgba(15, 23, 42, 0.85); 
             box-shadow: 0 35px 60px -25px rgba(15, 23, 42, 0.5);
@@ -311,9 +405,10 @@
 
         /* --- STAGGERED INTERNAL ELEMENTS CONFIGURATION --- */
         .content-card h2, 
-        .content-card p,
+        .content-card p, 
         .content-card .tech-category-title,
-        .content-card .skills-list {
+        .content-card .skills-list,
+        .cert-display-container {
             opacity: 0;
             transform: translateY(20px);
         }
@@ -322,6 +417,7 @@
         .content-card.active-card p { animation: revealStagger 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.2s; }
         .content-card.active-card .tech-category-title { animation: revealStagger 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.25s; }
         .content-card.active-card .skills-list { animation: revealStagger 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.3s; }
+        .content-card.active-card .cert-display-container { animation: revealStagger 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.25s; }
 
         /* --- KEYFRAME ANIMATIONS --- */
         @keyframes fadeLeftAnimation { to { opacity: 1; transform: translateX(0); } }
@@ -408,10 +504,42 @@
                     </ul>
                 </section>
 
-                <!-- Card 3: Certifications (Indigo 400) -->
+                <!-- Card 3: Certifications (Indigo 400 - Full Visual Layout) -->
                 <section id="certifications" class="content-card">
                     <h2>Certifications</h2>
-                    <p>ISTQB Certified Tester credentials ongoing. Actively pursuing advanced technical specializations and professional portfolio courses for automated system deployments.</p>
+                    
+                    <div class="cert-display-container">
+                        <!-- Upper Section split -->
+                        <div class="cert-upper-split">
+                            <div class="cert-main-info">
+                                <p>ISTQB Certified Tester credentials ongoing. Actively pursuing advanced technical specializations, professional modular verifications, and comprehensive validation portfolio courses for systems deployment operations.</p>
+                            </div>
+                            <!-- Right aligned ID profile picture frame -->
+                            <div class="profile-photo-frame">
+                                <img src="gc7.jpg" alt="Micko Garcia">
+                                <div class="profile-label">Micko Garcia</div>
+                            </div>
+                        </div>
+
+                        <!-- Fanning stack of certificate images underneath -->
+                        <div class="cert-images-fan-stack">
+                            <div class="cert-mock-photo">
+                                <img src="google-it-cert.jpg" alt="Google IT Support Certificate">
+                            </div>
+                            <div class="cert-mock-photo">
+                                <img src="istqb-cert.jpg" alt="ISTQB Foundation Level">
+                            </div>
+                            <div class="cert-mock-photo">
+                                <img src="automation-cert.jpg" alt="Automation Specialist">
+                            </div>
+                            <div class="cert-mock-photo">
+                                <img src="qa-advanced-cert.jpg" alt="Advanced Verification Certificate">
+                            </div>
+                            <div class="cert-mock-photo">
+                                <img src="systems-cert.jpg" alt="Systems Support Path">
+                            </div>
+                        </div>
+                    </div>
                 </section>
 
                 <!-- Card 4: Featured Projects (Sky 500) -->
