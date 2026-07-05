@@ -194,7 +194,7 @@
         .vertical-cards-container {
             display: flex;
             flex-direction: column;
-            gap: 16rem; /* Binalik sa mas maluwag na orihinal na distansya */
+            gap: 16rem; 
             width: 100%;
             max-width: 1100px; 
             margin-top: 22vh;
@@ -290,11 +290,11 @@
         #about.content-card h2 { color: var(--dark-blue-text); border-bottom: 2px solid rgba(15, 23, 42, 0.2); }
         #about.content-card p { color: var(--dark-blue-text); }
 
-        /* Card 2: Slate 400 (Muted Blue-Gray) - TANGING ITO LANG ANG NAKA-UP */
+        /* Card 2: Slate 400 (Muted Blue-Gray) */
         #skills.content-card {
             background: rgba(148, 163, 184, 0.85); 
             box-shadow: 0 35px 60px -25px rgba(148, 163, 184, 0.25);
-            margin-top: 1.5rem; /* Nanatiling mataas para sa tamang snap alignment */
+            margin-top: 1.5rem; 
         }
         #skills.content-card h2 { color: var(--dark-blue-text); border-bottom: 2px solid rgba(15, 23, 42, 0.2); }
         #skills.content-card p { color: var(--dark-blue-text); }
@@ -303,7 +303,7 @@
         #certifications.content-card {
             background: rgba(129, 140, 248, 0.85); 
             box-shadow: 0 35px 60px -25px rgba(129, 140, 248, 0.25);
-            margin-top: 6rem; /* Ibinalik ang sapat na space mula sa itaas */
+            margin-top: 6rem; 
         }
         #certifications.content-card h2 { color: var(--dark-blue-text); border-bottom: 2px solid rgba(15, 23, 42, 0.2); }
         #certifications.content-card p { color: var(--dark-blue-text); }
@@ -497,9 +497,9 @@
                         // DYNAMIC CONDITIONAL SCROLL ENGINE
                         let offsetPosition;
                         if (targetId === "skills") {
-                            offsetPosition = elementPosition - 65; // Tanging Tech Stack lang ang mataas ang akyat (65px gap)
+                            offsetPosition = elementPosition - 95; // Ginawang 95 para mas bumaba nang bahagya ang pwesto ng Tech Stack card
                         } else {
-                            offsetPosition = elementPosition - 120; // Ibinalik ang normal na lapat para sa ibang cards (120px gap)
+                            offsetPosition = elementPosition - 120; // Default lapat para sa ibang cards pa rin
                         }
 
                         window.scrollTo({
