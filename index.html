@@ -280,7 +280,8 @@
         #certifications.content-card {
             background: rgba(129, 140, 248, 0.85); 
             box-shadow: 0 35px 60px -25px rgba(129, 140, 248, 0.25);
-            margin-top: 6rem;
+            /* PERMANENT CSS ELEVATION: Inangat nang direkta para lumapit sa navbar nang walang script layout bugs */
+            margin-top: -3rem !important; 
             padding: 2.5rem 3.5rem 0.5rem 3.5rem; 
             overflow: visible !important; 
         }
@@ -324,7 +325,7 @@
             z-index: 60 !important;
         }
 
-        /* --- HIGHER POSITION ENGINE FOR RIGHT CERT --- */
+        /* --- POSITION ENGINE FOR RIGHT CERT --- */
         .cert-pos-main-top {
             width: 255px; 
             right: 1%;
@@ -619,9 +620,9 @@
                         const elementPosition = elementRect - bodyRect;
                         
                         let offsetPosition;
-                        // Mula -160, ginawang -200 para mas itulak pataas ang viewport at umakyat ang card kapag nag-hover/click ang user
+                        // Precision aligned base alignment para sa elevated native margin structure natin
                         if (targetId === "certifications") {
-                            offsetPosition = elementPosition - 200; 
+                            offsetPosition = elementPosition - 100; 
                         } else if (targetId === "skills") {
                             offsetPosition = elementPosition - 160;
                         } else {
@@ -648,7 +649,9 @@
             let currentActive = "";
             allCards.forEach(card => {
                 const cardTop = card.offsetTop;
-                if (window.scrollY >= (cardTop - 240)) {
+                // dynamic layout tracker threshold buffer
+                const threshold = (card.getAttribute('id') === 'certifications') ? 140 : 240;
+                if (window.scrollY >= (cardTop - threshold)) {
                     currentActive = card.getAttribute('id');
                 }
             });
