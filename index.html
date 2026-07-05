@@ -185,7 +185,7 @@
             opacity: 0.9;
             margin-top: 20px;
             display: block;
-            line-height: 1.8; /* Mas nilakihan para may magandang space kapag bumaba ang linya */
+            line-height: 1.8; 
             max-width: 850px;
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); 
         }
@@ -325,17 +325,15 @@
 </head>
 <body>
 
-    <!-- VIDEO BACKGROUND CONTAINER -->
     <div class="page-background-container">
         <video id="bgVideo" class="page-video" autoplay loop muted playsinline>
-            <source src="background2.mp4" type="video/mp4">
+            <source src="page-bg.mp4" type="video/mp4">
         </video>
     </div>
     <div class="page-overlay"></div>
 
     <div class="window-frame">
         
-        <!-- FIXED NAVIGATION BAR -->
         <nav class="navbar">
             <div class="nav-links">
                 <a class="nav-item" data-scroll="top">Home</a>
@@ -351,24 +349,20 @@
 
         <main class="main-viewport">
             
-            <!-- UPPER PORTION: INTRO HERO BLOCK WITH BREAK-LINE -->
             <section class="intro-section-hero">
                 <div class="intro-text-left">
                     <h1>HI, I'M MICKO.</h1>
-                    <span>Welcome to my digital space where engineering meets creativity.<br>Let's deep dive into my work, skills, creative projects, and all the things to know about me.</span>
+                    <span>Welcome to my digital space where engineering meets creativity.<br>Let's deep dive into my work, skills, creative projects,<br>and all the things to know about me.</span>
                 </div>
             </section>
 
-            <!-- LOWER PORTION: EXPANDED SCROLLABLE CARDS -->
             <div class="vertical-cards-container">
                 
-                <!-- Card 1: About Me (Light Steel Blue) -->
                 <section id="about" class="content-card active-card">
                     <h2>About Me</h2>
                     <p>I am a Computer Engineering practitioner focusing on Software Quality Assurance and Test Automation frameworks. Passionate about ensuring high-fidelity systems execution and building stable test cycles.</p>
                 </section>
 
-                <!-- Card 2: Tech Stack (Slate 400) -->
                 <section id="skills" class="content-card">
                     <h2>Tech Stack and tools</h2>
                     <p>The core technical frameworks and engineering instruments utilized for software validation environments:</p>
@@ -380,19 +374,16 @@
                     </ul>
                 </section>
 
-                <!-- Card 3: Certifications (Indigo 400) -->
                 <section id="certifications" class="content-card">
                     <h2>Certifications</h2>
                     <p>ISTQB Certified Tester credentials ongoing. Actively pursuing advanced technical specializations and professional portfolio courses for automated system deployments.</p>
                 </section>
 
-                <!-- Card 4: Featured Projects (Sky 500) -->
                 <section id="projects" class="content-card">
                     <h2>Featured Projects</h2>
                     <p>An organized showcase of continuous integration test scripts, dynamic object models repositories, and comprehensive automation test suites designed for reliable deployment operations.</p>
                 </section>
 
-                <!-- Card 5: Contact (Slate 900) -->
                 <section id="contact" class="content-card">
                     <h2>Contact Me</h2>
                     <p>Let's collaborate on optimization projects or QA structures. Reach out through my open communication lines:</p>
@@ -404,7 +395,6 @@
 
     </div>
 
-    <!-- DYNAMIC BACKGROUND FADE & HOVER TO SCROLL SYSTEM -->
     <script>
         // 1. VIDEO BACKGROUND FADE ENGINE
         const video = document.getElementById('bgVideo');
