@@ -205,13 +205,13 @@
         /* --- MASTER CARD LAYOUT ENGINE --- */
         .content-card {
             width: 100%;
-            min-height: 65vh; /* Binabaan mula 80vh para mas compact at flexible sa desktop screens */
+            min-height: 60vh; /* Mas pinaliit para magkasya lahat sa compact screens */
             display: flex;
             flex-direction: column;
             justify-content: center; 
             border: 1px solid var(--card-border);
             backdrop-filter: blur(16px); 
-            padding: 3.5rem 5.5rem; /* Ginawang 3.5rem mula 5rem para umakyat ang contents at title */
+            padding: 2rem 5.5rem 3rem 5.5rem; /* Pinalitan ang top padding sa 2rem para umakyat ang title */
             border-radius: 50px; 
             box-sizing: border-box;
             box-shadow: var(--bubble-shadow);
@@ -229,8 +229,8 @@
         /* TYPOGRAPHY BASE SETTINGS */
         .content-card h2 {
             margin-top: 0;
-            margin-bottom: 1rem;
-            padding-bottom: 1.2rem;
+            margin-bottom: 0.75rem; /* Binawasan para dikit ang contents */
+            padding-bottom: 0.75rem;
             font-size: 2.7rem; 
             font-weight: 800; 
             letter-spacing: -0.5px;
@@ -238,20 +238,21 @@
 
         .content-card p {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            font-size: 1.35rem; 
-            line-height: 1.75;
+            font-size: 1.25rem; /* Medyo pinaliit para iwas vertical spillover */
+            line-height: 1.65;
             font-weight: 550; 
             letter-spacing: -0.2px; 
             margin-top: 0;
+            margin-bottom: 0.5rem;
         }
 
         /* SUB-HEADINGS FOR TECH STACK CARD */
         .tech-category-title {
-            font-size: 1.15rem;
+            font-size: 1.05rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin: 1.25rem 0 0.5rem 0;
+            margin: 0.85rem 0 0.4rem 0; /* Ginawang mas compact ang padding */
             color: rgba(15, 23, 42, 0.65);
         }
 
@@ -271,17 +272,17 @@
             box-shadow: 0 35px 60px -25px rgba(148, 163, 184, 0.25);
         }
         #skills.content-card h2 { color: var(--dark-blue-text); border-bottom: 2px solid rgba(15, 23, 42, 0.2); }
-        #skills.content-card p { color: var(--dark-blue-text); margin-bottom: 0.5rem; }
+        #skills.content-card p { color: var(--dark-blue-text); margin-bottom: 0.25rem; }
         
-        /* Tech Tags */
-        .skills-list { display: flex; flex-wrap: wrap; gap: 0.75rem; list-style: none; padding: 0; margin-top: 0; margin-bottom: 1.25rem; }
+        /* Tech Tags Base Config */
+        .skills-list { display: flex; flex-wrap: wrap; gap: 0.6rem; list-style: none; padding: 0; margin-top: 0; margin-bottom: 0.5rem; }
         .skills-list li { 
             background: #0f172a; 
             color: #ffffff; 
-            padding: 10px 20px; 
+            padding: 8px 16px; /* Optimized padding para tipid sa vertical viewport */
             border-radius: 22px; 
             font-weight: 700; 
-            font-size: 1rem; 
+            font-size: 0.95rem; 
         }
 
         /* Card 3: Certifications (Indigo 400) */
@@ -333,7 +334,6 @@
 </head>
 <body>
 
-    <!-- VIDEO BACKGROUND CONTAINER -->
     <div class="page-background-container">
         <video id="bgVideo" class="page-video" autoplay loop muted playsinline>
             <source src="background12.mp4" type="video/mp4">
@@ -343,7 +343,6 @@
 
     <div class="window-frame">
         
-        <!-- FIXED NAVIGATION BAR -->
         <nav class="navbar">
             <div class="nav-links">
                 <a class="nav-item" data-scroll="top">Home</a>
@@ -359,7 +358,6 @@
 
         <main class="main-viewport">
             
-            <!-- UPPER PORTION: TRIPLE LINE TAGLINE HERO BLOCK -->
             <section class="intro-section-hero">
                 <div class="intro-text-left">
                     <h1>HI, I'M MICKO.</h1>
@@ -367,16 +365,13 @@
                 </div>
             </section>
 
-            <!-- LOWER PORTION: EXPANDED SCROLLABLE CARDS -->
             <div class="vertical-cards-container">
                 
-                <!-- Card 1: About Me (Light Steel Blue) -->
                 <section id="about" class="content-card active-card">
                     <h2>About Me</h2>
                     <p>Hi, I'm Micko Luis P. Garcia. I am a Computer Engineering practitioner focusing on Software Quality Assurance, spanning both manual testing methodologies and Test Automation Frameworks. Backed by a Google IT Support certification and a strong foundation in UI design, I aim to deliver fast, flawless, and high-fidelity technical solutions.</p>
                 </section>
 
-                <!-- Card 2: Tech Stack (Slate 400) -->
                 <section id="skills" class="content-card">
                     <h2>Tech Stack and tools</h2>
                     <p>The core applications, frameworks, and tools used to perform systems verification and continuous integration operations:</p>
@@ -410,19 +405,16 @@
                     </ul>
                 </section>
 
-                <!-- Card 3: Certifications (Indigo 400) -->
                 <section id="certifications" class="content-card">
                     <h2>Certifications</h2>
                     <p>ISTQB Certified Tester credentials ongoing. Actively pursuing advanced technical specializations and professional portfolio courses for automated system deployments.</p>
                 </section>
 
-                <!-- Card 4: Featured Projects (Sky 500) -->
                 <section id="projects" class="content-card">
                     <h2>Featured Projects</h2>
                     <p>An organized showcase of continuous integration test scripts, dynamic object models repositories, and comprehensive automation test suites designed for reliable deployment operations.</p>
                 </section>
 
-                <!-- Card 5: Contact (Slate 900) -->
                 <section id="contact" class="content-card">
                     <h2>Contact Me</h2>
                     <p>Let's collaborate on optimization projects or QA structures. Reach out through my open communication lines:</p>
@@ -434,7 +426,6 @@
 
     </div>
 
-    <!-- DYNAMIC BACKGROUND FADE & HOVER TO SCROLL SYSTEM -->
     <script>
         // 1. VIDEO BACKGROUND FADE ENGINE
         const video = document.getElementById('bgVideo');
@@ -470,10 +461,16 @@
                         void targetCard.offsetWidth; 
                         targetCard.classList.add('active-card');
 
+                        // Ginagamit natin ang window innerHeight para i-calculate ang saktong gitna (Perfect Middle Alignment)
+                        const cardHeight = targetCard.offsetHeight;
+                        const viewportHeight = window.innerHeight;
+                        
                         const bodyRect = document.body.getBoundingClientRect().top;
                         const elementRect = targetCard.getBoundingClientRect().top;
                         const elementPosition = elementRect - bodyRect;
-                        const offsetPosition = elementPosition - 75;
+                        
+                        // Dynamic calculation para mailagay ang card sa eksaktong gitna ng screen
+                        const offsetPosition = elementPosition - ((viewportHeight - cardHeight) / 2);
 
                         window.scrollTo({
                             top: offsetPosition,
