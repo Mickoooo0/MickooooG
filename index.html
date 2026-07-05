@@ -276,23 +276,23 @@
             font-size: 0.98rem; 
         }
 
-        /* --- UPDATED & ADJUSTED CERTIFICATIONS SECTION --- */
+        /* --- CERTIFICATIONS LAYOUT ADJUSTMENTS --- */
         #certifications.content-card {
             background: rgba(129, 140, 248, 0.85); 
             box-shadow: 0 35px 60px -25px rgba(129, 140, 248, 0.25);
             margin-top: 6rem;
-            padding: 2.5rem 3.5rem 1.5rem 3.5rem; /* Pinalawak nang bahagya ang box padding */
+            padding: 2.5rem 3.5rem 2rem 3.5rem; 
             overflow: visible !important; 
         }
         #certifications.content-card h2 { 
             color: var(--dark-blue-text); 
             border-bottom: 2px solid rgba(15, 23, 42, 0.2); 
-            font-size: 2.5rem; /* Mas malaking heading */
+            font-size: 2.5rem; 
             margin-bottom: 1rem;
         }
         #certifications.content-card p { 
             color: var(--dark-blue-text); 
-            font-size: 1.35rem; /* Mas malaki at malinaw na font size batay sa request mo */
+            font-size: 1.35rem; 
             line-height: 1.6;
             max-width: 58%; 
             margin-bottom: 0.8rem;
@@ -301,8 +301,8 @@
         .certs-display-canvas {
             position: relative;
             width: 100%;
-            height: 340px; /* Dagdag vertical working area */
-            margin-top: 1rem;
+            height: 350px; 
+            margin-top: 1.5rem;
             box-sizing: border-box;
         }
 
@@ -324,22 +324,22 @@
             z-index: 60 !important;
         }
 
-        /* --- UPDATED HIGHER POSITIONS FOR ALL CERTS --- */
+        /* --- ULTRA HIGHER Y-AXIS POSITIONING CODES --- */
         
-        /* Main Right Cert - Mas mataas na pagkakalagay sa gilid */
+        /* Main Right Cert (gac6.jpg) - Pinuwesto lalo pataas katapat ng H2 section */
         .cert-pos-main-top {
-            width: 250px; 
+            width: 255px; 
             right: 1%;
-            top: -165px; /* Mula -125px ginawang -165px para mas umakyat pa */
+            top: -190px; 
             transform: rotate(1deg);
             z-index: 10;
         }
 
-        /* Limang sub-certs sa ilalim - Lahat inangat nang husto para iwas-overlap sa borders */
+        /* 5 Sub-Certificates (gac1.jpg to gac5.jpg) - Iniangat nang lubusan mula sa ilalim */
         .cert-pos-bottom-1 {
             width: 170px;
             left: 0%;
-            bottom: 85px; /* Tinulak pataas mula sa dating 45px */
+            bottom: 125px; 
             transform: rotate(-3deg);
             z-index: 5;
         }
@@ -347,7 +347,7 @@
         .cert-pos-bottom-2 {
             width: 170px;
             left: 21%;
-            bottom: 75px; /* Tinulak pataas mula sa dating 35px */
+            bottom: 110px; 
             transform: rotate(2deg);
             z-index: 4;
         }
@@ -355,7 +355,7 @@
         .cert-pos-bottom-3 {
             width: 170px;
             left: 42%;
-            bottom: 80px; /* Tinulak pataas mula sa dating 40px */
+            bottom: 120px; 
             transform: rotate(-1deg);
             z-index: 3;
         }
@@ -363,7 +363,7 @@
         .cert-pos-bottom-4 {
             width: 170px;
             left: 63%;
-            bottom: 70px; /* Tinulak pataas mula sa dating 30px */
+            bottom: 110px; 
             transform: rotate(3deg);
             z-index: 2;
         }
@@ -371,7 +371,7 @@
         .cert-pos-bottom-5 {
             width: 170px;
             right: 0%;
-            bottom: 75px; /* Tinulak pataas mula sa dating 35px */
+            bottom: 115px; 
             transform: rotate(-2deg);
             z-index: 1;
         }
@@ -384,7 +384,7 @@
             border: 1px solid rgba(0,0,0,0.04);
         }
 
-        /* --- EACH CARD UNIQUE BLUE GRADATION CONFIG --- */
+        /* --- OTHER CONTENT CARDS --- */
         #about.content-card {
             background: rgba(176, 196, 222, 0.85); 
             box-shadow: 0 35px 60px -25px rgba(176, 196, 222, 0.25);
@@ -419,7 +419,7 @@
         #contact.content-card p { color: rgba(255, 255, 255, 0.9); }
         .contact-accent { font-weight: 700; font-size: 1.5rem; margin-top: 0.5rem; color: #38bdf8 !important; }
 
-        /* --- STAGGERED INTERNAL ELEMENTS CONFIGURATION --- */
+        /* --- ANIMATION ENGINES --- */
         .content-card h2, 
         .content-card p,
         .content-card .skills-grid-layout,
@@ -538,12 +538,10 @@
                     
                     <div class="certs-display-canvas">
                         
-                        <!-- Main Top Right Highlight Certificate (Elevated higher) -->
                         <a href="gac6.jpg" target="_blank" class="cert-card-interactive cert-pos-main-top">
                             <img src="gac6.jpg" alt="Google IT Support Professional Certificate" class="cert-img-fluid">
                         </a>
                         
-                        <!-- 5 Highly Elevated Sub-Certificates -->
                         <a href="gac1.jpg" target="_blank" class="cert-card-interactive cert-pos-bottom-1">
                             <img src="gac1.jpg" alt="Technical Support Fundamentals" class="cert-img-fluid">
                         </a>
