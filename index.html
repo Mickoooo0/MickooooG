@@ -211,7 +211,7 @@
             justify-content: center; 
             border: 1px solid var(--card-border);
             backdrop-filter: blur(16px); 
-            padding: 2.8rem 4.8rem; /* Inayos nang kaunti ang padding para sa mas malalaking font */
+            padding: 2.8rem 4.8rem; 
             border-radius: 40px; 
             box-sizing: border-box;
             box-shadow: var(--bubble-shadow);
@@ -236,10 +236,9 @@
             letter-spacing: -0.5px;
         }
 
-        /* PINALAKI ANG DESCRIPTION FONT SIZE */
         .content-card p {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            font-size: 1.35rem; /* Mula sa dating 1.15rem */
+            font-size: 1.35rem; 
             line-height: 1.65;
             font-weight: 550; 
             letter-spacing: -0.2px; 
@@ -262,7 +261,7 @@
         }
 
         .tech-category-title {
-            font-size: 1.05rem; /* Ginawang mas readable */
+            font-size: 1.05rem; 
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -270,7 +269,7 @@
             color: rgba(15, 23, 42, 0.75);
         }
 
-        /* Tech Tags Base Config - PINALAKI PARA BAGAY SA DESC */
+        /* Tech Tags Base Config */
         .skills-list { display: flex; flex-wrap: wrap; gap: 0.6rem; list-style: none; padding: 0; margin: 0; }
         .skills-list li { 
             background: #0f172a; 
@@ -278,7 +277,7 @@
             padding: 8px 16px; 
             border-radius: 20px; 
             font-weight: 700; 
-            font-size: 0.98rem; /* Inakyat mula 0.88rem */
+            font-size: 0.98rem; 
         }
 
         /* --- EACH CARD UNIQUE BLUE GRADATION CONFIG --- */
@@ -291,11 +290,11 @@
         #about.content-card h2 { color: var(--dark-blue-text); border-bottom: 2px solid rgba(15, 23, 42, 0.2); }
         #about.content-card p { color: var(--dark-blue-text); }
 
-        /* Card 2: Slate 400 (Muted Blue-Gray) */
+        /* Card 2: Slate 400 (Muted Blue-Gray) - GINAWANG MAS MATAAS ANG MARGIN */
         #skills.content-card {
             background: rgba(148, 163, 184, 0.85); 
             box-shadow: 0 35px 60px -25px rgba(148, 163, 184, 0.25);
-            margin-top: 4rem; 
+            margin-top: 1.5rem; /* Binabaan mula 4rem para natural na mas mataas ang pwesto */
         }
         #skills.content-card h2 { color: var(--dark-blue-text); border-bottom: 2px solid rgba(15, 23, 42, 0.2); }
         #skills.content-card p { color: var(--dark-blue-text); }
@@ -353,6 +352,7 @@
 </head>
 <body>
 
+    <!-- VIDEO BACKGROUND CONTAINER -->
     <div class="page-background-container">
         <video id="bgVideo" class="page-video" autoplay loop muted playsinline>
             <source src="background12.mp4" type="video/mp4">
@@ -362,6 +362,7 @@
 
     <div class="window-frame">
         
+        <!-- FIXED NAVIGATION BAR -->
         <nav class="navbar">
             <div class="nav-links">
                 <a class="nav-item" data-scroll="top">Home</a>
@@ -377,6 +378,7 @@
 
         <main class="main-viewport">
             
+            <!-- UPPER PORTION: TRIPLE LINE TAGLINE HERO BLOCK -->
             <section class="intro-section-hero">
                 <div class="intro-text-left">
                     <h1>HI, I'M MICKO.</h1>
@@ -384,18 +386,22 @@
                 </div>
             </section>
 
+            <!-- LOWER PORTION: EXPANDED SCROLLABLE CARDS -->
             <div class="vertical-cards-container">
                 
+                <!-- Card 1: About Me (Light Steel Blue) -->
                 <section id="about" class="content-card active-card">
                     <h2>About Me</h2>
                     <p>Hi, I'm Micko Luis P. Garcia. I am a Computer Engineering practitioner focusing on Software Quality Assurance, spanning both manual testing methodologies and Test Automation Frameworks. Backed by a Google IT Support certification and a strong foundation in UI design, I aim to deliver fast, flawless, and high-fidelity technical solutions.</p>
                 </section>
 
+                <!-- Card 2: Tech Stack (Slate 400) -->
                 <section id="skills" class="content-card">
                     <h2>Tech Stack and tools</h2>
                     <p>The core applications, frameworks, and tools used to perform systems verification and continuous integration operations:</p>
                     
                     <div class="skills-grid-layout">
+                        <!-- Column 1 -->
                         <div class="skills-column">
                             <div class="tech-category-title">Testing Frameworks</div>
                             <ul class="skills-list">
@@ -407,6 +413,7 @@
                             </ul>
                         </div>
 
+                        <!-- Column 2 -->
                         <div class="skills-column">
                             <div class="tech-category-title">Management & Tools</div>
                             <ul class="skills-list">
@@ -419,6 +426,7 @@
                             </ul>
                         </div>
 
+                        <!-- Column 3 -->
                         <div class="skills-column">
                             <div class="tech-category-title">Languages</div>
                             <ul class="skills-list">
@@ -432,16 +440,19 @@
                     </div>
                 </section>
 
+                <!-- Card 3: Certifications (Indigo 400) -->
                 <section id="certifications" class="content-card">
                     <h2>Certifications</h2>
                     <p>ISTQB Certified Tester credentials ongoing. Actively pursuing advanced technical specializations and professional portfolio courses for automated system deployments.</p>
                 </section>
 
+                <!-- Card 4: Featured Projects (Sky 500) -->
                 <section id="projects" class="content-card">
                     <h2>Featured Projects</h2>
                     <p>An organized showcase of continuous integration test scripts, dynamic object models repositories, and comprehensive automation test suites designed for reliable deployment operations.</p>
                 </section>
 
+                <!-- Card 5: Contact (Slate 900) -->
                 <section id="contact" class="content-card">
                     <h2>Contact Me</h2>
                     <p>Let's collaborate on optimization projects or QA structures. Reach out through my open communication lines:</p>
@@ -453,6 +464,7 @@
 
     </div>
 
+    <!-- DYNAMIC BACKGROUND FADE & HOVER TO PERFECT SCROLL SYSTEM -->
     <script>
         // 1. VIDEO BACKGROUND FADE ENGINE
         const video = document.getElementById('bgVideo');
@@ -492,7 +504,8 @@
                         const elementRect = targetCard.getBoundingClientRect().top;
                         const elementPosition = elementRect - bodyRect;
                         
-                        const offsetPosition = elementPosition - 120; 
+                        // Ginawang 75 mula 120 para mas aakyat pa nang kaunti ang mismong pwesto ng card
+                        const offsetPosition = elementPosition - 75; 
 
                         window.scrollTo({
                             top: offsetPosition,
@@ -514,7 +527,7 @@
             let currentActive = "";
             allCards.forEach(card => {
                 const cardTop = card.offsetTop;
-                if (window.scrollY >= (cardTop - 250)) {
+                if (window.scrollY >= (cardTop - 200)) {
                     currentActive = card.getAttribute('id');
                 }
             });
