@@ -280,89 +280,111 @@
             font-size: 0.98rem; 
         }
 
-        /* --- INTERACTIVE CANVAS FOR CERTIFICATIONS (SCATTER SCENE) --- */
+        /* --- EXPERT COMPACT LAYOUT FOR CERTIFICATIONS (NO SCROLL BASE) --- */
+        #certifications.content-card {
+            background: rgba(129, 140, 248, 0.85); 
+            box-shadow: 0 35px 60px -25px rgba(129, 140, 248, 0.25);
+            margin-top: 6rem;
+            padding: 2.2rem 3.5rem; /* Pinaliit ang padding para makatipid ng space */
+            overflow: visible !important; /* Para hindi maputol ang hover translation effect */
+        }
+        #certifications.content-card h2 { 
+            color: var(--dark-blue-text); 
+            border-bottom: 2px solid rgba(15, 23, 42, 0.2); 
+            font-size: 2.2rem; 
+            margin-bottom: 0.8rem;
+        }
+        #certifications.content-card p { 
+            color: var(--dark-blue-text); 
+            font-size: 1.15rem; /* Ginawang mas compact ang text size */
+            line-height: 1.5;
+            max-width: 55%; /* Binigyan ng space ang kanang bahagi para sa main cert */
+            margin-bottom: 0.5rem;
+        }
+
         .certs-display-canvas {
             position: relative;
             width: 100%;
-            height: 520px; 
-            margin-top: 3rem;
+            height: 340px; /* Mas maikli para kasya lahat sa isang tinginan */
+            margin-top: 1rem;
             box-sizing: border-box;
         }
 
         .cert-card-interactive {
             position: absolute;
             background: #ffffff;
-            padding: 8px;
-            border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25), 0 4px 10px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease;
+            padding: 5px; /* Mas maliit na puting border */
+            border-radius: 6px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2), 0 3px 8px rgba(0, 0, 0, 0.12);
+            transition: transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.25s ease;
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
         }
 
-        /* Hover Physics Effect */
+        /* Hover Physics Setup */
         .cert-card-interactive:hover {
-            transform: scale(1.08) translateY(-15px) rotate(0deg) !important;
-            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.4);
-            z-index: 50 !important;
+            transform: scale(1.1) translateY(-10px) rotate(0deg) !important;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.35);
+            z-index: 60 !important;
         }
 
-        /* Layer Coordinates Mapping */
+        /* Sizing at Coordinates Base sa Iyong Screenshot */
         .cert-pos-main-top {
-            width: 280px;
-            right: 4%;
-            top: 0px;
-            transform: rotate(2deg);
+            width: 240px; /* Pinaliit mula 280px */
+            right: 2%;
+            top: -90px; /* Iniangat para pumasok sa bakanteng espasyo sa tabi ng text */
+            transform: rotate(1deg);
+            z-index: 10;
+        }
+
+        /* 5 Sub-certs sa ibaba (Ginawang mas maliit para magkasya nang pantay sa row) */
+        .cert-pos-bottom-1 {
+            width: 165px;
+            left: 0%;
+            bottom: 25px;
+            transform: rotate(-3deg);
             z-index: 5;
         }
 
-        .cert-pos-middle-left {
-            width: 250px;
-            left: 18%;
-            top: 130px;
+        .cert-pos-bottom-2 {
+            width: 165px;
+            left: 21%;
+            bottom: 15px;
+            transform: rotate(2deg);
+            z-index: 4;
+        }
+
+        .cert-pos-bottom-3 {
+            width: 165px;
+            left: 42%;
+            bottom: 20px;
             transform: rotate(-1deg);
             z-index: 3;
         }
 
-        .cert-pos-middle-right {
-            width: 240px;
-            right: 24%;
-            top: 140px;
-            transform: rotate(-3deg);
-            z-index: 4;
-        }
-
-        .cert-pos-bottom-left1 {
-            width: 240px;
-            left: 4%;
-            bottom: -10px;
-            transform: rotate(1deg);
+        .cert-pos-bottom-4 {
+            width: 165px;
+            left: 63%;
+            bottom: 10px;
+            transform: rotate(3deg);
             z-index: 2;
         }
 
-        .cert-pos-bottom-left2 {
-            width: 240px;
-            left: 34%;
-            bottom: -30px;
-            transform: rotate(-1deg);
+        .cert-pos-bottom-5 {
+            width: 165px;
+            right: 0%;
+            bottom: 15px;
+            transform: rotate(-2deg);
             z-index: 1;
-        }
-
-        .cert-pos-bottom-right {
-            width: 240px;
-            right: 6%;
-            bottom: -50px;
-            transform: rotate(2deg);
-            z-index: 2;
         }
 
         .cert-img-fluid {
             width: 100%;
             height: auto;
             display: block;
-            border-radius: 4px;
-            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 3px;
+            border: 1px solid rgba(0,0,0,0.04);
         }
 
         /* --- EACH CARD UNIQUE BLUE GRADATION CONFIG --- */
@@ -383,15 +405,6 @@
         }
         #skills.content-card h2 { color: var(--dark-blue-text); border-bottom: 2px solid rgba(15, 23, 42, 0.2); }
         #skills.content-card p { color: var(--dark-blue-text); }
-
-        /* Card 3: Certifications (Indigo 400) */
-        #certifications.content-card {
-            background: rgba(129, 140, 248, 0.85); 
-            box-shadow: 0 35px 60px -25px rgba(129, 140, 248, 0.25);
-            margin-top: 6rem; 
-        }
-        #certifications.content-card h2 { color: var(--dark-blue-text); border-bottom: 2px solid rgba(15, 23, 42, 0.2); }
-        #certifications.content-card p { color: var(--dark-blue-text); }
 
         /* Card 4: Featured Projects (Sky 500) */
         #projects.content-card {
@@ -433,9 +446,10 @@
         @keyframes fadeDownAnimation { to { opacity: 1; transform: translateY(0); } }
         @keyframes revealStagger { to { opacity: 1; transform: translateY(0); } }
 
-        /* Responsive handling for smaller screens */
+        /* Responsive handling for mobile/tablet screens */
         @media (max-width: 950px) {
-            .certs-display-canvas { height: auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+            #certifications.content-card p { max-width: 100%; }
+            .certs-display-canvas { height: auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
             .cert-card-interactive { position: static !important; transform: none !important; width: 100% !important; box-sizing: border-box; }
         }
         @media (max-width: 768px) {
@@ -538,23 +552,23 @@
                             <img src="gc1.jpg" alt="Google IT Support Professional Certificate" class="cert-img-fluid">
                         </a>
                         
-                        <a href="gc1.jpg" target="_blank" class="cert-card-interactive cert-pos-middle-left">
+                        <a href="gc1.jpg" target="_blank" class="cert-card-interactive cert-pos-bottom-1">
                             <img src="gc1.jpg" alt="Technical Support Fundamentals" class="cert-img-fluid">
                         </a>
 
-                        <a href="gc2.jpg" target="_blank" class="cert-card-interactive cert-pos-middle-right">
+                        <a href="gc2.jpg" target="_blank" class="cert-card-interactive cert-pos-bottom-2">
                             <img src="gc2.jpg" alt="The Bits and Bytes of Networking" class="cert-img-fluid">
                         </a>
 
-                        <a href="gc3.jpg" target="_blank" class="cert-card-interactive cert-pos-bottom-left1">
+                        <a href="gc3.jpg" target="_blank" class="cert-card-interactive cert-pos-bottom-3">
                             <img src="gc3.jpg" alt="Operating Systems and You" class="cert-img-fluid">
                         </a>
 
-                        <a href="gc4.jpg" target="_blank" class="cert-card-interactive cert-pos-bottom-left2">
+                        <a href="gc4.jpg" target="_blank" class="cert-card-interactive cert-pos-bottom-4">
                             <img src="gc4.jpg" alt="System Administration & IT Infrastructure" class="cert-img-fluid">
                         </a>
 
-                        <a href="gc5.jpg" target="_blank" class="cert-card-interactive cert-pos-bottom-right">
+                        <a href="gc5.jpg" target="_blank" class="cert-card-interactive cert-pos-bottom-5">
                             <img src="gc5.jpg" alt="IT Security & Defense" class="cert-img-fluid">
                         </a>
 
